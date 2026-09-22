@@ -16,7 +16,7 @@
 | 6 | 四个难样本英雄（查莉娅、巴蒂斯特、吴阳、D.Mon）；补丁叠加的夹具链式撤销；run 1 原样记录：金标自身 2 处缺陷被校验器抓出、Agent 偏差 3 处全部指向规范文本 | 已完成 |
 | 7 | 按 run 1 改规范（金标方向、F4 伙伴字段存在性、提案格式三处）并固化 7 项回归测试；run 2 复跑：4/4 提取全对，暴露 1 类新错误（A4）→ 新增 F7 自洽规则 | 已完成 |
 | 8 | 审核 Agent（只读 diff，泄漏自检）+ reconcile 三方并排；7 例：4 例与官方注释一致，2 处上下文差被抓成 REVIEW，1 例无官方注释单独成立 | 已完成 |
-| 9 | REVIEW 决定文件（`reviews/decisions.yaml`，每条带理由与限定范围，禁全局豁免） | 模板已生成，待人填 |
+| 9 | REVIEW 决定文件（`reviews/decisions.yaml`）+ 格式校验 `pipeline/decisions.py`（pending 未清零 / 缺理由 / scope 全局或不含英雄 / 漏项 → CI 红）；决定内容由人填 | 校验已接 CI，待人填 |
 | 10 | 人工签字清单（`docs/SIGN_OFF_CHECKLIST.md`）；迭代历史 = `docs/RUN_LOG.md` + git log | 清单已出 |
 
 第 6 步以后的内容取决于实跑结果，不预先编排。
@@ -50,6 +50,7 @@ python -m pipeline.compare proposals/agent/2026-09-08_kiriko_run1.yaml   # 与�
 python -m pipeline.check agent/2026-09-08_kiriko_run1                    # 对 Agent 提案跑校验器
 python -m pipeline.reviewer proposals/agent/2026-09-08_kiriko_run1.yaml  # 审核 Agent（只读 diff）
 python -m pipeline.reconcile 2026-09-08 kiriko 1                          # 三方并排 → reviews/*_reconcile.json
+python -m pipeline.decisions                                              # 决定文件格式校验（CI 门禁）
 ```
 
 退出码：`0` 无 FAIL（允许 REVIEW / 缺输入的 NOT_RUN）；`1` 有 FAIL；`2` 加载失败或检查抛异常。金标样本当前结果见 `reports/2026-09-08_official.md`。温斯顿生命值模式差异和屏障冷却起算已现场核验，见 [来源核验](docs/WINSTON_SOURCE_REVIEW.md)。剩余 NOT_RUN 的原因逐项列于报告；通过现有测试不代表已证明不存在缺陷。

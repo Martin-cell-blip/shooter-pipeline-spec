@@ -15,5 +15,7 @@ jobs:
           python -m pipeline.fixture build 2026-09-08
           python -m pipeline.check 2026-09-08_official
           python -m pipeline.check 2026-09-17_official
+      - name: REVIEW decisions file is complete and well-formed (step 9)
+        run: python -m pipeline.decisions
       - name: fixture build is idempotent (no diff after rebuild)
         run: git diff --exit-code -- config/fixtures
