@@ -1,12 +1,13 @@
 {
   "summary": {
     "counts": {
-      "PASS": 44,
-      "REVIEW": 4,
-      "NOT_RUN": 8
+      "PASS": 127,
+      "REVIEW": 10,
+      "NOT_RUN": 30,
+      "FAIL": 2
     },
-    "exit_code": 0,
-    "final": "READY_FOR_HUMAN_REVIEW",
+    "exit_code": 1,
+    "final": "FAIL",
     "exception_not_run": 0
   },
   "results": [
@@ -829,6 +830,1678 @@
       "detail": "primal_rage: duration_s or cooldown_s missing",
       "records": {
         "ability": "primal_rage",
+        "mode": ""
+      }
+    },
+    {
+      "check": "apply_vs_baseline",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "applied snapshot matches baseline on every changed path",
+      "records": {}
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "missing field abilities.particle_barrier.cooldown_s.v6: 补丁只给 5v5 值，6v6 未查到可靠出处",
+      "records": {
+        "field": "abilities.particle_barrier.cooldown_s.v6"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "missing field weapons.particle_cannon.energy_scaling: 能量 0%→100% 的伤害缩放（95→175 /s、55→110）未建模，schema 无能量扩展",
+      "records": {
+        "field": "weapons.particle_cannon.energy_scaling"
+      }
+    },
+    {
+      "check": "F1_schema_bounds",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "all numeric fields within project bounds",
+      "records": {}
+    },
+    {
+      "check": "F2_falloff_structure",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "falloff structure consistent for all weapons",
+      "records": {}
+    },
+    {
+      "check": "F3_hitpoints_sum",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "total 550 = sum of components",
+      "records": {}
+    },
+    {
+      "check": "F4_linked_disposition",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "every touched linked pair has a disposition record",
+      "records": {}
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "abilities.particle_barrier.cooldown_s.v5: 11→12 = nerf, matches declaration",
+      "records": {
+        "path": "abilities.particle_barrier.cooldown_s.v5"
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon: full-cycle body DPS 73.08 → 73.08 (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon",
+        "before": {
+          "status": "OK",
+          "value": 73.07692307692308,
+          "fire_s": 5.0,
+          "reload_s": 1.5
+        },
+        "after": {
+          "status": "OK",
+          "value": 73.07692307692308,
+          "fire_s": 5.0,
+          "reload_s": 1.5
+        },
+        "rel_change": 0.0,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt: full-cycle body DPS 40.00 → 40.00 (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "before": {
+          "status": "OK",
+          "value": 40.0,
+          "shots_per_magazine": 4,
+          "fire_s": 4.0,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 55
+        },
+        "after": {
+          "status": "OK",
+          "value": 40.0,
+          "shots_per_magazine": 4,
+          "fire_s": 4.0,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 55
+        },
+        "rel_change": 0.0,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon vs 175hp body: TTK 1.842s → 1.842s (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.8421052631578947,
+          "requires_reload": false,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.8421052631578947,
+          "requires_reload": false,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon vs 250hp body: TTK 2.632s → 2.632s (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 2.6315789473684212,
+          "requires_reload": false,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 2.6315789473684212,
+          "requires_reload": false,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt vs 175hp body: TTK 3.000s → 3.000s (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 3.0,
+          "shots": 4,
+          "requires_reload": false,
+          "shots_per_magazine": 4,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 3.0,
+          "shots": 4,
+          "requires_reload": false,
+          "shots_per_magazine": 4,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt vs 250hp body: TTK 5.500s → 5.500s (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 5.5,
+          "shots": 5,
+          "requires_reload": true,
+          "shots_per_magazine": 4,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 5.5,
+          "shots": 5,
+          "requires_reload": true,
+          "shots_per_magazine": 4,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "particle_cannon",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R4_change_count_stats",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "changes: {'buff': 0, 'nerf': 1, 'ambiguous': 0} (display only, no threshold)",
+      "records": {
+        "buff": 0,
+        "nerf": 1,
+        "ambiguous": 0
+      }
+    },
+    {
+      "check": "R5_falloff_window_delta",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "no falloff weapons",
+      "records": {}
+    },
+    {
+      "check": "R6_cooldown_step",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_barrier[v5]: cooldown 11s → 12s (Δ1.00s, 9.1%)",
+      "records": {
+        "ability": "particle_barrier",
+        "mode": "v5",
+        "abs": 1,
+        "rel": 0.09090909090909091,
+        "threshold": {
+          "abs_s": 2,
+          "rel": 0.2
+        }
+      }
+    },
+    {
+      "check": "R8_mixed_direction_rationale",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "single direction {'nerf'}",
+      "records": {
+        "overall": "nerf"
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt vs 175hp body: 4 → 4 shot events",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "target_hp": 175,
+        "location": "body",
+        "before": 4,
+        "after": 4,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt vs 250hp body: 5 → 5 shot events",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "target_hp": 250,
+        "location": "body",
+        "before": 5,
+        "after": 5,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "particle_barrier[v5]: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "particle_barrier",
+        "mode": "v5"
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "particle_barrier[v6]: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "particle_barrier",
+        "mode": "v6"
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "projected_barrier: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "projected_barrier",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "graviton_surge: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "graviton_surge",
+        "mode": ""
+      }
+    },
+    {
+      "check": "apply_vs_baseline",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "applied snapshot matches baseline on every changed path",
+      "records": {}
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "no open conflicts, no missing fields",
+      "records": {}
+    },
+    {
+      "check": "F1_schema_bounds",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "all numeric fields within project bounds",
+      "records": {}
+    },
+    {
+      "check": "F2_falloff_structure",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "falloff structure consistent for all weapons",
+      "records": {}
+    },
+    {
+      "check": "F3_hitpoints_sum",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "total 250 = sum of components",
+      "records": {}
+    },
+    {
+      "check": "F4_linked_disposition",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "every touched linked pair has a disposition record",
+      "records": {}
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "abilities.immortality_field.threshold_pct: 20→25 = buff, matches declaration",
+      "records": {
+        "path": "abilities.immortality_field.threshold_pct"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "abilities.immortality_field.cooldown_s: 22→20 = buff, matches declaration",
+      "records": {
+        "path": "abilities.immortality_field.cooldown_s"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "abilities.immortality_field.deployable_health: 125→150 = buff, matches declaration",
+      "records": {
+        "path": "abilities.immortality_field.deployable_health"
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher: full-cycle body DPS 105.15 → 105.15 (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "before": {
+          "status": "OK",
+          "value": 105.15463917525773,
+          "shots_per_magazine": 12,
+          "fire_s": 7.0588235294117645,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 127.5
+        },
+        "after": {
+          "status": "OK",
+          "value": 105.15463917525773,
+          "shots_per_magazine": 12,
+          "fire_s": 7.0588235294117645,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 127.5
+        },
+        "rel_change": 0.0,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher_alt: full-cycle body DPS 0.00 → 0.00 (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher_alt",
+        "before": {
+          "status": "OK",
+          "value": 0.0,
+          "shots_per_magazine": 10,
+          "fire_s": 9.009009009009008,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 0.0
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.0,
+          "shots_per_magazine": 10,
+          "fire_s": 9.009009009009008,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 0.0
+        },
+        "rel_change": null,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 175hp body: TTK 1.176s → 1.176s (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.1764705882352942,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.1764705882352942,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 175hp head: TTK 0.588s → 0.588s (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 175,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 0.5882352941176471,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.5882352941176471,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 250hp body: TTK 1.765s → 1.765s (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.7647058823529411,
+          "shots": 4,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.7647058823529411,
+          "shots": 4,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 250hp head: TTK 0.588s → 0.588s (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 250,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 0.5882352941176471,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.5882352941176471,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "damage_head": 150,
+          "conditions": "none (plain shot, distance within falloff start)"
+        }
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher_alt: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "biotic_launcher_alt",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R4_change_count_stats",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "changes: {'buff': 3, 'nerf': 0, 'ambiguous': 0} (display only, no threshold)",
+      "records": {
+        "buff": 3,
+        "nerf": 0,
+        "ambiguous": 0
+      }
+    },
+    {
+      "check": "R5_falloff_window_delta",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher: window 20m → 20m (+0.0%); start 25→25, end 45→45",
+      "records": {
+        "weapon": "biotic_launcher",
+        "before": {
+          "status": "OK",
+          "value": 20,
+          "has_falloff": true,
+          "start": 25,
+          "end": 45
+        },
+        "after": {
+          "status": "OK",
+          "value": 20,
+          "has_falloff": true,
+          "start": 25,
+          "end": 45
+        },
+        "rel_change": 0.0,
+        "endpoints_moved": false
+      }
+    },
+    {
+      "check": "R6_cooldown_step",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "immortality_field: cooldown 22s → 20s (Δ2.00s, 9.1%)",
+      "records": {
+        "ability": "immortality_field",
+        "mode": "",
+        "abs": 2,
+        "rel": 0.09090909090909091,
+        "threshold": {
+          "abs_s": 2,
+          "rel": 0.2
+        }
+      }
+    },
+    {
+      "check": "R8_mixed_direction_rationale",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "single direction {'buff'}",
+      "records": {
+        "overall": "buff"
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 175hp body: 3 → 3 shot events",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 175,
+        "location": "body",
+        "before": 3,
+        "after": 3,
+        "pellets_per_event": 3
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 175hp head: 2 → 2 shot events",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 175,
+        "location": "head",
+        "before": 2,
+        "after": 2,
+        "pellets_per_event": 3
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 250hp body: 4 → 4 shot events",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 250,
+        "location": "body",
+        "before": 4,
+        "after": 4,
+        "pellets_per_event": 3
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 250hp head: 2 → 2 shot events",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 250,
+        "location": "head",
+        "before": 2,
+        "after": 2,
+        "pellets_per_event": 3
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "baptiste",
+      "status": "NOT_RUN",
+      "detail": "regenerative_burst: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "regenerative_burst",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "baptiste",
+      "status": "NOT_RUN",
+      "detail": "immortality_field: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "immortality_field",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "baptiste",
+      "status": "NOT_RUN",
+      "detail": "amplification_matrix: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "amplification_matrix",
+        "mode": ""
+      }
+    },
+    {
+      "check": "apply_vs_baseline",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "applied snapshot matches baseline on every changed path",
+      "records": {}
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "wuyang",
+      "status": "NOT_RUN",
+      "detail": "missing field weapons.xuanwu_staff.charged: 蓄力档（直击 40 / 溅射 60、消耗 2 弹）未建模，schema 无蓄力扩展",
+      "records": {
+        "field": "weapons.xuanwu_staff.charged"
+      }
+    },
+    {
+      "check": "F1_schema_bounds",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "all numeric fields within project bounds",
+      "records": {}
+    },
+    {
+      "check": "F2_falloff_structure",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "falloff structure consistent for all weapons",
+      "records": {}
+    },
+    {
+      "check": "F3_hitpoints_sum",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "total 225 = sum of components",
+      "records": {}
+    },
+    {
+      "check": "F4_linked_disposition",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "every touched linked pair has a disposition record",
+      "records": {}
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "abilities.restorative_stream.regen_pct_s: 12.5→15 = buff, matches declaration",
+      "records": {
+        "path": "abilities.restorative_stream.regen_pct_s"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "wuyang",
+      "status": "FAIL",
+      "detail": "abilities.restorative_stream.los_timeout_s: 5→3 is a nerf by field semantics but declared buff",
+      "records": {
+        "path": "abilities.restorative_stream.los_timeout_s",
+        "actual": "nerf",
+        "declared": "buff"
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff: full-cycle body DPS 73.47 → 73.47 (+0.0%)",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "before": {
+          "status": "OK",
+          "value": 73.46938775510203,
+          "shots_per_magazine": 20,
+          "fire_s": 6.666666666666667,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 90
+        },
+        "after": {
+          "status": "OK",
+          "value": 73.46938775510203,
+          "shots_per_magazine": 20,
+          "fire_s": 6.666666666666667,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 90
+        },
+        "rel_change": 0.0,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff vs 175hp body: TTK 1.667s → 1.667s (+0.0%)",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.6666666666666667,
+          "shots": 6,
+          "requires_reload": false,
+          "shots_per_magazine": 20,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.6666666666666667,
+          "shots": 6,
+          "requires_reload": false,
+          "shots_per_magazine": 20,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff vs 250hp body: TTK 2.667s → 2.667s (+0.0%)",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 2.6666666666666665,
+          "shots": 9,
+          "requires_reload": false,
+          "shots_per_magazine": 20,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 2.6666666666666665,
+          "shots": 9,
+          "requires_reload": false,
+          "shots_per_magazine": 20,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R4_change_count_stats",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "changes: {'buff': 2, 'nerf': 0, 'ambiguous': 0} (display only, no threshold)",
+      "records": {
+        "buff": 2,
+        "nerf": 0,
+        "ambiguous": 0
+      }
+    },
+    {
+      "check": "R5_falloff_window_delta",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "no falloff weapons",
+      "records": {}
+    },
+    {
+      "check": "R6_cooldown_step",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "no cooldown changes",
+      "records": {}
+    },
+    {
+      "check": "R8_mixed_direction_rationale",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "single direction {'buff'}",
+      "records": {
+        "overall": "buff"
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff vs 175hp body: 6 → 6 shot events",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "target_hp": 175,
+        "location": "body",
+        "before": 6,
+        "after": 6,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff vs 250hp body: 9 → 9 shot events",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "target_hp": 250,
+        "location": "body",
+        "before": 9,
+        "after": 9,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "wuyang",
+      "status": "NOT_RUN",
+      "detail": "rushing_torrent: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "rushing_torrent",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "wuyang",
+      "status": "NOT_RUN",
+      "detail": "guardian_wave: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "guardian_wave",
+        "mode": ""
+      }
+    },
+    {
+      "check": "apply_vs_baseline",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "applied snapshot matches baseline on every changed path",
+      "records": {}
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "open source conflict on hitpoints.health: {'overfast_api': 325, 'wiki_fandom': '275 (Open queue) / 425 (Role queue) / 175 (Pilot)'} — OverFast 的 325 与 wiki 任一模式都对不上；温斯顿那次的教训是模式标签，这次两边按模式对齐仍不一致，留空",
+      "records": {
+        "field": "hitpoints.health"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "open source conflict on abilities.propulsors.cost_pct_s: {'patch_notes_official': 30, 'wiki_fandom': 25} — 补丁原文写 \"Fuel drain rate 25 → 30\"，无单位；wiki 字段为 \"25% per second\"。取补丁值，但\"drain rate\"是否就是 wiki 的 energy cost 字段待确认",
+      "records": {
+        "field": "abilities.propulsors.cost_pct_s"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "missing field abilities.power_barrier.cast_time_s: 09-08 官方「Cast time decreased from 0.065s to 0.016s」，wiki 该技能无施法时间字段，无法核对改动后值",
+      "records": {
+        "field": "abilities.power_barrier.cast_time_s"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "missing field 09-17 General「Damage per bullet reduced from 45 to 36」: 无法映射到任何已知武器（Portable Fusion Repeater 为 12、Fusion Repeater 为 16→15）；疑为某 Perk 或未收录字段，留待人工",
+      "records": {
+        "field": "09-17 General「Damage per bullet reduced from 45 to 36」"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "missing field hitpoints.health: 见 conflicts",
+      "records": {
+        "field": "hitpoints.health"
+      }
+    },
+    {
+      "check": "F1_schema_bounds",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "all numeric fields within project bounds",
+      "records": {}
+    },
+    {
+      "check": "F2_falloff_structure",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "falloff structure consistent for all weapons",
+      "records": {}
+    },
+    {
+      "check": "F3_hitpoints_sum",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "hitpoints is null (open conflict or missing) — no numeric judgement",
+      "records": {}
+    },
+    {
+      "check": "F4_linked_disposition",
+      "hero": "dmon",
+      "status": "FAIL",
+      "detail": "weapons.plasma_saber.damage_max changed but linked field weapons.plasma_saber.damage_min has no disposition (keep / changed / not_needed:<reason>)",
+      "records": {
+        "path": "weapons.plasma_saber.damage_max",
+        "partner": "weapons.plasma_saber.damage_min"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "hitpoints_by_mode.v6.armor: 325→300 = nerf, matches declaration",
+      "records": {
+        "path": "hitpoints_by_mode.v6.armor"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "weapons.plasma_saber.damage_max: 65→60 = nerf, matches declaration",
+      "records": {
+        "path": "weapons.plasma_saber.damage_max"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "abilities.call_mech.duration_s: field semantics 'ambiguous' — direction cannot be machine-judged; declared=buff, reason='变形时间缩短，duration 在此为自身硬直时长，变短=增强'",
+      "records": {
+        "path": "abilities.call_mech.duration_s"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "weapons.portable_fusion_repeater.spread_deg: 2→1.75 = buff, matches declaration",
+      "records": {
+        "path": "weapons.portable_fusion_repeater.spread_deg"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "weapons.portable_fusion_repeater.falloff_start_m: 30→20 = nerf, matches declaration",
+      "records": {
+        "path": "weapons.portable_fusion_repeater.falloff_start_m"
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "plasma_saber: ammo or reload_s missing (full-cycle DPS needs both)",
+      "records": {
+        "weapon": "plasma_saber"
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "portable_fusion_repeater: ammo or reload_s missing (full-cycle DPS needs both)",
+      "records": {
+        "weapon": "portable_fusion_repeater"
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "plasma_saber vs 175hp body: TTK 1.316s → 1.316s (+0.0%)",
+      "records": {
+        "weapon": "plasma_saber",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.3157894736842106,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": null,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.3157894736842106,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": null,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "plasma_saber vs 250hp body: TTK 1.974s → 2.632s (+33.3%)",
+      "records": {
+        "weapon": "plasma_saber",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.9736842105263157,
+          "shots": 4,
+          "requires_reload": false,
+          "shots_per_magazine": null,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 2.6315789473684212,
+          "shots": 5,
+          "requires_reload": false,
+          "shots_per_magazine": null,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.3333333333333335,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 175hp body: TTK 1.792s → 1.792s (+0.0%)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.7918853193395623,
+          "shots": 15,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.7918853193395623,
+          "shots": 15,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 175hp head: TTK 0.896s → 0.896s (+0.0%)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 175,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 0.8959426596697811,
+          "shots": 8,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.8959426596697811,
+          "shots": 8,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 250hp body: TTK 2.560s → 2.560s (+0.0%)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 2.559836170485089,
+          "shots": 21,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 2.559836170485089,
+          "shots": 21,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 250hp head: TTK 1.280s → 1.280s (+0.0%)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 250,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 1.2799180852425445,
+          "shots": 11,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.2799180852425445,
+          "shots": 11,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "plasma_saber: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "plasma_saber",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "damage_head": 24,
+          "conditions": "none (plain shot, distance within falloff start)"
+        }
+      }
+    },
+    {
+      "check": "R4_change_count_stats",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "changes: {'buff': 2, 'nerf': 3, 'ambiguous': 0} (display only, no threshold)",
+      "records": {
+        "buff": 2,
+        "nerf": 3,
+        "ambiguous": 0
+      }
+    },
+    {
+      "check": "R5_falloff_window_delta",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "portable_fusion_repeater: window 10m → 20m (+100.0%); start 30→20, end 40→40 [endpoints moved]",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "before": {
+          "status": "OK",
+          "value": 10,
+          "has_falloff": true,
+          "start": 30,
+          "end": 40
+        },
+        "after": {
+          "status": "OK",
+          "value": 20,
+          "has_falloff": true,
+          "start": 20,
+          "end": 40
+        },
+        "rel_change": 1.0,
+        "endpoints_moved": true
+      }
+    },
+    {
+      "check": "R6_cooldown_step",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "no cooldown changes",
+      "records": {}
+    },
+    {
+      "check": "R8_mixed_direction_rationale",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "mixed, rationale given: '缩短变形时间、改善副武器精度为增强；降低等离子剑伤害、降低远距离效果、6v6 护甲下调为削弱；开发者注释明说等离子剑削弱用于抵消（offset）前述增强' (local directions only; net effect not machine-judged)",
+      "records": {
+        "overall": "mixed"
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "plasma_saber vs 175hp body: 3 → 3 shot events",
+      "records": {
+        "weapon": "plasma_saber",
+        "target_hp": 175,
+        "location": "body",
+        "before": 3,
+        "after": 3,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "plasma_saber vs 250hp body: 4 → 5 shot events",
+      "records": {
+        "weapon": "plasma_saber",
+        "target_hp": 250,
+        "location": "body",
+        "before": 4,
+        "after": 5,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 175hp body: 15 → 15 shot events",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 175,
+        "location": "body",
+        "before": 15,
+        "after": 15,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 175hp head: 8 → 8 shot events",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 175,
+        "location": "head",
+        "before": 8,
+        "after": 8,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 250hp body: 21 → 21 shot events",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 250,
+        "location": "body",
+        "before": 21,
+        "after": 21,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 250hp head: 11 → 11 shot events",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 250,
+        "location": "head",
+        "before": 11,
+        "after": 11,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "propulsors: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "propulsors",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "fusion_repeater: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "fusion_repeater",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "limit_break: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "limit_break",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "call_mech: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "call_mech",
         "mode": ""
       }
     }

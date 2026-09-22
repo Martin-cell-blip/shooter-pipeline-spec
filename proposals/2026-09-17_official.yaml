@@ -1,0 +1,17 @@
+# 「金标」提案：官方 2026-09-17 补丁（本仓库样本英雄中只有 D.Mon）。无开发者注释。
+proposal_id: 2026-09-17_official
+before: fixtures/2026-09-17_before
+after_ref: baseline
+heroes:
+  dmon:
+    overall_direction: nerf
+    mixed_rationale: null
+    changes:
+      - {path: hitpoints_by_mode.v5.armor, from: 325, to: 275, expected_direction: nerf, why: "5v5 护甲下调", mode: 5v5}
+      - {path: hitpoints_by_mode.v6.armor, from: 300, to: 250, expected_direction: nerf, why: "6v6 护甲下调", mode: 6v6}
+      - {path: abilities.propulsors.cost_pct_s, from: 25, to: 30, expected_direction: nerf, why: "燃料消耗加快；原文 fuel drain rate 无单位，按快照字段 cost_pct_s 映射（该映射本身登记为 REVIEW 冲突）"}
+      - {path: abilities.fusion_repeater.damage, from: 16, to: 15, expected_direction: nerf, why: "伤害下调"}
+      - {path: abilities.fusion_repeater.cooldown_s, from: 4, to: 5, expected_direction: nerf, why: "冷却增加"}
+    linked_dispositions: {}
+    unmapped:
+      - "Damage per bullet reduced from 45 to 36."   # 快照无任何武器/技能的每发伤害为 45；不得硬凑到 portable_fusion_repeater(12) 或 fusion_repeater(16)

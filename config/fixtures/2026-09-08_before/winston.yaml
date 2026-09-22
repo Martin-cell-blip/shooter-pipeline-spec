@@ -103,10 +103,12 @@ provenance:
   fixture:
     kind: constructed_before_snapshot
     patch: '2026-09-08'
-    method: baseline with official 'from' values written back on listed paths
+    method: baseline; later patches undone in reverse order; then official 'from'
+      values written back on listed paths
+    later_patches_undone: []
     assumes:
-    - patch entries cover all numeric changes for this hero on that date
-    - no later patch touched these paths before baseline fetch (2026-09-22)
+    - patch entries cover all numeric changes for this hero on each listed date
+    - no unlisted patch touched these paths before baseline fetch (2026-09-22)
     restored_paths:
     - abilities.barrier_projector.cooldown_s.v5
     - abilities.barrier_projector.duration_s

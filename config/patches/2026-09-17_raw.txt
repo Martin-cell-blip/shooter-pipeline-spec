@@ -1,0 +1,14 @@
+# 官方补丁说明原文（非结构化输入，给执行 Agent 用）。抓取 2026-09-22，来源 https://overwatch.blizzard.com/en-us/news/patch-notes/
+# 只保留本仓库样本英雄的条目。
+
+Overwatch Retail Patch Notes – September 17, 2026
+
+## D.Mon
+- Armor reduced from 325 to 275 (5v5).
+- Armor reduced from 300 to 250 (6v6).
+- Damage per bullet reduced from 45 to 36.
+### Propulsors
+- Fuel drain rate increased from 25 to 30.
+### Fusion Repeater
+- Damage reduced from 16 to 15.
+- Cooldown increased from 4 to 5 seconds.

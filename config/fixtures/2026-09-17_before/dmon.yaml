@@ -1,0 +1,165 @@
+id: dmon
+name_en: D.Mon
+name_zh: D.Mon
+role: tank
+subrole: stalwart
+mode_split: true
+hitpoints: null
+hitpoints_by_mode:
+  v5:
+    health: null
+    armor: 325
+    shields: 0
+    total: null
+  v6:
+    health: null
+    armor: 300
+    shields: 0
+    total: null
+weapons:
+- id: plasma_saber
+  slot: primary
+  hit_type: melee
+  damage_max: 60
+  headshot_mult: 1
+  rate_of_fire: 1.52
+  max_range_m: 4
+- id: portable_fusion_repeater
+  slot: secondary
+  hit_type: hitscan
+  damage_max: 12
+  falloff_start_m: 20
+  falloff_end_m: 40
+  headshot_mult: 2
+  rate_of_fire: 7.813
+  ammo: 30
+  spread_deg: 1.75
+abilities:
+- id: power_barrier
+  kind: ability
+  cooldown_s: 5
+  barrier_health: 650
+- id: propulsors
+  kind: ability
+  cooldown_s: 1
+  damage: 15
+  cost_pct_s: 25
+  regen_pct_s: 22.5
+  duration_s: 4
+- id: fusion_repeater
+  kind: ability
+  cooldown_s: 4
+  damage: 16
+  duration_s: 4
+  rate_of_fire: 9
+- id: surging_strike
+  kind: ability
+  cooldown_s: 6
+  damage: 70
+  max_range_m: 10
+- id: limit_break
+  kind: ultimate
+  damage: 125
+  duration_s: 5
+  max_range_m: 20
+- id: call_mech
+  kind: ultimate
+  damage: 150
+  duration_s: 0.95
+provenance:
+  default:
+    source: wiki_fandom
+    url: https://overwatch.fandom.com/wiki/D.Mon
+    fetched: 2026-09-22
+  overrides:
+  - field: hitpoints_by_mode.v5.armor
+    value: 275
+    source: patch_notes_official
+    date: 2026-09-17
+    why: 「Armor reduced from 325 to 275 (5v5)」；wiki 与 OverFast 均仍写 325（两者都未同步 09-17）
+  - field: hitpoints_by_mode.v6.armor
+    value: 250
+    source: patch_notes_official
+    date: 2026-09-17
+    why: 「Armor reduced from 300 to 250 (6v6)」
+  - field: abilities.propulsors.cost_pct_s
+    value: 30
+    source: patch_notes_official
+    date: 2026-09-17
+    why: 「Fuel drain rate increased from 25 to 30」；wiki 仍写 25% per second
+  - field: abilities.fusion_repeater.damage
+    value: 15
+    source: patch_notes_official
+    date: 2026-09-17
+    why: 「Damage reduced from 16 to 15」；wiki 仍写 16
+  - field: abilities.fusion_repeater.cooldown_s
+    value: 5
+    source: patch_notes_official
+    date: 2026-09-17
+    why: 「Cooldown increased from 4 to 5 seconds」；wiki 仍写 4
+  - field: weapons.plasma_saber.damage_max
+    value: 60
+    source: patch_notes_official
+    date: 2026-09-08
+    why: 65 → 60，wiki 已同步
+  - field: abilities.call_mech.duration_s
+    value: 0.95
+    source: patch_notes_official
+    date: 2026-09-08
+    why: 1.95 → 0.95，wiki 已同步
+  conflicts:
+  - field: hitpoints.health
+    values:
+      overfast_api: 325
+      wiki_fandom: 275 (Open queue) / 425 (Role queue) / 175 (Pilot)
+    status: REVIEW
+    note: OverFast 的 325 与 wiki 任一模式都对不上；温斯顿那次的教训是模式标签，这次两边按模式对齐仍不一致，留空
+  - field: hitpoints.armor
+    values:
+      patch_notes_official: 275 (5v5) / 250 (6v6) after 09-17
+      overfast_api: 325
+      wiki_fandom: 325
+    status: RESOLVED
+    note: 官方补丁权威最高且明确分模式；两处 325 均为 09-17 之前的旧值
+  - field: abilities.propulsors.cost_pct_s
+    values:
+      patch_notes_official: 30
+      wiki_fandom: 25
+    status: REVIEW
+    note: 补丁原文写 "Fuel drain rate 25 → 30"，无单位；wiki 字段为 "25% per second"。取补丁值，但"drain
+      rate"是否就是 wiki 的 energy cost 字段待确认
+  - field: abilities.fusion_repeater.damage
+    values:
+      patch_notes_official: 15
+      wiki_fandom: 16
+    status: RESOLVED
+    note: wiki 未同步 09-17
+  - field: abilities.fusion_repeater.cooldown_s
+    values:
+      patch_notes_official: 5
+      wiki_fandom: 4
+    status: RESOLVED
+    note: wiki 未同步 09-17
+  missing:
+  - field: abilities.power_barrier.cast_time_s
+    note: 09-08 官方「Cast time decreased from 0.065s to 0.016s」，wiki 该技能无施法时间字段，无法核对改动后值
+  - field: 09-17 General「Damage per bullet reduced from 45 to 36」
+    note: 无法映射到任何已知武器（Portable Fusion Repeater 为 12、Fusion Repeater 为 16→15）；疑为某 Perk
+      或未收录字段，留待人工
+  - field: hitpoints.health
+    note: 见 conflicts
+  fixture:
+    kind: constructed_before_snapshot
+    patch: '2026-09-17'
+    method: baseline; later patches undone in reverse order; then official 'from'
+      values written back on listed paths
+    later_patches_undone: []
+    assumes:
+    - patch entries cover all numeric changes for this hero on each listed date
+    - no unlisted patch touched these paths before baseline fetch (2026-09-22)
+    restored_paths:
+    - hitpoints_by_mode.v5.armor
+    - hitpoints_by_mode.v6.armor
+    - abilities.propulsors.cost_pct_s
+    - abilities.fusion_repeater.damage
+    - abilities.fusion_repeater.cooldown_s

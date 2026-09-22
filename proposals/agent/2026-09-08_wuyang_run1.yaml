@@ -1,0 +1,20 @@
+# agent output — deepseek-chat — run 1 — raw record: runs/2026-09-08/wuyang_run1.json
+proposal_id: 2026-09-08_wuyang_restorative_stream
+before: fixtures/2026-09-08_before
+heroes:
+  wuyang:
+    overall_direction: buff
+    mixed_rationale: null
+    changes:
+    - path: abilities.restorative_stream.regen_pct_s
+      from: 12.5
+      to: 15
+      expected_direction: buff
+      why: Regeneration rate increased from 12.5% to 15% per second.
+    - path: abilities.restorative_stream.los_timeout_s
+      from: 5
+      to: 3
+      expected_direction: nerf
+      why: Line of sight timeout reduced from 5 to 3 seconds.
+    linked_dispositions: {}
+    unmapped: []

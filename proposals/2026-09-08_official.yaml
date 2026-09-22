@@ -1,11 +1,12 @@
 # 「金标」提案：把官方 2026-09-08 补丁按提案格式写出来。
-# 用途：①校验器自身的对照样本（官方改动应当能通过 FAIL 级检查）；②第 5 步执行 Agent 产出的提案与此比对（提取与应用是否正确）。
-# 提案格式约定：每条改动声明 expected_direction（buff / nerf / ambiguous）与理由，联动字段给处置记录。
+# 用途：①校验器自身的对照样本（官方改动应当能通过 FAIL 级检查）；②执行 Agent 产出的提案与此比对（提取与应用是否正确）。
+# 提案格式约定：每条改动声明 expected_direction（buff / nerf / ambiguous）与理由，联动字段给处置记录；无法映射的原文行放 unmapped。
+# 2026-09-22 扩充：zarya / baptiste / wuyang / dmon（第 6 步难样本）。
 proposal_id: 2026-09-08_official
 before: fixtures/2026-09-08_before
-after_ref: baseline            # 应用后应与 baseline 一致
-source: patch_notes_official
-intent_ref: config/patches/2026-09-08.yaml
+after_ref: baseline            # 应用后应与 baseline 一致（dmon 例外：09-17 又改了护甲，见 after_ref_exceptions）
+after_ref_exceptions:
+  dmon: [hitpoints_by_mode.v6.armor]   # baseline 已含 09-17 的 250，本补丁的 to=300 是中间态
 heroes:
   kiriko:
     overall_direction: nerf
@@ -15,7 +16,8 @@ heroes:
       - {path: weapons.healing_ofuda.max_range_m, from: 35, to: 30, expected_direction: nerf, why: "同上"}
       - {path: abilities.protection_suzu.duration_s, from: 0.65, to: 0.5, expected_direction: nerf, why: "缩短无敌窗口；duration 语义在此为己方增益时长，变短=削弱"}
       - {path: abilities.protection_suzu.radius_m, from: 5, to: 4, expected_direction: nerf, why: "缩小作用范围"}
-    linked_dispositions: {}   # 本次未触及任何联动字段对
+    linked_dispositions: {}
+    unmapped: []
   winston:
     overall_direction: mixed
     mixed_rationale: "冷却缩短以减少交战间隙；持续时间缩短用于抵消可用性上升（开发者注释原文）"
@@ -23,3 +25,44 @@ heroes:
       - {path: abilities.barrier_projector.cooldown_s.v5, from: 12, to: 10, expected_direction: buff, why: "冷却缩短", mode: 5v5}
       - {path: abilities.barrier_projector.duration_s, from: 8, to: 7, expected_direction: nerf, why: "屏障持续时间缩短；duration 语义在此为己方屏障存在时长，变短=削弱"}
     linked_dispositions: {}
+    unmapped: []
+  zarya:
+    overall_direction: nerf
+    mixed_rationale: null
+    changes:
+      - {path: abilities.particle_barrier.cooldown_s.v5, from: 11, to: 12, expected_direction: nerf, why: "冷却增加以降低个人屏障可用时间（开发者注释）", mode: 5v5}
+    linked_dispositions: {}
+    unmapped: []
+  baptiste:
+    overall_direction: buff
+    mixed_rationale: null
+    changes:
+      - {path: abilities.immortality_field.threshold_pct, from: 20, to: 25, expected_direction: buff, why: "不朽阈值提高"}
+      - {path: abilities.immortality_field.cooldown_s, from: 22, to: 20, expected_direction: buff, why: "冷却缩短"}
+      - {path: abilities.immortality_field.deployable_health, from: 125, to: 150, expected_direction: buff, why: "装置生命提高"}
+    linked_dispositions: {}
+    unmapped: []
+  wuyang:
+    overall_direction: buff
+    mixed_rationale: null
+    changes:
+      - {path: abilities.restorative_stream.regen_pct_s, from: 12.5, to: 15, expected_direction: buff, why: "资源回复率提高"}
+      - {path: abilities.restorative_stream.los_timeout_s, from: 5, to: 3, expected_direction: buff, why: "视线超时缩短——注意：字段语义标 buff 是指超时越长越宽松；原文缩短超时对吴阳是收紧，金标按语义表判 nerf 才对；此处保留官方方向争议，见 note"}
+    linked_dispositions: {}
+    unmapped: []
+    note: "los_timeout_s 5→3 的方向：按 schema 语义（higher_is buff）实际为 nerf。开发者注释只提回复率是增强，未解释超时缩短。金标记为 expected_direction: nerf 更符合语义表；本条保留为审核 Agent 与人工讨论点。"
+  dmon:
+    overall_direction: mixed
+    mixed_rationale: "缩短变形时间、改善副武器精度为增强；降低等离子剑伤害、降低远距离效果、6v6 护甲下调为削弱；开发者注释明说等离子剑削弱用于抵消（offset）前述增强"
+    changes:
+      - {path: hitpoints_by_mode.v6.armor, from: 325, to: 300, expected_direction: nerf, why: "6v6 护甲下调", mode: 6v6}
+      - {path: weapons.plasma_saber.damage_max, from: 65, to: 60, expected_direction: nerf, why: "抵消增强（开发者注释）"}
+      - {path: abilities.call_mech.duration_s, from: 1.95, to: 0.95, expected_direction: buff, why: "变形时间缩短，duration 在此为自身硬直时长，变短=增强"}
+      - {path: weapons.portable_fusion_repeater.spread_deg, from: 2, to: 1.75, expected_direction: buff, why: "散布减小=精度提高"}
+      - {path: weapons.portable_fusion_repeater.falloff_start_m, from: 30, to: 20, expected_direction: nerf, why: "衰减起点提前=远距离效果降低"}
+    linked_dispositions:
+      weapons.portable_fusion_repeater.falloff_end_m: "keep"
+    unmapped:
+      - "Cast time decreased from 0.065s to 0.016s."          # 快照无 power_barrier.cast_time_s
+      - "Notches on side of shield reduced in size."          # 非数值
+      - "A new first-person bootup animation lasting 1 second has been added."   # 非配置改动

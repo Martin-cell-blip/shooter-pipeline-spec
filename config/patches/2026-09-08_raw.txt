@@ -18,3 +18,36 @@ Developer Comments: Winston's Barrier Projector cooldown is being reduced to sho
 - Phased out invulnerability duration reduced from 0.65 to 0.5 seconds.
 - Explosion radius reduced from 5 to 4 meters.
 Developer Comments: Kiriko has become highly effective as a healer while retaining the utility and mobility of her kit. We're reducing the speed and range of Healing Ofuda to lower her healing consistency at longer distances. Protection Suzu is also being adjusted to reduce the effectiveness of its invulnerability window.
+
+## D.Mon
+- Armor reduced from 325 to 300. (6v6)
+### Plasma Saber
+- Damage reduced from 65 to 60.
+### Power Barrier
+- Cast time decreased from 0.065s to 0.016s.
+- Notches on side of shield reduced in size.
+### Call Mech
+- Transformation duration has been reduced from 1.95 to 0.95 seconds.
+- A new first-person bootup animation lasting 1 second has been added.
+### Portable Fusion Repeater
+- Spread reduced from 2 to 1.75 degrees.
+- Minimum falloff range reduced from 30 to 20 meters.
+Developer Comments: D.Mon has settled into a strong position since launch. We're reducing Call Mech's transformation time to match D.Va's while adjusting Portable Fusion Repeater to improve accuracy and reduce effectiveness at longer distances. We're also reducing Plasma Saber's damage to help offset these improvements.
+
+## Zarya
+### Particle Barrier
+- Cooldown increased from 11 to 12 seconds. (5v5)
+Developer Comments: The cooldown of Particle Barrier is being increased to reduce Zarya's personal barrier uptime and energy generation. Projected Barrier remains unchanged, encouraging more proactive use on allies.
+
+## Baptiste
+### Immortality Field
+- Unkillable health threshold increased from 20% to 25%.
+- Cooldown reduced from 22 to 20 seconds.
+- Health increased from 125 to 150.
+Developer Comments: Immortality Field's long cooldown and vulnerability to being destroyed can limit its effectiveness. We're increasing its health, lowering its cooldown, and raising its minimum health threshold to improve its overall reliability.
+
+## Wuyang
+### Restorative Stream
+- Regeneration rate increased from 12.5% to 15% per second.
+- Line of sight timeout reduced from 5 to 3 seconds.
+Developer Comments: Wuyang's empowered healing resource can be limiting when responding to sustained damage. We're increasing its regeneration rate to provide more frequent access to empowered healing.

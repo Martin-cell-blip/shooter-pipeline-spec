@@ -22,12 +22,13 @@ hero:
     armor:     {type: int, min: 0,  max: 1000, required: true}
     shields:   {type: int, min: 0,  max: 1000, required: true}
     total:     {type: int, derived: health + armor + shields, note: 派生字段，与三项之和不等 = FAIL}
+  hitpoints_by_mode: {type: map, note: "mode_split 且各模式生命/护甲不同的英雄用 {v5: {...}, v6: {...}}，路径写 hitpoints_by_mode.v5.armor"}
   mode_split:  {type: bool, note: "若 5v5 与 6v6 取值不同则为 true，且相应字段以 {v5: x, v6: y} 形式给出"}
 
 weapon:
   id:               {type: str, required: true}
   slot:             {type: enum, values: [primary, secondary], required: true}
-  hit_type:         {type: enum, values: [hitscan, projectile, beam], required: true}
+  hit_type:         {type: enum, values: [hitscan, projectile, beam, melee], required: true}
   damage_max:       {type: num, min: 0, max: 500, required: true, note: 衰减起点之前的每发伤害}
   damage_min:       {type: num, min: 0, max: 500, required: false, note: 衰减终点之后的每发伤害；无衰减则省略}
   falloff_start_m:  {type: num, min: 0, max: 200, required: false}
@@ -60,6 +61,15 @@ ability:
   radius_m:    {type: num, min: 0, max: 50,  required: false}
   max_range_m: {type: num, min: 0, max: 500, required: false}
   ult_cost:    {type: int, min: 500, max: 5000, required: false, note: 仅 ultimate}
+  cast_time_s: {type: num, min: 0, max: 5,   required: false}
+  barrier_health:    {type: num, min: 0, max: 5000, required: false}
+  deployable_health: {type: num, min: 0, max: 5000, required: false, note: 可被打掉的装置生命}
+  threshold_pct:     {type: num, min: 0, max: 100,  required: false, note: 百分比字段存数值不存 %}
+  regen_pct_s:       {type: num, min: 0, max: 100,  required: false, note: 资源每秒回复百分比}
+  cost_pct_s:        {type: num, min: 0, max: 100,  required: false, note: 资源每秒消耗百分比}
+  los_timeout_s:     {type: num, min: 0, max: 30,   required: false}
+  healing_per_s:     {type: num, min: 0, max: 500,  required: false}
+  bonus_healing_per_s: {type: num, min: 0, max: 500, required: false}
 
 # 字段方向语义：higher_is 表示"数值变大对该英雄是增强还是削弱"。ambiguous 的字段不参与"方向与意图相反"的 FAIL 判定，只能 REVIEW。
 semantics:
@@ -86,6 +96,14 @@ semantics:
     max_range_m: buff
     ult_cost: nerf
     barrier_health: buff
+    deployable_health: buff
+    threshold_pct: buff
+    regen_pct_s: buff
+    cost_pct_s: nerf
+    los_timeout_s: buff
+    healing_per_s: buff
+    bonus_healing_per_s: buff
+    cast_time_s: nerf
     duration_s: ambiguous   # 屏障持续=增强，敌方控制持续=增强，但自身硬直/施法持续=削弱；由提案逐条声明
   hitpoints:
     health: buff

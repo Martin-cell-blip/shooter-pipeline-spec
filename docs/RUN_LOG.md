@@ -2,15 +2,32 @@
 
 每次执行 Agent 实跑一条：输入、模型、提取验收（与官方 from/to 比对）、校验结果、发现的问题。失败原样记录，不做事后美化；后续规范修改必须能指回这里的某一条。
 
-## 2026-09-22 · run 1 · deepseek-chat · 补丁 2026-09-08
+## 2026-09-22 · run 1 · deepseek-chat · 补丁 2026-09-08（雾子、温斯顿）
 
 | 英雄 | 提取验收（matched / wrong / missing / extra） | 方向声明 | 校验器 | 用时 / tokens |
 |---|---|---|---|---|
 | 雾子 | 4 / 0 / 0 / 0 | 4/4 与金标一致；`duration_s` 主动标注"语义 ambiguous，按上下文判 nerf" | 0 FAIL · 3 REVIEW · 3 NOT_RUN | 1.8 s / 1513 |
 | 温斯顿 | 2 / 0 / 0 / 0 | 2/2 一致；给出对冲理由；正确挂到 `cooldown_s.v5` 并标 mode | 0 FAIL · 1 REVIEW · 5 NOT_RUN | 1.8 s / 1371 |
 
-输出未加 markdown 围栏，YAML 一次解析成功。REVIEW / NOT_RUN 与金标样本同源（`duration_s` 语义、来源冲突、`cooldown_starts` 未知、温斯顿生命值留空），不是 Agent 引入的。
+输出未加 markdown 围栏，YAML 一次解析成功。**本轮没有失败，原因是样本太容易**：每行自带精确 from/to，技能名与快照 id 几乎一一对应。
 
-**结论：本轮没有失败。** 但要如实说明原因：09-08 这两组条目是最容易的一类——每行都自带精确的 from/to，技能名与快照里的 id 几乎一一对应，没有相对表述（"提高 20%"）、没有快照里不存在的字段、没触及联动字段对。这轮证明的是"格式、映射、方向声明这条链路能跑通"，不能证明 Agent 在难样本上的提取正确率。
+## 2026-09-22 · run 1 · deepseek-chat · 难样本（查莉娅、巴蒂斯特、吴阳、D.Mon；补丁 09-08 与 09-17）
 
-**下一步（第 6 步）需要更难的真实样本**，候选来源仍是官方补丁页面同期条目：含 "(5v5)/(6v6)" 分模式给不同值的、用相对表述的、改动的是快照里没有的字段的（应进 unmapped）、触及弹匣/装填联动对的。这些样本涉及五个样本英雄之外的英雄，需要先补基线。
+先说金标：**新样本的官方金标自己先被校验器打出 2 个 FAIL**，都是我写金标时的错：
+
+| # | 金标缺陷 | 校验器怎么抓到的 | 定性 |
+|---|---|---|---|
+| G1 | 吴阳 `los_timeout_s` 5→3 我声明 buff | F5：字段语义 higher_is=buff，5→3 是 nerf | 金标写错方向；**Agent 判 nerf 是对的** |
+| G2 | D.Mon `plasma_saber.damage_max` 65→60 被 F4 要求给 `damage_min` 处置，但近战武器根本没有 `damage_min` 字段 | F4 只看 schema 的联动对，不看快照里字段是否存在 | **规范缺陷**：联动处置应只对快照中实际存在的伙伴字段要求 |
+
+Agent 五次运行（每次约 2 s）：
+
+| 运行 | 提取验收 | 问题 |
+|---|---|---|
+| 09-08 查莉娅 | 1/1 matched | 把开发者注释里的一句话（"Projected Barrier remains unchanged…"）放进了 `unmapped`。金标 unmapped 为空 → 记 `agent_extra_unmapped` 1。**规范缺陷**：提案格式没说清 unmapped 只收条目行、不收注释 |
+| 09-08 巴蒂斯特 | 3/3 matched，方向全对 | 无（百分比字段 20%→25% 正确映射到 `threshold_pct`） |
+| 09-08 吴阳 | 2/2 matched | `los_timeout_s` 方向与金标不一致——见 G1，是金标错。Agent 整体方向标 buff 却含一条 nerf 且无对冲理由 → R8 REVIEW，属正常 |
+| 09-08 D.Mon | 4/5 matched，1 missing，1 extra；3 条 unmapped 全部正确保留（施法时间无字段、非数值、非配置改动） | ①护甲路径写成 `hitpoints.armor.v6`，金标是 `hitpoints_by_mode.v6.armor`。**规范缺陷**：我给 Agent 的路径语法只写了 `hitpoints.<field>` 和 `.v5/.v6` 后缀，快照里却是 `hitpoints_by_mode` 结构——Agent 按我给的语法拼的。②`linked_dispositions` 的键写在被改的字段（`falloff_start_m`）上，而不是伙伴字段（`falloff_end_m`）上，F4 会判 FAIL。**规范缺陷**：格式说明没写明"键 = 伙伴字段路径" |
+| 09-17 D.Mon | 3/5 matched，2 missing，2 extra；"Damage per bullet 45→36" 正确放进 unmapped，没有硬凑 | 两条护甲路径同样的 `hitpoints.armor.v5/.v6` 问题 |
+
+**本轮定性**：5 次运行里 Agent 的数值提取 0 错（from/to 全对），不可映射条目 4/4 处理正确；所有偏差都指向**我写的规范**——金标方向错 1 处、联动规则 1 处过宽、提案格式 3 处没说清（路径语法、处置键、unmapped 范围）。第 7 步先改规范，把这五条固化成回归测试，再跑 run 2。

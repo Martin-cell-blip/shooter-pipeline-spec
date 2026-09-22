@@ -26,6 +26,49 @@ entries:
     changes:
       - {field: abilities.barrier_projector.cooldown_s.v5, from: 12, to: 10, unit: s, mode: 5v5, text: "Cooldown reduced from 12 to 10 seconds. (5v5)"}
       - {field: abilities.barrier_projector.duration_s, from: 8, to: 7, unit: s, text: "Duration reduced from 8 to 7 seconds."}
+  - hero: zarya
+    intent: >-
+      Developer Comments: The cooldown of Particle Barrier is being increased to reduce Zarya's personal
+      barrier uptime and energy generation. Projected Barrier remains unchanged, encouraging more proactive
+      use on allies.
+    direction: nerf
+    changes:
+      - {field: abilities.particle_barrier.cooldown_s.v5, from: 11, to: 12, unit: s, mode: 5v5, text: "Cooldown increased from 11 to 12 seconds. (5v5)"}
+  - hero: baptiste
+    intent: >-
+      Developer Comments: Immortality Field's long cooldown and vulnerability to being destroyed can limit
+      its effectiveness. We're increasing its health, lowering its cooldown, and raising its minimum health
+      threshold to improve its overall reliability.
+    direction: buff
+    changes:
+      - {field: abilities.immortality_field.threshold_pct, from: 20, to: 25, unit: pct, text: "Unkillable health threshold increased from 20% to 25%."}
+      - {field: abilities.immortality_field.cooldown_s, from: 22, to: 20, unit: s, text: "Cooldown reduced from 22 to 20 seconds."}
+      - {field: abilities.immortality_field.deployable_health, from: 125, to: 150, unit: hp, text: "Health increased from 125 to 150."}
+  - hero: wuyang
+    intent: >-
+      Developer Comments: Wuyang's empowered healing resource can be limiting when responding to sustained
+      damage. We're increasing its regeneration rate to provide more frequent access to empowered healing.
+    direction: buff
+    changes:
+      - {field: abilities.restorative_stream.regen_pct_s, from: 12.5, to: 15, unit: pct_per_s, text: "Regeneration rate increased from 12.5% to 15% per second."}
+      - {field: abilities.restorative_stream.los_timeout_s, from: 5, to: 3, unit: s, text: "Line of sight timeout reduced from 5 to 3 seconds."}
+  - hero: dmon
+    intent: >-
+      Developer Comments: D.Mon has settled into a strong position since launch. We're reducing Call Mech's
+      transformation time to match D.Va's while adjusting Portable Fusion Repeater to improve accuracy and
+      reduce effectiveness at longer distances. We're also reducing Plasma Saber's damage to help offset
+      these improvements.
+    direction: mixed
+    changes:
+      - {field: hitpoints_by_mode.v6.armor, from: 325, to: 300, unit: hp, mode: 6v6, text: "Armor reduced from 325 to 300. (6v6)"}
+      - {field: weapons.plasma_saber.damage_max, from: 65, to: 60, unit: hp, text: "Damage reduced from 65 to 60."}
+      - {field: null, from: 0.065, to: 0.016, unit: s, text: "Cast time decreased from 0.065s to 0.016s.", note: 快照无 power_barrier.cast_time_s 字段 → 金标答案 = unmapped}
+      - {field: null, text: "Notches on side of shield reduced in size.", note: 非数值 → unmapped}
+      - {field: abilities.call_mech.duration_s, from: 1.95, to: 0.95, unit: s, text: "Transformation duration has been reduced from 1.95 to 0.95 seconds."}
+      - {field: null, text: "A new first-person bootup animation lasting 1 second has been added.", note: 非配置改动 → unmapped}
+      - {field: weapons.portable_fusion_repeater.spread_deg, from: 2, to: 1.75, unit: deg, text: "Spread reduced from 2 to 1.75 degrees."}
+      - {field: weapons.portable_fusion_repeater.falloff_start_m, from: 30, to: 20, unit: m, text: "Minimum falloff range reduced from 30 to 20 meters."}
 notes:
+  - 2026-09-22 扩充：加入 zarya / baptiste / wuyang / dmon 四个英雄作为第 6 步难样本（分模式、百分比、单位粘连、不可映射条目、与 09-17 叠加）。
   - 当前官方页面只保留最近三期补丁（09-17 / 09-10 / 09-08），Sojourn、Cassidy、Tracer 在这三期内无数值改动，故本文件无其条目。
   - Winston 的改动是「一增一减」的对冲型补丁，方向字段不能用单一 nerf/buff 表达——这是不变量设计要处理的第一个真实案例。

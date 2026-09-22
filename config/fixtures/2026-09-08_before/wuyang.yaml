@@ -1,0 +1,91 @@
+id: wuyang
+name_en: Wuyang
+name_zh: 吴阳
+role: support
+subrole: survivor
+mode_split: false
+hitpoints:
+  health: 225
+  armor: 0
+  shields: 0
+  total: 225
+weapons:
+- id: xuanwu_staff
+  slot: primary
+  hit_type: projectile
+  damage_max: 30
+  headshot_mult: 1
+  rate_of_fire: 3
+  ammo_consumption: 1
+  ammo: 20
+  reload_s: 1.5
+  projectile_speed: 25
+abilities:
+- id: restorative_stream
+  kind: ability
+  healing_per_s: 20
+  bonus_healing_per_s: 55
+  cost_pct_s: 33.3
+  regen_pct_s: 12.5
+  los_timeout_s: 5
+  max_range_m: 20
+- id: rushing_torrent
+  kind: ability
+  cooldown_s: 8
+  duration_s: 3.5
+- id: guardian_wave
+  kind: ability
+  cooldown_s: 14
+  damage: 80
+  healing: 80
+  duration_s: 3
+  max_range_m: 30
+- id: tidal_blast
+  kind: ultimate
+  ult_cost: 2800
+  damage: 100
+  healing: 250
+  radius_m: 7.5
+  max_range_m: 35
+provenance:
+  default:
+    source: wiki_fandom
+    url: https://overwatch.fandom.com/wiki/Wuyang
+    fetched: 2026-09-22
+  overrides:
+  - field: hitpoints
+    value:
+      health: 225
+      armor: 0
+      shields: 0
+    source: overfast_api
+    url: https://overfast-api.tekrop.fr/heroes/wuyang
+    date: 2026-09-22
+    why: 两源一致
+  - field: abilities.restorative_stream.regen_pct_s
+    value: 15
+    source: patch_notes_official
+    date: 2026-09-08
+    why: 「Regeneration rate increased from 12.5% to 15% per second」；wiki 已同步
+  - field: abilities.restorative_stream.los_timeout_s
+    value: 3
+    source: patch_notes_official
+    date: 2026-09-08
+    why: 「Line of sight timeout reduced from 5 to 3 seconds」；wiki 写 3 s (passive)
+      已同步；manual 1 s 未建模
+  conflicts: []
+  missing:
+  - field: weapons.xuanwu_staff.charged
+    note: 蓄力档（直击 40 / 溅射 60、消耗 2 弹）未建模，schema 无蓄力扩展
+  fixture:
+    kind: constructed_before_snapshot
+    patch: '2026-09-08'
+    method: baseline; later patches undone in reverse order; then official 'from'
+      values written back on listed paths
+    later_patches_undone: []
+    assumes:
+    - patch entries cover all numeric changes for this hero on each listed date
+    - no unlisted patch touched these paths before baseline fetch (2026-09-22)
+    restored_paths:
+    - abilities.restorative_stream.regen_pct_s
+    - abilities.restorative_stream.los_timeout_s

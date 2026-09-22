@@ -57,6 +57,10 @@ def _walk_numeric(hero: dict):
         for f, v in hp.items():
             if isinstance(v, (int, float)) and not isinstance(v, bool):
                 yield "hero.hitpoints", f"hitpoints.{f}", f, v
+    for mode, mhp in (hero.get("hitpoints_by_mode") or {}).items():
+        for f, v in (mhp or {}).items():
+            if isinstance(v, (int, float)) and not isinstance(v, bool):
+                yield "hero.hitpoints", f"hitpoints_by_mode.{mode}.{f}", f, v
 
 
 @_guard
@@ -142,7 +146,7 @@ def F5_direction_vs_declared(schema: dict, hero_id: str, proposal_hero: dict, be
     out = []
     for c in proposal_hero.get("changes") or []:
         path = c["path"]; parts = path.split(".")
-        section = {"weapons": "weapon", "abilities": "ability", "hitpoints": "hitpoints"}.get(parts[0])
+        section = {"weapons": "weapon", "abilities": "ability", "hitpoints": "hitpoints", "hitpoints_by_mode": "hitpoints"}.get(parts[0])
         field = parts[1] if parts[0] == "hitpoints" else (parts[2] if len(parts) > 2 else None)
         declared = c.get("expected_direction")
         frm, to = _num(c.get("from")), _num(c.get("to"))
@@ -381,7 +385,8 @@ def run_proposal(schema: dict, inv: dict, proposal: dict, before_heroes: dict[st
         except KeyError as e:
             results.append(_r("apply", hero_id, FAIL, f"change path not found: {e}")); continue
         if baseline is not None and hero_id in baseline and proposal.get("after_ref") == "baseline":
-            diffs = [c["path"] for c in ph.get("changes") or [] if get_path(baseline[hero_id], c["path"]) != c["to"]]
+            exc = set((proposal.get("after_ref_exceptions") or {}).get(hero_id) or [])
+            diffs = [c["path"] for c in ph.get("changes") or [] if c["path"] not in exc and get_path(baseline[hero_id], c["path"]) != c["to"]]
             results.append(_r("apply_vs_baseline", hero_id, FAIL if diffs else PASS,
                               ("applied values differ from baseline at: " + ", ".join(diffs)) if diffs else "applied snapshot matches baseline on every changed path"))
         results += P0_provenance_status(schema, hero_id, after)

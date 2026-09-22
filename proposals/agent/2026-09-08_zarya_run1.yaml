@@ -1,0 +1,17 @@
+# agent output — deepseek-chat — run 1 — raw record: runs/2026-09-08/zarya_run1.json
+proposal_id: zarya_particle_barrier_cd_2026-09-08
+before: fixtures/2026-09-08_before
+heroes:
+  zarya:
+    overall_direction: nerf
+    mixed_rationale: null
+    changes:
+    - path: abilities.particle_barrier.cooldown_s.v5
+      from: 11
+      to: 12
+      expected_direction: nerf
+      why: Cooldown increased from 11 to 12 seconds. (5v5)
+      mode: 5v5
+    linked_dispositions: {}
+    unmapped:
+    - Projected Barrier remains unchanged, encouraging more proactive use on allies.

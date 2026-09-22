@@ -1,0 +1,16 @@
+# 官方补丁说明 2026-09-17（Overwatch Retail Patch Notes – September 17, 2026）。抓取 2026-09-22，按 HTML 结构解析。
+# 只收录本仓库样本英雄；本期只有 D.Mon。注意：本期与 09-08 都改了 D.Mon 的护甲——两期叠加，构造 09-08 的「改动前」必须先撤销本期。
+source: patch_notes_official
+url: https://overwatch.blizzard.com/en-us/news/patch-notes/
+date: 2026-09-17
+entries:
+  - hero: dmon
+    intent: null          # 本期该英雄无开发者注释
+    direction: nerf
+    changes:
+      - {field: hitpoints_by_mode.v5.armor, from: 325, to: 275, unit: hp, mode: 5v5, text: "Armor reduced from 325 to 275 (5v5)."}
+      - {field: hitpoints_by_mode.v6.armor, from: 300, to: 250, unit: hp, mode: 6v6, text: "Armor reduced from 300 to 250 (6v6)."}
+      - {field: null, from: 45, to: 36, unit: hp, text: "Damage per bullet reduced from 45 to 36.", note: 无法映射到快照任何字段，金标答案 = unmapped}
+      - {field: abilities.propulsors.cost_pct_s, from: 25, to: 30, unit: pct_per_s, text: "Fuel drain rate increased from 25 to 30."}
+      - {field: abilities.fusion_repeater.damage, from: 16, to: 15, unit: hp, text: "Damage reduced from 16 to 15."}
+      - {field: abilities.fusion_repeater.cooldown_s, from: 4, to: 5, unit: s, text: "Cooldown increased from 4 to 5 seconds."}

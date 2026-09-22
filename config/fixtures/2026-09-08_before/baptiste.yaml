@@ -1,0 +1,101 @@
+id: baptiste
+name_en: Baptiste
+name_zh: 巴蒂斯特
+role: support
+subrole: tactician
+mode_split: false
+hitpoints:
+  health: 250
+  armor: 0
+  shields: 0
+  total: 250
+weapons:
+- id: biotic_launcher
+  slot: primary
+  hit_type: hitscan
+  damage_max: 25
+  damage_min: 7.2
+  falloff_start_m: 25
+  falloff_end_m: 45
+  headshot_mult: 2
+  rate_of_fire: 1.7
+  pellets_per_shot: 3
+  ammo_consumption: 3
+  ammo: 36
+  reload_s: 1.5
+- id: biotic_launcher_alt
+  slot: secondary
+  hit_type: projectile
+  damage_max: 0
+  healing_per_shot: 60
+  headshot_mult: 1
+  rate_of_fire: 1.11
+  ammo: 10
+  reload_s: 1.5
+  projectile_speed: 60
+abilities:
+- id: regenerative_burst
+  kind: ability
+  cooldown_s: 12
+  healing: 50
+  duration_s: 4
+  radius_m: 12
+- id: immortality_field
+  kind: ability
+  cooldown_s: 22
+  deployable_health: 125
+  threshold_pct: 20
+  duration_s: 5
+  radius_m: 6
+  cast_time_s: 0.8
+- id: amplification_matrix
+  kind: ultimate
+  ult_cost: 2550
+  duration_s: 10
+  max_range_m: 35
+provenance:
+  default:
+    source: wiki_fandom
+    url: https://overwatch.fandom.com/wiki/Baptiste
+    fetched: 2026-09-22
+  overrides:
+  - field: hitpoints
+    value:
+      health: 250
+      armor: 0
+      shields: 0
+    source: overfast_api
+    url: https://overfast-api.tekrop.fr/heroes/baptiste
+    date: 2026-09-22
+    why: 两源一致
+  - field: abilities.immortality_field.cooldown_s
+    value: 20
+    source: patch_notes_official
+    date: 2026-09-08
+    why: 「Cooldown reduced from 22 to 20 seconds」；wiki 已同步
+  - field: abilities.immortality_field.deployable_health
+    value: 150
+    source: patch_notes_official
+    date: 2026-09-08
+    why: 「Health increased from 125 to 150」；wiki 已同步
+  - field: abilities.immortality_field.threshold_pct
+    value: 25
+    source: patch_notes_official
+    date: 2026-09-08
+    why: 「Unkillable health threshold increased from 20% to 25%」；wiki 写 "Any deficit
+      from 25% HP"，已同步
+  conflicts: []
+  missing: []
+  fixture:
+    kind: constructed_before_snapshot
+    patch: '2026-09-08'
+    method: baseline; later patches undone in reverse order; then official 'from'
+      values written back on listed paths
+    later_patches_undone: []
+    assumes:
+    - patch entries cover all numeric changes for this hero on each listed date
+    - no unlisted patch touched these paths before baseline fetch (2026-09-22)
+    restored_paths:
+    - abilities.immortality_field.threshold_pct
+    - abilities.immortality_field.cooldown_s
+    - abilities.immortality_field.deployable_health
