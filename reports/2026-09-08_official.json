@@ -1,7 +1,7 @@
 {
   "summary": {
     "counts": {
-      "PASS": 135,
+      "PASS": 141,
       "REVIEW": 10,
       "NOT_RUN": 30
     },
@@ -104,6 +104,13 @@
       "hero": "kiriko",
       "status": "PASS",
       "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
+      "check": "F8_unique_ids",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "weapon and ability ids unique",
       "records": {}
     },
     {
@@ -375,56 +382,64 @@
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "kiriko",
       "status": "PASS",
-      "detail": "kunai vs 175hp body: 3 → 3 shot events",
+      "detail": "kunai vs 175hp body: 3 → 3 shot events; overkill 5→5",
       "records": {
         "weapon": "kunai",
         "target_hp": 175,
         "location": "body",
         "before": 3,
         "after": 3,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 5,
+        "overkill_after": 5
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "kiriko",
       "status": "PASS",
-      "detail": "kunai vs 175hp head: 2 → 2 shot events",
+      "detail": "kunai vs 175hp head: 2 → 2 shot events; overkill 65→65",
       "records": {
         "weapon": "kunai",
         "target_hp": 175,
         "location": "head",
         "before": 2,
         "after": 2,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 65,
+        "overkill_after": 65
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "kiriko",
       "status": "PASS",
-      "detail": "kunai vs 250hp body: 5 → 5 shot events",
+      "detail": "kunai vs 250hp body: 5 → 5 shot events; overkill 50→50",
       "records": {
         "weapon": "kunai",
         "target_hp": 250,
         "location": "body",
         "before": 5,
         "after": 5,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 50,
+        "overkill_after": 50
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "kiriko",
       "status": "PASS",
-      "detail": "kunai vs 250hp head: 3 → 3 shot events",
+      "detail": "kunai vs 250hp head: 3 → 3 shot events; overkill 110→110",
       "records": {
         "weapon": "kunai",
         "target_hp": 250,
         "location": "head",
         "before": 3,
         "after": 3,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 110,
+        "overkill_after": 110
       }
     },
     {
@@ -533,6 +548,13 @@
       "hero": "winston",
       "status": "PASS",
       "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
+      "check": "F8_unique_ids",
+      "hero": "winston",
+      "status": "PASS",
+      "detail": "weapon and ability ids unique",
       "records": {}
     },
     {
@@ -782,28 +804,32 @@
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "winston",
       "status": "PASS",
-      "detail": "tesla_cannon_alt vs 175hp body: 3 → 3 shot events",
+      "detail": "tesla_cannon_alt vs 175hp body: 3 → 3 shot events; overkill 5→5",
       "records": {
         "weapon": "tesla_cannon_alt",
         "target_hp": 175,
         "location": "body",
         "before": 3,
         "after": 3,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 5,
+        "overkill_after": 5
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "winston",
       "status": "PASS",
-      "detail": "tesla_cannon_alt vs 250hp body: 5 → 5 shot events",
+      "detail": "tesla_cannon_alt vs 250hp body: 5 → 5 shot events; overkill 50→50",
       "records": {
         "weapon": "tesla_cannon_alt",
         "target_hp": 250,
         "location": "body",
         "before": 5,
         "after": 5,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 50,
+        "overkill_after": 50
       }
     },
     {
@@ -913,6 +939,13 @@
       "hero": "zarya",
       "status": "PASS",
       "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
+      "check": "F8_unique_ids",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "weapon and ability ids unique",
       "records": {}
     },
     {
@@ -1180,28 +1213,32 @@
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "zarya",
       "status": "PASS",
-      "detail": "particle_cannon_alt vs 175hp body: 4 → 4 shot events",
+      "detail": "particle_cannon_alt vs 175hp body: 4 → 4 shot events; overkill 45→45",
       "records": {
         "weapon": "particle_cannon_alt",
         "target_hp": 175,
         "location": "body",
         "before": 4,
         "after": 4,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 45,
+        "overkill_after": 45
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "zarya",
       "status": "PASS",
-      "detail": "particle_cannon_alt vs 250hp body: 5 → 5 shot events",
+      "detail": "particle_cannon_alt vs 250hp body: 5 → 5 shot events; overkill 25→25",
       "records": {
         "weapon": "particle_cannon_alt",
         "target_hp": 250,
         "location": "body",
         "before": 5,
         "after": 5,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 25,
+        "overkill_after": 25
       }
     },
     {
@@ -1318,6 +1355,13 @@
       "hero": "baptiste",
       "status": "PASS",
       "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
+      "check": "F8_unique_ids",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "weapon and ability ids unique",
       "records": {}
     },
     {
@@ -1616,56 +1660,64 @@
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "baptiste",
       "status": "PASS",
-      "detail": "biotic_launcher vs 175hp body: 3 → 3 shot events",
+      "detail": "biotic_launcher vs 175hp body: 3 → 3 shot events; overkill 50→50",
       "records": {
         "weapon": "biotic_launcher",
         "target_hp": 175,
         "location": "body",
         "before": 3,
         "after": 3,
-        "pellets_per_event": 3
+        "pellets_per_event": 3,
+        "overkill_before": 50,
+        "overkill_after": 50
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "baptiste",
       "status": "PASS",
-      "detail": "biotic_launcher vs 175hp head: 2 → 2 shot events",
+      "detail": "biotic_launcher vs 175hp head: 2 → 2 shot events; overkill 125→125",
       "records": {
         "weapon": "biotic_launcher",
         "target_hp": 175,
         "location": "head",
         "before": 2,
         "after": 2,
-        "pellets_per_event": 3
+        "pellets_per_event": 3,
+        "overkill_before": 125,
+        "overkill_after": 125
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "baptiste",
       "status": "PASS",
-      "detail": "biotic_launcher vs 250hp body: 4 → 4 shot events",
+      "detail": "biotic_launcher vs 250hp body: 4 → 4 shot events; overkill 50→50",
       "records": {
         "weapon": "biotic_launcher",
         "target_hp": 250,
         "location": "body",
         "before": 4,
         "after": 4,
-        "pellets_per_event": 3
+        "pellets_per_event": 3,
+        "overkill_before": 50,
+        "overkill_after": 50
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "baptiste",
       "status": "PASS",
-      "detail": "biotic_launcher vs 250hp head: 2 → 2 shot events",
+      "detail": "biotic_launcher vs 250hp head: 2 → 2 shot events; overkill 50→50",
       "records": {
         "weapon": "biotic_launcher",
         "target_hp": 250,
         "location": "head",
         "before": 2,
         "after": 2,
-        "pellets_per_event": 3
+        "pellets_per_event": 3,
+        "overkill_before": 50,
+        "overkill_after": 50
       }
     },
     {
@@ -1765,6 +1817,13 @@
       "hero": "wuyang",
       "status": "PASS",
       "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
+      "check": "F8_unique_ids",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "weapon and ability ids unique",
       "records": {}
     },
     {
@@ -1920,28 +1979,32 @@
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "wuyang",
       "status": "PASS",
-      "detail": "xuanwu_staff vs 175hp body: 6 → 6 shot events",
+      "detail": "xuanwu_staff vs 175hp body: 6 → 6 shot events; overkill 5→5",
       "records": {
         "weapon": "xuanwu_staff",
         "target_hp": 175,
         "location": "body",
         "before": 6,
         "after": 6,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 5,
+        "overkill_after": 5
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "wuyang",
       "status": "PASS",
-      "detail": "xuanwu_staff vs 250hp body: 9 → 9 shot events",
+      "detail": "xuanwu_staff vs 250hp body: 9 → 9 shot events; overkill 20→20",
       "records": {
         "weapon": "xuanwu_staff",
         "target_hp": 250,
         "location": "body",
         "before": 9,
         "after": 9,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 20,
+        "overkill_after": 20
       }
     },
     {
@@ -2094,6 +2157,13 @@
       "hero": "dmon",
       "status": "PASS",
       "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
+      "check": "F8_unique_ids",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "weapon and ability ids unique",
       "records": {}
     },
     {
@@ -2421,84 +2491,96 @@
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "plasma_saber vs 175hp body: 3 → 3 shot events",
+      "detail": "plasma_saber vs 175hp body: 3 → 3 shot events; overkill 20→5",
       "records": {
         "weapon": "plasma_saber",
         "target_hp": 175,
         "location": "body",
         "before": 3,
         "after": 3,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 20,
+        "overkill_after": 5
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "REVIEW",
-      "detail": "plasma_saber vs 250hp body: 4 → 5 shot events",
+      "detail": "plasma_saber vs 250hp body: 4 → 5 shot events; overkill 10→50",
       "records": {
         "weapon": "plasma_saber",
         "target_hp": 250,
         "location": "body",
         "before": 4,
         "after": 5,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 10,
+        "overkill_after": 50
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "portable_fusion_repeater vs 175hp body: 15 → 15 shot events",
+      "detail": "portable_fusion_repeater vs 175hp body: 15 → 15 shot events; overkill 5→5",
       "records": {
         "weapon": "portable_fusion_repeater",
         "target_hp": 175,
         "location": "body",
         "before": 15,
         "after": 15,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 5,
+        "overkill_after": 5
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "portable_fusion_repeater vs 175hp head: 8 → 8 shot events",
+      "detail": "portable_fusion_repeater vs 175hp head: 8 → 8 shot events; overkill 17→17",
       "records": {
         "weapon": "portable_fusion_repeater",
         "target_hp": 175,
         "location": "head",
         "before": 8,
         "after": 8,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 17,
+        "overkill_after": 17
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "portable_fusion_repeater vs 250hp body: 21 → 21 shot events",
+      "detail": "portable_fusion_repeater vs 250hp body: 21 → 21 shot events; overkill 2→2",
       "records": {
         "weapon": "portable_fusion_repeater",
         "target_hp": 250,
         "location": "body",
         "before": 21,
         "after": 21,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 2,
+        "overkill_after": 2
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "portable_fusion_repeater vs 250hp head: 11 → 11 shot events",
+      "detail": "portable_fusion_repeater vs 250hp head: 11 → 11 shot events; overkill 14→14",
       "records": {
         "weapon": "portable_fusion_repeater",
         "target_hp": 250,
         "location": "head",
         "before": 11,
         "after": 11,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 14,
+        "overkill_after": 14
       }
     },
     {

@@ -13,7 +13,17 @@ from .loader import ROOT, load_proposal, load_yaml
 
 KEYS = ["matched", "wrong_value", "missing", "extra", "direction_mismatch",
         "unmapped_kept", "unmapped_forced", "unmapped_dropped", "agent_extra_unmapped",
-        "missing_hero", "extra_hero", "duplicate_path", "invalid_scope"]
+        "missing_hero", "extra_hero", "duplicate_path", "invalid_scope", "numeric_vs_regex_mismatch"]
+
+
+def regex_numbers(text: str):
+    """从 why 里引用的原文中确定性抽 old/new；抽不到返回 None（不判）。"""
+    from .preclassify import classify_line
+    try:
+        r = classify_line(text, None)
+    except Exception:  # noqa: BLE001
+        return None
+    return (r["old"], r["new"]) if r.get("state") == "NUMERIC" else None
 
 
 def _norm(s: str) -> str:
@@ -51,6 +61,11 @@ def compare(agent: dict, golden: dict, expected_heroes=None) -> dict:
                 rows[-1]["direction"] = {"agent": ac.get("expected_direction"), "golden": gc["expected_direction"]}; T["direction_mismatch"] += 1
         for path in a.keys() - g.keys():
             rows.append({"path": path, "verdict": "extra", "agent": (a[path].get("from"), a[path].get("to")), "why": a[path].get("why")}); T["extra"] += 1
+        # 迭代 2：模型 from/to 与确定性解析对不上 → 记 numeric_vs_regex_mismatch（模型在 NUMERIC 层没有发言权）
+        for path, ac in a.items():
+            rx = regex_numbers(ac.get("why", ""))
+            if rx and (float(ac.get("from", "nan")), float(ac.get("to", "nan"))) != rx:
+                rows.append({"path": path, "verdict": "numeric_vs_regex_mismatch", "agent": (ac.get("from"), ac.get("to")), "regex": rx}); T["numeric_vs_regex_mismatch"] += 1
         # unmapped：金标里每条 unmapped 原文，在 Agent 输出里去哪了
         a_um = [_norm(x) for x in (aph.get("unmapped") or [])]
         a_why = " || ".join(_norm(c.get("why", "")) for c in aph.get("changes") or [])
@@ -75,7 +90,7 @@ def compare(agent: dict, golden: dict, expected_heroes=None) -> dict:
 
 def acceptance_ok(res: dict) -> bool:
     t = res["totals"]
-    return all(t[k] == 0 for k in ("missing", "wrong_value", "extra", "unmapped_forced", "unmapped_dropped", "agent_extra_unmapped", "missing_hero", "extra_hero", "duplicate_path", "invalid_scope"))
+    return all(t[k] == 0 for k in ("missing", "wrong_value", "extra", "unmapped_forced", "unmapped_dropped", "agent_extra_unmapped", "missing_hero", "extra_hero", "duplicate_path", "invalid_scope", "numeric_vs_regex_mismatch"))
 
 
 def main(argv=None) -> int:

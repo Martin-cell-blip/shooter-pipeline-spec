@@ -1,7 +1,7 @@
 {
   "summary": {
     "counts": {
-      "PASS": 27,
+      "PASS": 28,
       "REVIEW": 3,
       "NOT_RUN": 10
     },
@@ -140,6 +140,13 @@
       "hero": "dmon",
       "status": "PASS",
       "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
+      "check": "F8_unique_ids",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "weapon and ability ids unique",
       "records": {}
     },
     {
@@ -476,84 +483,96 @@
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "plasma_saber vs 175hp body: 3 → 3 shot events",
+      "detail": "plasma_saber vs 175hp body: 3 → 3 shot events; overkill 5→5",
       "records": {
         "weapon": "plasma_saber",
         "target_hp": 175,
         "location": "body",
         "before": 3,
         "after": 3,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 5,
+        "overkill_after": 5
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "plasma_saber vs 250hp body: 5 → 5 shot events",
+      "detail": "plasma_saber vs 250hp body: 5 → 5 shot events; overkill 50→50",
       "records": {
         "weapon": "plasma_saber",
         "target_hp": 250,
         "location": "body",
         "before": 5,
         "after": 5,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 50,
+        "overkill_after": 50
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "portable_fusion_repeater vs 175hp body: 15 → 15 shot events",
+      "detail": "portable_fusion_repeater vs 175hp body: 15 → 15 shot events; overkill 5→5",
       "records": {
         "weapon": "portable_fusion_repeater",
         "target_hp": 175,
         "location": "body",
         "before": 15,
         "after": 15,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 5,
+        "overkill_after": 5
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "portable_fusion_repeater vs 175hp head: 8 → 8 shot events",
+      "detail": "portable_fusion_repeater vs 175hp head: 8 → 8 shot events; overkill 17→17",
       "records": {
         "weapon": "portable_fusion_repeater",
         "target_hp": 175,
         "location": "head",
         "before": 8,
         "after": 8,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 17,
+        "overkill_after": 17
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "portable_fusion_repeater vs 250hp body: 21 → 21 shot events",
+      "detail": "portable_fusion_repeater vs 250hp body: 21 → 21 shot events; overkill 2→2",
       "records": {
         "weapon": "portable_fusion_repeater",
         "target_hp": 250,
         "location": "body",
         "before": 21,
         "after": 21,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 2,
+        "overkill_after": 2
       }
     },
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "portable_fusion_repeater vs 250hp head: 11 → 11 shot events",
+      "detail": "portable_fusion_repeater vs 250hp head: 11 → 11 shot events; overkill 14→14",
       "records": {
         "weapon": "portable_fusion_repeater",
         "target_hp": 250,
         "location": "head",
         "before": 11,
         "after": 11,
-        "pellets_per_event": 1
+        "pellets_per_event": 1,
+        "overkill_before": 14,
+        "overkill_after": 14
       }
     },
     {

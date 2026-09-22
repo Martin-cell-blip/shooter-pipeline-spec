@@ -63,6 +63,16 @@ def shots_to_kill(w: dict, hp: float, location: str) -> dict:
     return {"status": "OK", "value": math.ceil(hp / per), "damage_per_event": per}
 
 
+def overkill(w: dict, hp: float, location: str) -> dict:
+    """击杀所需射击事件的总伤害减去目标生命值（DRG calculator 的 Average Overkill 在固定场景下的确定性版本）。
+    解释小幅伤害改动为什么会跨断点：overkill 越接近 0，再削一点就多打一枪。"""
+    stk = shots_to_kill(w, hp, location)
+    if stk["status"] != "OK" or stk["value"] is None:
+        return stk
+    total = stk["value"] * stk["damage_per_event"]
+    return {"status": "OK", "value": total - hp, "shots": stk["value"], "margin_ratio": (total - hp) / hp}
+
+
 def ttk(w: dict, hp: float, location: str, scenario: dict) -> dict:
     """离散射击事件：第 k 发落在 (k-1)/rof；弹匣耗尽加一次 reload_s。beam 连续。"""
     rec = {"distance_m": scenario.get("distance_m", 0), "first_shot_at_s": scenario.get("first_shot_at_s", 0),

@@ -1,0 +1,69 @@
+# 官方补丁说明页面（09-08 / 09-10 / 09-17 三期）全部条目行，去重，抓取 2026-09-22；仅作预分类器测试语料，不含英雄归属
+- A new first-person bootup animation lasting 1 second has been added.
+- Allies now automatically accept Lifeline when over a death plane.
+- Armor increased from 50 to 75.
+- Armor reduced from 300 to 250 (6v6).
+- Armor reduced from 325 to 275 (5v5).
+- Armor reduced from 325 to 300. (6v6)
+- Attack speed bonus increased to 50% (Up from 30%).
+- Base armor reduced from 150 to 125.
+- Bonus speed reduced from 125% to 100%.
+- Camera pitch is no longer fully locked during the slash.
+- Cast time decreased from 0.065s to 0.016s.
+- Cast time reduced from 3 to 2.5 seconds.
+- Combo link duration increased from 0.75 to 0.9 seconds.
+- Cooldown increased from 11 to 12 seconds. (5v5)
+- Cooldown increased from 4 to 5 seconds.
+- Cooldown reduced from 12 to 10 seconds. (5v5)
+- Cooldown reduced from 22 to 20 seconds.
+- Cooldown reduced from 8 to 7 seconds.
+- Cooldown reduced from 8.5 to 7 seconds.
+- Cooldown reduction per target increased to 2.5s (Up from 2s).
+- Damage and healing per projectile reduced from 4.5 to 4.
+- Damage falloff minimum range when firing both guns reduced from 15 to 10 meters.
+- Damage per bullet reduced from 45 to 36.
+- Damage reduced from 16 to 15.
+- Damage reduced from 30 to 28.
+- Damage reduced from 65 to 60.
+- Damage reduced from 9 to 8.5.
+- Damage reduced to 20% of healing (Down from 30%).
+- Deploy turrets increased throw range reduced from 50% to 25%.
+- Duration reduced from 1.5 to 1 second.
+- Duration reduced from 8 to 7 seconds.
+- Explosion radius reduced from 5 to 4 meters.
+- Explosive Bolt explosion damage reduced from 80 to 75.
+- Explosive bolt impact sound effects reduced.
+- Fuel drain rate increased from 25 to 30.
+- Health increased from 125 to 150.
+- Health reduced from 200 to 175.
+- Horizontal swing duration reduced from 0.25 to 0.2 seconds.
+- Increased sound priority and volume of base movement and Frenetic Flight.
+- Initial Swing delay reduced from 0.3 to 0.15 seconds.
+- Lifesteal per stack reduced to 4% (Down from 5%).
+- Line of sight timeout reduced from 5 to 3 seconds.
+- Maximum seeking range reduced from 35 to 30 meters.
+- Maximum spread when firing a single gun reverted from 1.5 to 1 degree.
+- Maximum spread when firing both guns increased from 4 to 5 degrees.
+- Mech base health increased from 175 to 200. (5v5)
+- Minimum falloff range reduced from 30 to 20 meters.
+- Notches on side of shield reduced in size.
+- Phased out invulnerability duration reduced from 0.65 to 0.5 seconds.
+- Placement range reduced from 30 to 25 meters.
+- Projectile travel speed reduced from 24 to 18 meters per second.
+- Recovery increased from 0.2 to 0.5 seconds.
+- Recovery increased from 0.5 to 0.75 seconds.
+- Reduced the amount of visual effects enemies see when impacted by Dancing Blaze.
+- Refunded automatic bolts reduced from 8 to 5.
+- Regeneration rate increased from 12.5% to 15% per second.
+- Return damage reduced to 30 (Down from 40).
+- Secondary fire spread reduced from 4.5 to 4 degrees.
+- Spread reduced from 2 to 1.75 degrees.
+- Stuns and mobility locking effects on a carried target now disconnect Lifeline.
+- Teleport reuse cooldown increased from 1 to 1.25 seconds.
+- Transformation duration has been reduced from 1.95 to 0.95 seconds.
+- Ultimate Charge cost reduction increased to 60% (Up from 50%).
+- Ultimate Charge gain reduced to 10% (Down from 25%).
+- Ultimate Cost reduced by 6%.
+- Unkillable health threshold increased from 20% to 25%.
+- Updated Widowmaker's Take Aim charge sound effects for the default, Mythic, and Hello Kitty weapons. These sound effects now increase in intensity when the charge level is above 50%.
+- Weapon projectile speed increased from 90 to 120.

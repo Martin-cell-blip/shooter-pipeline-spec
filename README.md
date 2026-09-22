@@ -18,12 +18,14 @@
 | 8 | 审核 Agent（只读 diff，泄漏自检）+ reconcile 三方并排；7 例：4 例与官方注释一致，2 处上下文差被抓成 REVIEW，1 例无官方注释单独成立 | 已完成 |
 | 9 | REVIEW 决定文件（`reviews/decisions.yaml`）+ 格式校验 `pipeline/decisions.py`（pending 未清零 / 缺理由 / scope 全局或不含英雄 / 漏项 → CI 红）；决定内容由人填 | 已填（助手代填，所有者签字待办），校验接 CI |
 | 10 | 人工签字清单（`docs/SIGN_OFF_CHECKLIST.md`）；迭代历史 = `docs/RUN_LOG.md` + git log | 清单已出 |
+| 迭代 2 | 调研 GitHub 同类项目并吸收（见 `docs/PRIOR_ART.md`）：确定性预分类器（四态）+ 语义本体 + 模型数值 vs 正则一致性 + overkill 指标 + 唯一 id 约束 + 汇总评估与回归门 | 已完成 |
 
 第 6 步以后的内容取决于实跑结果，不预先编排。
 
 ## 文档
 
 - [管线总图（控制表）](docs/PIPELINE_MAP.md)：战斗、关卡、数值、叙事、配置表、资源六条子管线各自的产出物、权威来源、可机检范围与 Agent 可接的任务；本仓库只实现其中"数值 + 配置表"一条竖切。
+- [同类项目调研与吸收记录](docs/PRIOR_ART.md)：看了哪些项目、借了什么、为什么不借。
 - [签字清单](docs/SIGN_OFF_CHECKLIST.md)：机器门禁之外必须由人确认的判断。
 - [实跑记录](docs/RUN_LOG.md)：每轮实跑、每处失败、每次规范修改的指回关系。
 - [数据来源核验记录](docs/DATA_SOURCES.md)：每个来源实际提供什么、不提供什么，以及三源交叉核对发现的不一致。
@@ -37,6 +39,8 @@
 - `pipeline/`：`loader`（读取与路径寻址）、`metrics`（完整周期 DPS、离散 TTK、射击次数断点、可用时间占比等）、`checks`（四态校验）、`report`、`fixture`、`check`（入口）、`agent`（执行 Agent，只读原文与改动前快照，不读 baseline、不读校验器、不自评）、`compare`（提取验收）。
 - `config/patches/2026-09-08_raw.txt`：给 Agent 的非结构化原文（无字段路径、无方向标签）。
 - `runs/`：每次实跑的完整 prompt、原始回复、模型与用时；`docs/RUN_LOG.md` 是人读的实跑记录。
+- `pipeline/preclassify.py` + `spec/ontology.yaml`：LLM 之前的确定性分类（NUMERIC / KNOWN_SEMANTIC / PARTIALLY_CLASSIFIED / UNKNOWN）；`config/corpus/` 是官方页面全部 68 条真实条目的测试语料。
+- `pipeline/evaluate.py`：按 (date, hero) 取最新模型输出，汇总 numeric_precision / numeric_recall / unmapped_handling，日志按提案格式版本留痕于 `reports/validation_log/`，回归门接 CI。
 - `pipeline/reviewer.py`：审核 Agent，只读 {path, from, to}；`pipeline/reconcile.py`：执行方声明 × 审核方反推 × 官方注释 → REVIEW 项；`reviews/`：审核输出与比对结果。
 
 ## 运行
@@ -51,6 +55,8 @@ python -m pipeline.check agent/2026-09-08_kiriko_run1                    # 对 A
 python -m pipeline.reviewer proposals/agent/2026-09-08_kiriko_run1.yaml  # 审核 Agent（只读 diff）
 python -m pipeline.reconcile 2026-09-08 kiriko 1                          # 三方并排 → reviews/*_reconcile.json
 python -m pipeline.decisions                                              # 决定文件格式校验（CI 门禁）
+python -m pipeline.preclassify config/patches/2026-09-08_raw.txt --hero D.Mon   # LLM 之前的确定性四态分类
+python -m pipeline.evaluate                                               # 汇总精确率/召回率，写验证日志；比上一条日志变差 → exit 1
 ```
 
 退出码：`0` 无 FAIL（允许 REVIEW / 缺输入的 NOT_RUN）；`1` 有 FAIL；`2` 加载失败或检查抛异常。金标样本当前结果见 `reports/2026-09-08_official.md`。温斯顿生命值模式差异和屏障冷却起算已现场核验，见 [来源核验](docs/WINSTON_SOURCE_REVIEW.md)。剩余 NOT_RUN 的原因逐项列于报告；通过现有测试不代表已证明不存在缺陷。

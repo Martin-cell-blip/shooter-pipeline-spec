@@ -1,0 +1,100 @@
+{
+  "engine": "71d93f99",
+  "utc": "2026-09-22T17:11:15+00:00",
+  "n_cases": 7,
+  "aggregate": {
+    "matched": 22,
+    "wrong_value": 0,
+    "missing": 0,
+    "extra": 0,
+    "unmapped_kept": 4,
+    "unmapped_forced": 0,
+    "unmapped_dropped": 0,
+    "direction_mismatch": 0
+  },
+  "metrics": {
+    "numeric_precision": 1.0,
+    "numeric_recall": 1.0,
+    "unmapped_handling": 1.0
+  },
+  "below_threshold": [],
+  "per_case": {
+    "2026-09-08/baptiste": {
+      "file": "proposals\\agent\\2026-09-08_baptiste_run1.yaml",
+      "matched": 3,
+      "wrong_value": 0,
+      "missing": 0,
+      "extra": 0,
+      "unmapped_kept": 0,
+      "unmapped_forced": 0,
+      "unmapped_dropped": 0,
+      "direction_mismatch": 0
+    },
+    "2026-09-08/dmon": {
+      "file": "proposals\\agent\\2026-09-08_dmon_run2.yaml",
+      "matched": 5,
+      "wrong_value": 0,
+      "missing": 0,
+      "extra": 0,
+      "unmapped_kept": 3,
+      "unmapped_forced": 0,
+      "unmapped_dropped": 0,
+      "direction_mismatch": 0
+    },
+    "2026-09-08/kiriko": {
+      "file": "proposals\\agent\\2026-09-08_kiriko_run1.yaml",
+      "matched": 4,
+      "wrong_value": 0,
+      "missing": 0,
+      "extra": 0,
+      "unmapped_kept": 0,
+      "unmapped_forced": 0,
+      "unmapped_dropped": 0,
+      "direction_mismatch": 0
+    },
+    "2026-09-08/winston": {
+      "file": "proposals\\agent\\2026-09-08_winston_run1.yaml",
+      "matched": 2,
+      "wrong_value": 0,
+      "missing": 0,
+      "extra": 0,
+      "unmapped_kept": 0,
+      "unmapped_forced": 0,
+      "unmapped_dropped": 0,
+      "direction_mismatch": 0
+    },
+    "2026-09-08/wuyang": {
+      "file": "proposals\\agent\\2026-09-08_wuyang_run2.yaml",
+      "matched": 2,
+      "wrong_value": 0,
+      "missing": 0,
+      "extra": 0,
+      "unmapped_kept": 0,
+      "unmapped_forced": 0,
+      "unmapped_dropped": 0,
+      "direction_mismatch": 0
+    },
+    "2026-09-08/zarya": {
+      "file": "proposals\\agent\\2026-09-08_zarya_run2.yaml",
+      "matched": 1,
+      "wrong_value": 0,
+      "missing": 0,
+      "extra": 0,
+      "unmapped_kept": 0,
+      "unmapped_forced": 0,
+      "unmapped_dropped": 0,
+      "direction_mismatch": 0
+    },
+    "2026-09-17/dmon": {
+      "file": "proposals\\agent\\2026-09-17_dmon_run2.yaml",
+      "matched": 5,
+      "wrong_value": 0,
+      "missing": 0,
+      "extra": 0,
+      "unmapped_kept": 1,
+      "unmapped_forced": 0,
+      "unmapped_dropped": 0,
+      "direction_mismatch": 0
+    }
+  }
+}

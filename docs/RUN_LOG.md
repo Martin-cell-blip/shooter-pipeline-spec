@@ -75,3 +75,15 @@ A4 的处置：这是提案自洽问题，不需要金标就能判——新增 F
 ## 2026-09-23 · 第 9 步 · REVIEW 决定文件
 
 19 条 REVIEW 项全部处置（accepted 10 / resolved 5 / needs_revision 3 / false_positive 1），每条带理由与限定范围；格式由 `pipeline/decisions.py` 校验并接入 CI。**决定内容由助手按仓库所有者指示代填，所有者签字待办**（文件头 `_filled` 段有注明）。三条 needs_revision：吴阳提案整体方向应为 mixed 并补对冲理由（#4、#11）；D.Mon 生命值继续留空待第三来源（#12）。附带一处数据修正：`config/patches/2026-09-08.yaml` 中吴阳的 direction 由 buff 改为 mixed（#5）。
+
+## 2026-09-23 · 迭代 2 · 吸收同类项目的机制（详见 docs/PRIOR_ART.md）
+
+| 来源 | 借入 | 落点 | 在本仓库数据上的即时效果 |
+|---|---|---|---|
+| dota-patch-intelligence | 四态确定性分类（NUMERIC 层不需要模型） | `pipeline/preclassify.py` | 官方页面 68 条真实条目：58 NUMERIC 全部解析出 old/new/单位/模式，10 KNOWN_SEMANTIC，0 UNKNOWN；`compare` 新增 `numeric_vs_regex_mismatch`，7 个历史案例重跑均为 0 |
+| dota-patch-intelligence | 语义本体 + 人工覆盖回填 | `spec/ontology.yaml` | D.Mon 09-08 的三条 unmapped 现在分别被标为 VISUAL_ONLY / ANIMATION_ADDED / （施法时间行为 NUMERIC 但无字段）——下一轮可让执行 Agent 直接引用标签 |
+| dota-patch-intelligence | 金标指标 + 验证日志 + 回归门 | `pipeline/evaluate.py` | 首条日志：7 案例，numeric_precision 1.0 / recall 1.0 / unmapped_handling 1.0；引擎版本＝提案格式文本 sha8；CI 起对上一条日志比较 |
+| balance-studio | unique_across_set 约束 | `F8_unique_ids` | 全部基线 PASS |
+| drg-weapons-calculator | Average Overkill | `metrics.overkill`，进 R9 记录 | 等离子剑 65→60 对 250 血：overkill 10→50，说明改动前离断点只剩 10 点 |
+
+没有引入新的模型调用；64 项测试。未吸收的（胜率校准、自博弈优化、事件溯源）与原因见 PRIOR_ART。

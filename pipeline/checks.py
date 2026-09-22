@@ -177,6 +177,18 @@ def F5_direction_vs_declared(schema: dict, hero_id: str, proposal_hero: dict, be
 
 
 @_guard
+def F8_unique_ids(schema: dict, hero_id: str, after: dict) -> list[dict]:
+    """武器 id 与技能 id 在英雄内唯一（balance-studio 的 unique_across_set 约束）；重复 id 会让路径寻址静默取第一个。"""
+    out = []
+    for sec in ("weapons", "abilities"):
+        ids = [x.get("id") for x in after.get(sec) or []]
+        dup = sorted({i for i in ids if ids.count(i) > 1})
+        if dup:
+            out.append(_r("F8_unique_ids", hero_id, FAIL, f"duplicate {sec} id(s): {dup}", section=sec, dup=dup))
+    return out or [_r("F8_unique_ids", hero_id, PASS, "weapon and ability ids unique")]
+
+
+@_guard
 def F7_unmapped_vs_changes(schema: dict, hero_id: str, proposal_hero: dict) -> list[dict]:
     """提案自洽：同一原文行不能既映射成改动又列在 unmapped（run 2 D.Mon 09-17 出现过）。不需要金标即可判。"""
     import re as _re
@@ -363,8 +375,11 @@ def R9_shots_to_kill_breakpoint(inv: dict, hero_id: str, before: dict, after: di
                     out.append(_r("R9_shots_to_kill_breakpoint", hero_id, NOT_RUN, f"{wb['id']} {hp}hp {loc}: {sb.get('reason') or sa.get('reason')}", weapon=wb["id"])); continue
                 if sb["value"] is None or sa["value"] is None: continue
                 st = REVIEW if sb["value"] != sa["value"] else PASS
-                out.append(_r("R9_shots_to_kill_breakpoint", hero_id, st, f"{wb['id']} vs {hp}hp {loc}: {sb['value']} → {sa['value']} shot events",
-                              weapon=wb["id"], target_hp=hp, location=loc, before=sb["value"], after=sa["value"], pellets_per_event=wb.get("pellets_per_shot") or 1))
+                ob, oa = M.overkill(wb, hp, loc), M.overkill(wa, hp, loc)
+                ok_txt = f"; overkill {ob.get('value')}→{oa.get('value')}" if ob.get("status") == "OK" and oa.get("status") == "OK" else ""
+                out.append(_r("R9_shots_to_kill_breakpoint", hero_id, st, f"{wb['id']} vs {hp}hp {loc}: {sb['value']} → {sa['value']} shot events{ok_txt}",
+                              weapon=wb["id"], target_hp=hp, location=loc, before=sb["value"], after=sa["value"], pellets_per_event=wb.get("pellets_per_shot") or 1,
+                              overkill_before=ob.get("value"), overkill_after=oa.get("value")))
     return out or [_r("R9_shots_to_kill_breakpoint", hero_id, NOT_RUN, "no applicable weapons")]
 
 
@@ -413,6 +428,7 @@ def run_proposal(schema: dict, inv: dict, proposal: dict, before_heroes: dict[st
         results += F4_linked_disposition(schema, hero_id, ph, before)
         results += F5_direction_vs_declared(schema, hero_id, ph, before)
         results += F7_unmapped_vs_changes(schema, hero_id, ph)
+        results += F8_unique_ids(schema, hero_id, after)
         results += R1_full_cycle_dps_delta(inv, hero_id, before, after)
         results += R2_ttk_delta_or_reload_breakpoint(inv, hero_id, before, after)
         results += R3_headshot_oneshot_change(inv, hero_id, before, after)

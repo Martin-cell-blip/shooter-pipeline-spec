@@ -1,0 +1,36 @@
+# 非数值条目的语义本体 v0（借鉴 bamsemats/dota-patch-intelligence 的 semantic_tags.json：标签 + 匹配短语 + 默认方向）
+# 用途：让确定性预分类器在 LLM 之前把已知模式的非数值行标成 KNOWN_SEMANTIC，而不是每次都落到 unmapped / UNKNOWN。
+# 规则：匹配是小写子串匹配；一行命中多个标签取第一个；default_direction 只是默认，提案仍须逐条声明。
+# 扩展方式：新模式先进 decisions（人判）→ 再加到这里（与 Dota 项目的 review queue → ontology 同一思路）。
+version: 0
+tags:
+  - tag: AUDIO_ONLY
+    kind: cosmetic
+    default_direction: neutral
+    config_relevant: false
+    patterns: ["sound effect", "sound priority", "volume of"]
+  - tag: VISUAL_ONLY
+    kind: cosmetic
+    default_direction: neutral
+    config_relevant: false
+    patterns: ["visual effects", "reduced in size", "notches on side of shield", "updated the appearance"]
+  - tag: ANIMATION_ADDED
+    kind: add
+    default_direction: ambiguous
+    config_relevant: true          # 可能引入硬直，值得人看
+    patterns: ["animation lasting", "animation has been added", "new first-person"]
+  - tag: CAMERA_CONTROL
+    kind: rework
+    default_direction: ambiguous
+    config_relevant: true
+    patterns: ["camera pitch", "camera is no longer", "no longer fully locked"]
+  - tag: INTERACTION_RULE
+    kind: rework
+    default_direction: ambiguous
+    config_relevant: true
+    patterns: ["now disconnect", "now automatically", "no longer procs", "now pierces", "can now target", "no longer targets"]
+  - tag: RELATIVE_ONLY_CHANGE
+    kind: numeric_relative
+    default_direction: ambiguous
+    config_relevant: true          # 有幅度没有绝对值：需要基线才能落表
+    patterns: ["reduced by", "increased by", "lowered by", "raised by"]

@@ -17,5 +17,7 @@ jobs:
           python -m pipeline.check 2026-09-17_official
       - name: REVIEW decisions file is complete and well-formed (step 9)
         run: python -m pipeline.decisions
+      - name: extraction metrics must not regress vs last validation log (iteration 2)
+        run: python -m pipeline.evaluate --no-write
       - name: fixture build is idempotent (no diff after rebuild)
         run: git diff --exit-code -- config/fixtures
