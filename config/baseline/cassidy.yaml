@@ -1,0 +1,42 @@
+id: cassidy
+name_en: Cassidy
+name_zh: 麦克雷（卡西迪）
+role: damage
+subrole: sharpshooter
+mode_split: false
+hitpoints: {health: 250, armor: 0, shields: 0, total: 250}
+weapons:
+  - id: peacekeeper
+    slot: primary
+    hit_type: hitscan
+    damage_max: 70
+    damage_min: 21
+    falloff_start_m: 25
+    falloff_end_m: 35
+    headshot_mult: 2
+    rate_of_fire: 2
+    ammo: 6
+    reload_s: 1.5
+    spread_deg: 0
+  - id: fan_the_hammer
+    slot: secondary
+    hit_type: hitscan
+    damage_max: 50
+    damage_min: 15
+    falloff_start_m: 20
+    falloff_end_m: 30
+    headshot_mult: 1
+    rate_of_fire: 8.33
+    ammo: 6
+    reload_s: 1.5
+    spread_deg: 6
+abilities:
+  - {id: combat_roll, kind: ability, cooldown_s: 5, duration_s: 0.4, max_range_m: 6.22}
+  - {id: flashbang, kind: ability, cooldown_s: 12, damage: 75, radius_m: 3, max_range_m: 7}
+  - {id: deadeye, kind: ultimate, ult_cost: 1800, duration_s: 7, max_range_m: 200}
+provenance:
+  default: {source: wiki_fandom, url: https://overwatch.fandom.com/wiki/Cassidy, fetched: 2026-09-22}
+  overrides:
+    - {field: hitpoints, value: {health: 250, armor: 0, shields: 0}, source: overfast_api, url: https://overfast-api.tekrop.fr/heroes/cassidy, date: 2026-09-22, why: 生命值以 API 为准；wiki 信息框同为 250，两源一致}
+  conflicts: []
+  missing: []

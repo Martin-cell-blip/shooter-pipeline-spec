@@ -1,0 +1,65 @@
+# 配置表字段定义 v0（§5 配置表的 schema）
+# 规则：每个字段给类型、单位、硬边界；硬边界越界 = FAIL。经验区间不写在这里（那是不变量文件的事，命中只报 REVIEW）。
+# 取值出处：每个英雄文件顶部 provenance.default 给默认来源；与默认来源不同的字段在 overrides 里逐条给出；来源间不一致的字段在 conflicts 里逐条登记，状态 REVIEW，校验器不得替它选边。
+
+version: 0
+units:
+  damage: hp           # 每发/每秒伤害，单位为生命值点
+  distance: m
+  time: s
+  rate: shots_per_s
+  angle: deg
+  speed: m_per_s
+
+hero:
+  id:          {type: str,  required: true, note: 小写英文 slug，与 OverFast API 路径一致}
+  name_en:     {type: str,  required: true}
+  name_zh:     {type: str,  required: true}
+  role:        {type: enum, values: [tank, damage, support], required: true}
+  subrole:     {type: str,  required: false}
+  hitpoints:
+    health:    {type: int, min: 1,  max: 1000, required: true}
+    armor:     {type: int, min: 0,  max: 1000, required: true}
+    shields:   {type: int, min: 0,  max: 1000, required: true}
+    total:     {type: int, derived: health + armor + shields, note: 派生字段，与三项之和不等 = FAIL}
+  mode_split:  {type: bool, note: "若 5v5 与 6v6 取值不同则为 true，且相应字段以 {v5: x, v6: y} 形式给出"}
+
+weapon:
+  id:               {type: str, required: true}
+  slot:             {type: enum, values: [primary, secondary], required: true}
+  hit_type:         {type: enum, values: [hitscan, projectile, beam], required: true}
+  damage_max:       {type: num, min: 0, max: 500, required: true, note: 衰减起点之前的每发伤害}
+  damage_min:       {type: num, min: 0, max: 500, required: false, note: 衰减终点之后的每发伤害；无衰减则省略}
+  falloff_start_m:  {type: num, min: 0, max: 200, required: false}
+  falloff_end_m:    {type: num, min: 0, max: 200, required: false}
+  headshot_mult:    {type: num, min: 1, max: 3,   required: true, note: 不能爆头写 1}
+  rate_of_fire:     {type: num, min: 0.1, max: 60, required: true}
+  pellets_per_shot: {type: int, min: 1, max: 50,  default: 1}
+  ammo:             {type: int, min: 1, max: 999, required: false, note: beam 类按每秒消耗另记}
+  reload_s:         {type: num, min: 0, max: 10,  required: false}
+  spread_deg:       {type: num, min: 0, max: 30,  required: false}
+  projectile_speed: {type: num, min: 1, max: 500, required: false, note: 仅 projectile}
+  max_range_m:      {type: num, min: 0, max: 500, required: false, note: 仅 beam / 有射程上限的武器}
+  linked:
+    # 联动字段：改其中一个必须对另一个给出处置（保持 / 同改 / 说明不需改），否则 FAIL
+    - [ammo, reload_s]
+    - [damage_max, damage_min]
+    - [falloff_start_m, falloff_end_m]
+
+ability:
+  id:          {type: str, required: true}
+  kind:        {type: enum, values: [ability, ultimate, passive], required: true}
+  cooldown_s:  {type: num, min: 0, max: 60,  required: false}
+  charges:     {type: int, min: 1, max: 5,   default: 1}
+  duration_s:  {type: num, min: 0, max: 60,  required: false}
+  damage:      {type: num, min: 0, max: 1000, required: false}
+  healing:     {type: num, min: 0, max: 1000, required: false}
+  radius_m:    {type: num, min: 0, max: 50,  required: false}
+  max_range_m: {type: num, min: 0, max: 500, required: false}
+  ult_cost:    {type: int, min: 500, max: 5000, required: false, note: 仅 ultimate}
+
+provenance:
+  default:   {source: str, url: str, fetched: date}
+  overrides: "list of {field: dotted.path, value: any, source: str, url: str, date: date, why: str}"
+  conflicts: "list of {field: dotted.path, values: {source_id: value}, status: REVIEW|RESOLVED, note: str}"
+  missing:   "list of {field: dotted.path, note: str}"   # 找不到可靠出处的字段：留空，校验时报 NOT_RUN，不猜

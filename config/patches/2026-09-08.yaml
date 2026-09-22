@@ -1,0 +1,31 @@
+# 真实补丁样本：官方补丁说明 2026-09-08（Overwatch Retail Patch Notes – September 8, 2026）
+# 用途：执行 Agent 的输入样本（intent = 开发者注释原文）与验收答案（changes = 官方给出的改动前后值）。
+# 抓取：2026-09-22，按页面 HTML 结构（PatchNotesHeroUpdate / PatchNotesAbilityUpdate）解析，非正则猜测。
+# 只收录本仓库五个样本英雄；同期其他英雄的改动不在此列。
+source: patch_notes_official
+url: https://overwatch.blizzard.com/en-us/news/patch-notes/
+date: 2026-09-08
+entries:
+  - hero: kiriko
+    intent: >-
+      Developer Comments: Kiriko has become highly effective as a healer while retaining the utility and
+      mobility of her kit. We're reducing the speed and range of Healing Ofuda to lower her healing
+      consistency at longer distances. Protection Suzu is also being adjusted to reduce the effectiveness
+      of its invulnerability window.
+    direction: nerf
+    changes:
+      - {field: weapons.healing_ofuda.projectile_speed, from: 24, to: 18, unit: m_per_s, text: "Projectile travel speed reduced from 24 to 18 meters per second."}
+      - {field: weapons.healing_ofuda.max_range_m, from: 35, to: 30, unit: m, text: "Maximum seeking range reduced from 35 to 30 meters."}
+      - {field: abilities.protection_suzu.duration_s, from: 0.65, to: 0.5, unit: s, text: "Phased out invulnerability duration reduced from 0.65 to 0.5 seconds."}
+      - {field: abilities.protection_suzu.radius_m, from: 5, to: 4, unit: m, text: "Explosion radius reduced from 5 to 4 meters."}
+  - hero: winston
+    intent: >-
+      Developer Comments: Winston's Barrier Projector cooldown is being reduced to shorten the downtime
+      between engagements. To offset the increased availability, its duration is also being reduced.
+    direction: mixed        # 冷却减 = 增强；持续时间减 = 削弱；意图明说是「抵消」
+    changes:
+      - {field: abilities.barrier_projector.cooldown_s.v5, from: 12, to: 10, unit: s, mode: 5v5, text: "Cooldown reduced from 12 to 10 seconds. (5v5)"}
+      - {field: abilities.barrier_projector.duration_s, from: 8, to: 7, unit: s, text: "Duration reduced from 8 to 7 seconds."}
+notes:
+  - 当前官方页面只保留最近三期补丁（09-17 / 09-10 / 09-08），Sojourn、Cassidy、Tracer 在这三期内无数值改动，故本文件无其条目。
+  - Winston 的改动是「一增一减」的对冲型补丁，方向字段不能用单一 nerf/buff 表达——这是不变量设计要处理的第一个真实案例。

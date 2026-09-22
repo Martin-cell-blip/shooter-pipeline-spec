@@ -1,0 +1,25 @@
+# 来源登记。id 供各英雄文件引用；同一事实两个来源不一致时以 authority 高者为准，但校验器只登记冲突不自动选边。
+sources:
+  patch_notes_official:
+    authority: 1
+    name: 守望先锋官方补丁说明
+    url: https://overwatch.blizzard.com/en-us/news/patch-notes/
+    provides: 被改动参数的改动前值与改动后值；开发者注释（即补丁意图）；分模式取值
+    fetched: 2026-09-22
+    access: curl 直接可取
+  overfast_api:
+    authority: 2
+    name: OverFast API
+    url: https://overfast-api.tekrop.fr/heroes/{hero}
+    provides: 英雄主键、定位、生命/护甲/护盾、技能名与文字描述
+    lacks: 任何战斗数值（伤害、射速、衰减、冷却）
+    fetched: 2026-09-22
+    access: curl 直接可取
+  wiki_fandom:
+    authority: 3
+    name: Overwatch Wiki (fandom)
+    url: https://overwatch.fandom.com/wiki/{Hero}
+    provides: 武器与技能的当前数值（伤害、衰减、射速、弹匣、装填、散布、冷却等）
+    caveat: 社区维护，更新滞后于官方补丁——本仓库已实测 Kiriko 页面在 09-08 补丁两周后仍是旧值（见该英雄文件 conflicts）
+    fetched: 2026-09-22
+    access: curl 返回 403（Cloudflare），须浏览器读取；抓取方式见 docs/DATA_SOURCES.md

@@ -1,0 +1,39 @@
+id: sojourn
+name_en: Sojourn
+name_zh: 索杰恩
+role: damage
+subrole: sharpshooter
+mode_split: false
+hitpoints: {health: 225, armor: 0, shields: 0, total: 225}
+weapons:
+  - id: railgun
+    slot: primary
+    hit_type: projectile
+    damage_max: 9
+    headshot_mult: 2
+    rate_of_fire: 16
+    ammo: 45
+    reload_s: 1.2
+    spread_deg: 1.6
+    projectile_speed: 150
+  - id: charged_shot
+    slot: secondary
+    hit_type: hitscan
+    damage_max: 120        # 满能量
+    damage_min: 60         # 满能量、衰减终点之后
+    falloff_start_m: 40
+    falloff_end_m: 60
+    headshot_mult: 1.5
+    rate_of_fire: 1.56     # 派生：1 / 0.64 s 施放时间；wiki 未直接给射速，见 missing
+    spread_deg: 0
+abilities:
+  - {id: power_slide, kind: ability, cooldown_s: 7, duration_s: 1, max_range_m: 13}
+  - {id: disruptor_shot, kind: ability, cooldown_s: 15, damage: 315, duration_s: 3.5, radius_m: 4, max_range_m: 30}
+  - {id: overclock, kind: ultimate, ult_cost: 2300, duration_s: 8}
+provenance:
+  default: {source: wiki_fandom, url: https://overwatch.fandom.com/wiki/Sojourn, fetched: 2026-09-22}
+  overrides:
+    - {field: hitpoints, value: {health: 225, armor: 0, shields: 0}, source: overfast_api, url: https://overfast-api.tekrop.fr/heroes/sojourn, date: 2026-09-22, why: 两源一致}
+  conflicts: []
+  missing:
+    - {field: weapons.charged_shot.rate_of_fire, note: wiki 只给 0.64 s 施放时间，射速为派生值；能量最低档伤害 21–10.5 未建模（本表只记满能量）}

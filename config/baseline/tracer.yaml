@@ -1,0 +1,31 @@
+id: tracer
+name_en: Tracer
+name_zh: 猎空
+role: damage
+subrole: flanker
+mode_split: false
+hitpoints: {health: 175, armor: 0, shields: 0, total: 175}
+weapons:
+  - id: pulse_pistols
+    slot: primary
+    hit_type: hitscan
+    damage_max: 5.75       # 每发子弹；每次射击双枪各一发
+    damage_min: 1.725
+    falloff_start_m: 10
+    falloff_end_m: 20
+    headshot_mult: 2
+    rate_of_fire: 20
+    pellets_per_shot: 2
+    ammo: 40
+    reload_s: 1
+    spread_deg: 3.5
+abilities:
+  - {id: blink, kind: ability, cooldown_s: 3, charges: 3, max_range_m: 7.5}
+  - {id: recall, kind: ability, cooldown_s: 12, duration_s: 3}
+  - {id: pulse_bomb, kind: ultimate, ult_cost: 1375, damage: 350, radius_m: 4, duration_s: 1}
+provenance:
+  default: {source: wiki_fandom, url: https://overwatch.fandom.com/wiki/Tracer, fetched: 2026-09-22}
+  overrides:
+    - {field: hitpoints, value: {health: 175, armor: 0, shields: 0}, source: overfast_api, url: https://overfast-api.tekrop.fr/heroes/tracer, date: 2026-09-22, why: 两源一致}
+  conflicts: []
+  missing: []
