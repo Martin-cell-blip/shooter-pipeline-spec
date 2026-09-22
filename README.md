@@ -13,7 +13,7 @@
 | 3 | 不变量 v0（6 条 FAIL 级 + 10 条 REVIEW 级，同英雄前后对比为主）；校验器；改动前夹具；官方补丁按提案格式的金标样本 | 已完成 |
 | 4 | 24 项测试（每条规则至少一个触发与一个不触发用例；异常永不变 PASS；金标 0 FAIL）；CI 含夹具幂等性检查 | 已完成 |
 | 5 | 执行 Agent：补丁原文 → 配置改动提案 | 契约已确定，尚未实现 |
-| 6 及以后 | 实跑、记录失败、据此修规范并固化为回归测试、审核 Agent、人工签字清单 | 未开始 |
+| 6 及以后 | 补更难的真实样本并实跑、记录失败、据此修规范并固化为回归测试、审核 Agent、人工签字清单 | 未开始 |
 
 第 6 步以后的内容取决于实跑结果，不预先编排。
 
@@ -28,7 +28,9 @@
 - `spec/invariants.yaml`：不变量 v0。固定测试场景（175 / 250 血目标、满弹匣、身体全命中、不计弹道时间）、FAIL 级硬规则、REVIEW 级经验阈值。阈值是本项目初始审查灵敏度，不是官方平衡标准。
 - `config/fixtures/2026-09-08_before/`：构造的「改动前」快照（基线回填官方 from 值），前提与方法见其 README。
 - `proposals/2026-09-08_official.yaml`：官方补丁按提案格式写出的金标样本。
-- `pipeline/`：`loader`（读取与路径寻址）、`metrics`（完整周期 DPS、离散 TTK、射击次数断点、可用时间占比等）、`checks`（四态校验）、`report`、`fixture`、`check`（入口）。
+- `pipeline/`：`loader`（读取与路径寻址）、`metrics`（完整周期 DPS、离散 TTK、射击次数断点、可用时间占比等）、`checks`（四态校验）、`report`、`fixture`、`check`（入口）、`agent`（执行 Agent，只读原文与改动前快照，不读 baseline、不读校验器、不自评）、`compare`（提取验收）。
+- `config/patches/2026-09-08_raw.txt`：给 Agent 的非结构化原文（无字段路径、无方向标签）。
+- `runs/`：每次实跑的完整 prompt、原始回复、模型与用时；`docs/RUN_LOG.md` 是人读的实跑记录。
 
 ## 运行
 
@@ -36,6 +38,9 @@
 python -m pipeline.fixture build 2026-09-08        # 构造改动前夹具（幂等）
 python -m pipeline.check 2026-09-08_official      # 校验金标提案 → reports/
 python -m pytest -q                                # 24 项测试
+python -m pipeline.agent 2026-09-08 kiriko         # 执行 Agent（需 DEEPSEEK_API_KEY）→ proposals/agent/ + runs/
+python -m pipeline.compare proposals/agent/2026-09-08_kiriko_run1.yaml   # 与官方金标比对提取结果
+python -m pipeline.check agent/2026-09-08_kiriko_run1                    # 对 Agent 提案跑校验器
 ```
 
 退出码：`0` 无 FAIL（允许 REVIEW / 缺输入的 NOT_RUN）；`1` 有 FAIL；`2` 加载失败或检查抛异常。金标样本当前结果见 `reports/2026-09-08_official.md`。温斯顿生命值模式差异和屏障冷却起算已现场核验，见 [来源核验](docs/WINSTON_SOURCE_REVIEW.md)。剩余 NOT_RUN 的原因逐项列于报告；通过现有测试不代表已证明不存在缺陷。

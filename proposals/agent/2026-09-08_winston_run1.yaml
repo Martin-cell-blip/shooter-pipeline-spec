@@ -1,0 +1,22 @@
+# agent output — deepseek-chat — run 1 — raw record: runs/2026-09-08/winston_run1.json
+proposal_id: 2026-09-08_winston_barrier_projector
+before: fixtures/2026-09-08_before
+heroes:
+  winston:
+    overall_direction: mixed
+    mixed_rationale: 冷却时间缩短（12→10s）为增益，屏障持续时间缩短（8→7s）为削弱，两者按原文设计意图相互对冲。
+    changes:
+    - path: abilities.barrier_projector.cooldown_s.v5
+      from: 12
+      to: 10
+      expected_direction: buff
+      why: 原文 "Cooldown reduced from 12 to 10 seconds. (5v5)"，冷却缩短为增益。
+      mode: 5v5
+    - path: abilities.barrier_projector.duration_s
+      from: 8
+      to: 7
+      expected_direction: nerf
+      why: 原文 "Duration reduced from 8 to 7 seconds."，持续时间缩短削弱屏障可用时长；duration_s 语义为
+        ambiguous，按上下文（缩短可用时间）判为 nerf。
+    linked_dispositions: {}
+    unmapped: []

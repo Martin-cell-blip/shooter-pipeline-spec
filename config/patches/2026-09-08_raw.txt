@@ -1,0 +1,20 @@
+# 官方补丁说明原文（非结构化输入，给执行 Agent 用）。抓取 2026-09-22，来源 https://overwatch.blizzard.com/en-us/news/patch-notes/
+# 只保留本仓库五个样本英雄的条目；层级 = 英雄 / 技能 / 条目行；开发者注释原文附于英雄末尾。
+# 与 2026-09-08.yaml 的区别：这里没有字段路径、没有方向标签——那是 Agent 要产出的东西。
+
+Overwatch Retail Patch Notes – September 8, 2026
+
+## Winston
+### Barrier Projector
+- Cooldown reduced from 12 to 10 seconds. (5v5)
+- Duration reduced from 8 to 7 seconds.
+Developer Comments: Winston's Barrier Projector cooldown is being reduced to shorten the downtime between engagements. To offset the increased availability, its duration is also being reduced.
+
+## Kiriko
+### Healing Ofuda
+- Projectile travel speed reduced from 24 to 18 meters per second.
+- Maximum seeking range reduced from 35 to 30 meters.
+### Protection Suzu
+- Phased out invulnerability duration reduced from 0.65 to 0.5 seconds.
+- Explosion radius reduced from 5 to 4 meters.
+Developer Comments: Kiriko has become highly effective as a healer while retaining the utility and mobility of her kit. We're reducing the speed and range of Healing Ofuda to lower her healing consistency at longer distances. Protection Suzu is also being adjusted to reduce the effectiveness of its invulnerability window.

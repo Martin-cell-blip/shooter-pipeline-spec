@@ -1,0 +1,31 @@
+# agent output — deepseek-chat — run 1 — raw record: runs/2026-09-08/kiriko_run1.json
+proposal_id: 2026-09-08_kiriko_healing_ofuda_protection_suzu
+before: fixtures/2026-09-08_before
+heroes:
+  kiriko:
+    overall_direction: nerf
+    mixed_rationale: null
+    changes:
+    - path: weapons.healing_ofuda.projectile_speed
+      from: 24
+      to: 18
+      expected_direction: nerf
+      why: Projectile travel speed reduced from 24 to 18 meters per second.
+    - path: weapons.healing_ofuda.max_range_m
+      from: 35
+      to: 30
+      expected_direction: nerf
+      why: Maximum seeking range reduced from 35 to 30 meters.
+    - path: abilities.protection_suzu.duration_s
+      from: 0.65
+      to: 0.5
+      expected_direction: nerf
+      why: Phased out invulnerability duration reduced from 0.65 to 0.5 seconds; duration_s
+        语义为 ambiguous，按上下文（无敌窗口缩短）判定为 nerf。
+    - path: abilities.protection_suzu.radius_m
+      from: 5
+      to: 4
+      expected_direction: nerf
+      why: Explosion radius reduced from 5 to 4 meters.
+    linked_dispositions: {}
+    unmapped: []

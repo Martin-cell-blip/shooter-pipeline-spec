@@ -1,0 +1,447 @@
+{
+  "summary": {
+    "counts": {
+      "REVIEW": 3,
+      "PASS": 23,
+      "NOT_RUN": 3
+    },
+    "exit_code": 0,
+    "final": "READY_FOR_HUMAN_REVIEW",
+    "exception_not_run": 0
+  },
+  "results": [
+    {
+      "check": "P0_provenance_status",
+      "hero": "kiriko",
+      "status": "REVIEW",
+      "detail": "open source conflict on weapons.healing_ofuda.projectile_speed: {'patch_notes_official': 18, 'wiki_fandom': '30 (homing) / 24 (non-homing)'} — wiki 在补丁两周后未更新；且 wiki 区分 homing/non-homing 两个速度而补丁只给一个数——补丁改的是哪一个，需确认后才能关闭",
+      "records": {
+        "field": "weapons.healing_ofuda.projectile_speed"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "kiriko",
+      "status": "REVIEW",
+      "detail": "open source conflict on weapons.healing_ofuda.max_range_m: {'patch_notes_official': 30, 'wiki_fandom': 35} — 同上，wiki 未更新",
+      "records": {
+        "field": "weapons.healing_ofuda.max_range_m"
+      }
+    },
+    {
+      "check": "F1_schema_bounds",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "all numeric fields within project bounds",
+      "records": {}
+    },
+    {
+      "check": "F2_falloff_structure",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "falloff structure consistent for all weapons",
+      "records": {}
+    },
+    {
+      "check": "F3_hitpoints_sum",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "total 225 = sum of components",
+      "records": {}
+    },
+    {
+      "check": "F4_linked_disposition",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "every touched linked pair has a disposition record",
+      "records": {}
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "weapons.healing_ofuda.projectile_speed: 24→18 = nerf, matches declaration",
+      "records": {
+        "path": "weapons.healing_ofuda.projectile_speed"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "weapons.healing_ofuda.max_range_m: 35→30 = nerf, matches declaration",
+      "records": {
+        "path": "weapons.healing_ofuda.max_range_m"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "kiriko",
+      "status": "REVIEW",
+      "detail": "abilities.protection_suzu.duration_s: field semantics 'ambiguous' — direction cannot be machine-judged; declared=nerf, reason='Phased out invulnerability duration reduced from 0.65 to 0.5 seconds; duration_s 语义为 ambiguous，按上下文（无敌窗口缩短）判定为 nerf。'",
+      "records": {
+        "path": "abilities.protection_suzu.duration_s"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "abilities.protection_suzu.radius_m: 5→4 = nerf, matches declaration",
+      "records": {
+        "path": "abilities.protection_suzu.radius_m"
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "healing_ofuda: full-cycle body DPS 0.00 → 0.00 (+0.0%)",
+      "records": {
+        "weapon": "healing_ofuda",
+        "before": {
+          "status": "OK",
+          "value": 0.0,
+          "shots_per_magazine": 5,
+          "fire_s": 0.7496251874062969,
+          "reload_s": 0.9,
+          "theoretical_dps_no_reload": 0.0
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.0,
+          "shots_per_magazine": 5,
+          "fire_s": 0.7496251874062969,
+          "reload_s": 0.9,
+          "theoretical_dps_no_reload": 0.0
+        },
+        "rel_change": null,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai: full-cycle body DPS 102.27 → 102.27 (+0.0%)",
+      "records": {
+        "weapon": "kunai",
+        "before": {
+          "status": "OK",
+          "value": 102.27272727272727,
+          "shots_per_magazine": 15,
+          "fire_s": 7.5,
+          "reload_s": 1.3,
+          "theoretical_dps_no_reload": 120
+        },
+        "after": {
+          "status": "OK",
+          "value": 102.27272727272727,
+          "shots_per_magazine": 15,
+          "fire_s": 7.5,
+          "reload_s": 1.3,
+          "theoretical_dps_no_reload": 120
+        },
+        "rel_change": 0.0,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai vs 175hp body: TTK 1.000s → 1.000s (+0.0%)",
+      "records": {
+        "weapon": "kunai",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.0,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": 15,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.0,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": 15,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai vs 175hp head: TTK 0.500s → 0.500s (+0.0%)",
+      "records": {
+        "weapon": "kunai",
+        "target_hp": 175,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 0.5,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 15,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.5,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 15,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai vs 250hp body: TTK 2.000s → 2.000s (+0.0%)",
+      "records": {
+        "weapon": "kunai",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 2.0,
+          "shots": 5,
+          "requires_reload": false,
+          "shots_per_magazine": 15,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 2.0,
+          "shots": 5,
+          "requires_reload": false,
+          "shots_per_magazine": 15,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai vs 250hp head: TTK 1.000s → 1.000s (+0.0%)",
+      "records": {
+        "weapon": "kunai",
+        "target_hp": 250,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 1.0,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": 15,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.0,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": 15,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "healing_ofuda: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "healing_ofuda",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "kunai",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "damage_head": 120,
+          "conditions": "none (plain shot, distance within falloff start)"
+        }
+      }
+    },
+    {
+      "check": "R4_change_count_stats",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "changes: {'buff': 0, 'nerf': 4, 'ambiguous': 0} (display only, no threshold)",
+      "records": {
+        "buff": 0,
+        "nerf": 4,
+        "ambiguous": 0
+      }
+    },
+    {
+      "check": "R5_falloff_window_delta",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "no falloff weapons",
+      "records": {}
+    },
+    {
+      "check": "R6_cooldown_step",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "no cooldown changes",
+      "records": {}
+    },
+    {
+      "check": "R8_mixed_direction_rationale",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "single direction {'nerf'}",
+      "records": {
+        "overall": "nerf"
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai vs 175hp body: 3 → 3 shot events",
+      "records": {
+        "weapon": "kunai",
+        "target_hp": 175,
+        "location": "body",
+        "before": 3,
+        "after": 3,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai vs 175hp head: 2 → 2 shot events",
+      "records": {
+        "weapon": "kunai",
+        "target_hp": 175,
+        "location": "head",
+        "before": 2,
+        "after": 2,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai vs 250hp body: 5 → 5 shot events",
+      "records": {
+        "weapon": "kunai",
+        "target_hp": 250,
+        "location": "body",
+        "before": 5,
+        "after": 5,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "kunai vs 250hp head: 3 → 3 shot events",
+      "records": {
+        "weapon": "kunai",
+        "target_hp": 250,
+        "location": "head",
+        "before": 3,
+        "after": 3,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "kiriko",
+      "status": "NOT_RUN",
+      "detail": "swift_step: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "swift_step",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "kiriko",
+      "status": "NOT_RUN",
+      "detail": "protection_suzu: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "protection_suzu",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "kiriko",
+      "status": "NOT_RUN",
+      "detail": "kitsune_rush: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "kitsune_rush",
+        "mode": ""
+      }
+    }
+  ]
+}
