@@ -1,9 +1,9 @@
 {
   "summary": {
     "counts": {
-      "PASS": 42,
-      "REVIEW": 5,
-      "NOT_RUN": 10
+      "PASS": 44,
+      "REVIEW": 4,
+      "NOT_RUN": 8
     },
     "exit_code": 0,
     "final": "READY_FOR_HUMAN_REVIEW",
@@ -460,15 +460,6 @@
     {
       "check": "P0_provenance_status",
       "hero": "winston",
-      "status": "REVIEW",
-      "detail": "open source conflict on hitpoints: {'overfast_api': {'health': 425, 'armor': 200, 'total': 625}, 'wiki_fandom': '信息框首个数字 Health 275（页面同时列多个模式/版本的取值，本次抓取只取到首项）'} — 两源差距过大，不像更新滞后，更像口径不同（5v5 vs 6v6，或含/不含护甲）；本仓库不猜，留空待人工核对后填入并关闭",
-      "records": {
-        "field": "hitpoints"
-      }
-    },
-    {
-      "check": "P0_provenance_status",
-      "hero": "winston",
       "status": "NOT_RUN",
       "detail": "missing field abilities.barrier_projector.cooldown_s.v6: 补丁只给 5v5 值，6v6 未查到可靠出处",
       "records": {
@@ -501,8 +492,8 @@
     {
       "check": "F3_hitpoints_sum",
       "hero": "winston",
-      "status": "NOT_RUN",
-      "detail": "hitpoints is null (open conflict or missing) — no numeric judgement",
+      "status": "PASS",
+      "detail": "total 625 = sum of components",
       "records": {}
     },
     {
@@ -804,11 +795,21 @@
     {
       "check": "R10_uptime_ratio",
       "hero": "winston",
-      "status": "NOT_RUN",
-      "detail": "barrier_projector[v5]: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "status": "PASS",
+      "detail": "barrier_projector[v5]: uptime 66.7% → 70.0% (+3.3pp)",
       "records": {
         "ability": "barrier_projector",
-        "mode": "v5"
+        "mode": "v5",
+        "before": {
+          "status": "OK",
+          "value": 0.6666666666666666,
+          "cooldown_starts": "on_cast"
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.7,
+          "cooldown_starts": "on_cast"
+        }
       }
     },
     {

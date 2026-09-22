@@ -4,7 +4,12 @@ name_zh: 温斯顿
 role: tank
 subrole: initiator
 mode_split: true
-hitpoints: null
+hitpoints:
+  health: 425
+  armor: 200
+  shields: 0
+  total: 625
+hitpoints_scope: 5v5_role_queue
 weapons:
 - id: tesla_cannon
   slot: primary
@@ -35,6 +40,7 @@ abilities:
   cooldown_s:
     v5: 12
     v6: null
+  cooldown_starts: on_cast
   duration_s: 8
   radius_m: 5
   barrier_health: 650
@@ -49,6 +55,22 @@ provenance:
     url: https://overwatch.fandom.com/wiki/Winston
     fetched: 2026-09-22
   overrides:
+  - field: hitpoints
+    value:
+      health: 425
+      armor: 200
+      shields: 0
+      total: 625
+    source: overfast_api
+    url: https://overfast-api.tekrop.fr/heroes/winston
+    date: 2026-09-22
+    why: 现场读取 API；wiki 职责队列生命值 425、护甲 200 相符；275 属于开放队列，不能跨队列比较
+  - field: abilities.barrier_projector.cooldown_starts
+    value: on_cast
+    source: wiki_fandom
+    url: https://overwatch.fandom.com/wiki/Winston
+    date: 2026-09-22
+    why: 浏览器核对 Barrier Projector 的 Additional details，说明冷却从激活时开始；属于来源核验，不代表人类最终签字
   - field: abilities.barrier_projector.cooldown_s.v5
     value: 10
     source: patch_notes_official
@@ -69,8 +91,9 @@ provenance:
         armor: 200
         total: 625
       wiki_fandom: 信息框首个数字 Health 275（页面同时列多个模式/版本的取值，本次抓取只取到首项）
-    status: REVIEW
-    note: 两源差距过大，不像更新滞后，更像口径不同（5v5 vs 6v6，或含/不含护甲）；本仓库不猜，留空待人工核对后填入并关闭
+    status: RESOLVED
+    note: 2026-09-22 浏览器核验：Health 275 为 Open queue，425 为 Role queue，325 为 6v6；Armor
+      200。原抓取漏掉模式标签。职责队列与 API 一致；其他模式未合并入本快照。详见 docs/WINSTON_SOURCE_REVIEW.md；不代表最终人工验收。
   missing:
   - field: abilities.barrier_projector.cooldown_s.v6
     note: 补丁只给 5v5 值，6v6 未查到可靠出处

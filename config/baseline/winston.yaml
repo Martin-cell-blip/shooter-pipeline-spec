@@ -4,7 +4,8 @@ name_zh: 温斯顿
 role: tank
 subrole: initiator
 mode_split: true
-hitpoints: null   # 两源不一致，见 conflicts；填值前校验器对依赖 total 的检查报 NOT_RUN
+hitpoints: {health: 425, armor: 200, shields: 0, total: 625}
+hitpoints_scope: 5v5_role_queue  # 本快照的生命值仅适用于职责队列；其他模式见来源核验记录
 weapons:
   - id: tesla_cannon
     slot: primary
@@ -26,18 +27,20 @@ weapons:
     max_range_m: 40
 abilities:
   - {id: jump_pack, kind: ability, cooldown_s: 5, damage: 60, radius_m: 5}
-  - {id: barrier_projector, kind: ability, cooldown_s: {v5: 10, v6: null}, duration_s: 7, radius_m: 5, barrier_health: 650}
+  - {id: barrier_projector, kind: ability, cooldown_s: {v5: 10, v6: null}, cooldown_starts: on_cast, duration_s: 7, radius_m: 5, barrier_health: 650}
   - {id: primal_rage, kind: ultimate, ult_cost: 2525, duration_s: 10, damage: 50}
 provenance:
   default: {source: wiki_fandom, url: https://overwatch.fandom.com/wiki/Winston, fetched: 2026-09-22}
   overrides:
+    - {field: hitpoints, value: {health: 425, armor: 200, shields: 0, total: 625}, source: overfast_api, url: https://overfast-api.tekrop.fr/heroes/winston, date: 2026-09-22, why: 现场读取 API；wiki 职责队列生命值 425、护甲 200 相符；275 属于开放队列，不能跨队列比较}
+    - {field: abilities.barrier_projector.cooldown_starts, value: on_cast, source: wiki_fandom, url: https://overwatch.fandom.com/wiki/Winston, date: 2026-09-22, why: 浏览器核对 Barrier Projector 的 Additional details，说明冷却从激活时开始；属于来源核验，不代表人类最终签字}
     - {field: abilities.barrier_projector.cooldown_s.v5, value: 10, source: patch_notes_official, url: https://overwatch.blizzard.com/en-us/news/patch-notes/, date: 2026-09-08, why: 「Cooldown reduced from 12 to 10 seconds. (5v5)」；wiki 同为 10，两源一致}
     - {field: abilities.barrier_projector.duration_s, value: 7, source: patch_notes_official, url: https://overwatch.blizzard.com/en-us/news/patch-notes/, date: 2026-09-08, why: 「Duration reduced from 8 to 7 seconds」；wiki 同为 7}
   conflicts:
     - field: hitpoints
       values: {overfast_api: {health: 425, armor: 200, total: 625}, wiki_fandom: "信息框首个数字 Health 275（页面同时列多个模式/版本的取值，本次抓取只取到首项）"}
-      status: REVIEW
-      note: 两源差距过大，不像更新滞后，更像口径不同（5v5 vs 6v6，或含/不含护甲）；本仓库不猜，留空待人工核对后填入并关闭
+      status: RESOLVED
+      note: 2026-09-22 浏览器核验：Health 275 为 Open queue，425 为 Role queue，325 为 6v6；Armor 200。原抓取漏掉模式标签。职责队列与 API 一致；其他模式未合并入本快照。详见 docs/WINSTON_SOURCE_REVIEW.md；不代表最终人工验收。
   missing:
     - {field: abilities.barrier_projector.cooldown_s.v6, note: 补丁只给 5v5 值，6v6 未查到可靠出处}
     - {field: weapons.tesla_cannon_alt.damage_min, note: 该字段语义是「最低蓄力伤害」而非距离衰减，与 schema 中 damage_min 定义不同——schema 需要 charge_min/charge_max 扩展，记入待办}

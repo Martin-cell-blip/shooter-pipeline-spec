@@ -28,7 +28,7 @@ def test_golden_proposal_has_no_fail():
     p = load_proposal("2026-09-08_official")
     res = run_proposal(SCHEMA, INV, p, load_hero_dir(p["before"]), load_hero_dir("baseline"))
     assert not [r for r in res if r["status"] == "FAIL"], [r["detail"] for r in res if r["status"] == "FAIL"]
-    assert "NOT_RUN" in statuses(res, "F3_hitpoints_sum")   # 温斯顿生命值留空 → 不判错
+    assert statuses(res, "F3_hitpoints_sum") == ["PASS", "PASS"]  # 职责队列生命值已现场核验；空值行为由独立测试覆盖
 
 
 def test_bounds_fail_is_labelled_as_project_bound():
