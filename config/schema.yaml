@@ -36,6 +36,8 @@ weapon:
   rate_of_fire:     {type: num, min: 0.1, max: 60, required: true}
   pellets_per_shot: {type: int, min: 1, max: 50,  default: 1}
   ammo:             {type: int, min: 1, max: 999, required: false, note: beam 类按每秒消耗另记}
+  ammo_consumption: {type: int, min: 1, max: 50,  default: 1, note: 每次射击事件消耗的弹药数（双枪齐射为 2）}
+  ammo_per_s:       {type: num, min: 0, max: 100, required: false, note: 仅 beam}
   reload_s:         {type: num, min: 0, max: 10,  required: false}
   spread_deg:       {type: num, min: 0, max: 30,  required: false}
   projectile_speed: {type: num, min: 1, max: 500, required: false, note: 仅 projectile}
@@ -48,6 +50,7 @@ weapon:
 
 ability:
   id:          {type: str, required: true}
+  cooldown_starts: {type: enum, values: [on_cast, on_end], required: false, note: 冷却从施放起算还是从效果结束起算；缺失时任何"可用时间占比"计算报 NOT_RUN}
   kind:        {type: enum, values: [ability, ultimate, passive], required: true}
   cooldown_s:  {type: num, min: 0, max: 60,  required: false}
   charges:     {type: int, min: 1, max: 5,   default: 1}
@@ -57,6 +60,37 @@ ability:
   radius_m:    {type: num, min: 0, max: 50,  required: false}
   max_range_m: {type: num, min: 0, max: 500, required: false}
   ult_cost:    {type: int, min: 500, max: 5000, required: false, note: 仅 ultimate}
+
+# 字段方向语义：higher_is 表示"数值变大对该英雄是增强还是削弱"。ambiguous 的字段不参与"方向与意图相反"的 FAIL 判定，只能 REVIEW。
+semantics:
+  weapon:
+    damage_max: buff
+    damage_min: buff
+    healing_per_shot: buff
+    rate_of_fire: buff
+    ammo: buff
+    reload_s: nerf
+    spread_deg: nerf
+    projectile_speed: buff
+    max_range_m: buff
+    falloff_start_m: buff
+    falloff_end_m: buff
+    headshot_mult: buff
+    pellets_per_shot: buff
+  ability:
+    cooldown_s: nerf
+    charges: buff
+    damage: buff
+    healing: buff
+    radius_m: buff
+    max_range_m: buff
+    ult_cost: nerf
+    barrier_health: buff
+    duration_s: ambiguous   # 屏障持续=增强，敌方控制持续=增强，但自身硬直/施法持续=削弱；由提案逐条声明
+  hitpoints:
+    health: buff
+    armor: buff
+    shields: buff
 
 provenance:
   default:   {source: str, url: str, fetched: date}

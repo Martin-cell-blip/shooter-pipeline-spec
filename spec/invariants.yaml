@@ -1,0 +1,86 @@
+# 不变量 v0（第 3 步）
+#
+# 审查对象：以「同一英雄改动前后的变化」为主，跨英雄比较只作展示，不设红线。
+# 阈值性质：以下数值是本项目的初始审查灵敏度，不是官方平衡标准，也未经实战验证；
+#           触发只表示 REVIEW（需要人看），不触发不等于游戏平衡合格。
+# 运行前提：输入完整、版本与模式一致。缺任一依赖 → 该项 NOT_RUN；来源冲突未关闭 → 依赖该字段的指标不得给 PASS。
+version: 0
+
+# ---------- 固定测试场景（所有 TTK / 射击次数计算共用） ----------
+scenario:
+  targets_hp: [175, 250]          # 显式测试目标；175 不宣称是全游戏最低血量
+  target_armor: 0
+  target_healing: 0
+  hit_location: [body, head]      # 分别计算，全命中
+  distance_m: 0                   # 衰减起点以内，取 damage_max
+  first_shot_at_s: 0              # 首发时刻
+  includes_travel_time: false     # 弹道飞行时间不计入
+  magazine: full                  # 起始满弹匣；耗尽后加一次 reload_s
+  shot_event: one trigger pull    # 多弹丸武器一次射击事件含 pellets_per_shot 发
+  beam: continuous                # beam 类按每秒伤害连续计算，弹药按每秒消耗
+  full_cycle_dps: (magazine_damage) / (shots_per_magazine / rate_of_fire + reload_s)
+
+# ---------- FAIL 级：机器可证的硬规则 ----------
+fail_rules:
+  - id: F1_schema_bounds
+    what: 取值类型与硬边界
+    note: 边界是本项目的支持范围，越界报「配置 FAIL」，不据此断言游戏设计不合法
+  - id: F2_falloff_structure
+    what: damage_min ≤ damage_max；falloff_start_m < falloff_end_m；二者要么都有要么都无
+  - id: F3_hitpoints_sum
+    what: total = health + armor + shields
+    note: hitpoints 为空 → NOT_RUN，不判错
+  - id: F4_linked_disposition
+    what: 改动了联动字段对中的一个，提案必须对另一个给出处置记录（keep / changed / not_needed+理由）
+    note: 是「必须有处置记录」，不是「必须一起改值」
+  - id: F5_direction_vs_declared
+    what: 提案逐条声明 expected_direction；字段 semantics 为 buff/nerf 且实际增减与声明相反 → FAIL
+    note: semantics=ambiguous 或声明缺失 → REVIEW；开发者注释的自然语言不直接转成方向
+  - id: F6_no_silent_null
+    what: 空值不参与任何数值比较；依赖空值的计算报 NOT_RUN
+
+# ---------- REVIEW 级：经验阈值（同英雄前后对比） ----------
+review_rules:
+  - id: R1_full_cycle_dps_delta
+    what: 同英雄、同武器、同场景的完整周期身体 DPS，相对补丁前变化 > 15%
+    threshold: {rel: 0.15}
+    note: 跨英雄 DPS 差异只展示，不触发
+  - id: R2_ttk_delta_or_reload_breakpoint
+    what: 固定场景下 TTK 相对变化绝对值 > 15%，或「击杀是否需要装填」发生翻转
+    threshold: {rel: 0.15}
+    records: [distance_m, first_shot_at_s, includes_travel_time, requires_reload]
+  - id: R3_headshot_oneshot_change
+    what: 对 175 血目标的单发爆头秒杀能力新增或消失
+    note: 允许存在；只报变化。需列出距离、能量/蓄力条件与伤害增益条件，条件字段缺失 → NOT_RUN；原有能力保持不重复报警
+  - id: R4_change_count_stats
+    what: 统计本次补丁对该英雄的增强 / 削弱 / 未分类条数
+    threshold: null
+    note: 只展示，不设条数上限——条数依赖配置拆分方式
+  - id: R5_falloff_window_delta
+    what: 同武器衰减窗口宽度（终点−起点）相对变化 > 25%；新增或移除衰减机制
+    threshold: {rel: 0.25}
+    note: 另行展示起点与终点各自的变化，防止窗口整体平移未被发现
+  - id: R6_cooldown_step
+    what: 冷却绝对变化 > 2 s，或相对变化 > 20%，任一满足
+    threshold: {abs_s: 2, rel: 0.20}
+    note: 旧值为 0 时不算比例，转为机制变化审查（REVIEW）
+  - id: R7_cross_role_ratio_display
+    what: 辅助副武器 DPS 与输出主武器 DPS 之比
+    threshold: null
+    note: 只展示，不设红线；同武器变化复用 R1
+  - id: R8_mixed_direction_rationale
+    what: 一次补丁内对同一英雄既有增强又有削弱 → 整体标 mixed；提案缺少对冲理由 → REVIEW
+    note: 允许跨技能对冲；机器只判局部方向，不判整体是否抵消
+  - id: R9_shots_to_kill_breakpoint
+    what: 对 175 / 250 血目标，身体或爆头所需射击事件数发生变化
+    threshold: {delta_shots: 1}
+    note: 小幅伤害调整可能少打一枪，DPS 百分比会漏掉
+  - id: R10_uptime_ratio
+    what: 可用时间占比 = duration / (duration + cooldown)（cooldown_starts=on_end）或 duration / cooldown（on_cast）；变化 > 10 个百分点，或跨过「可无缝覆盖」边界（占比 ≥ 1）
+    threshold: {abs_pp: 10}
+    note: cooldown_starts 缺失 → NOT_RUN，不得用 duration/cooldown 冒充覆盖率
+
+# ---------- 前置条件 ----------
+preconditions:
+  - baseline 已含补丁后数值，不能直接充当该补丁的「改动前」；回放须用明确的前版本快照，或在范围完整、无后续覆盖的前提下构造并标注测试夹具（见 config/fixtures/）
+  - 官方 from/to 只用于验收「提取与应用」的结果；开发者注释本身不能唯一推出精确数值

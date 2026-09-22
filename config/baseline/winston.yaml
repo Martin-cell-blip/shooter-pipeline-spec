@@ -13,6 +13,7 @@ weapons:
     headshot_mult: 1
     rate_of_fire: 1        # beam 按每秒伤害计，此字段为占位
     ammo: 120
+    ammo_per_s: 20         # wiki: Ammo consumption 20 per second
     reload_s: 1.5
     max_range_m: 8
   - id: tesla_cannon_alt

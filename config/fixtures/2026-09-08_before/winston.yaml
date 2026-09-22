@@ -1,0 +1,89 @@
+id: winston
+name_en: Winston
+name_zh: 温斯顿
+role: tank
+subrole: initiator
+mode_split: true
+hitpoints: null
+weapons:
+- id: tesla_cannon
+  slot: primary
+  hit_type: beam
+  damage_max: 70
+  headshot_mult: 1
+  rate_of_fire: 1
+  ammo: 120
+  ammo_per_s: 20
+  reload_s: 1.5
+  max_range_m: 8
+- id: tesla_cannon_alt
+  slot: secondary
+  hit_type: hitscan
+  damage_max: 60
+  damage_min: 15.93
+  headshot_mult: 1
+  rate_of_fire: 0.63
+  max_range_m: 40
+abilities:
+- id: jump_pack
+  kind: ability
+  cooldown_s: 5
+  damage: 60
+  radius_m: 5
+- id: barrier_projector
+  kind: ability
+  cooldown_s:
+    v5: 12
+    v6: null
+  duration_s: 8
+  radius_m: 5
+  barrier_health: 650
+- id: primal_rage
+  kind: ultimate
+  ult_cost: 2525
+  duration_s: 10
+  damage: 50
+provenance:
+  default:
+    source: wiki_fandom
+    url: https://overwatch.fandom.com/wiki/Winston
+    fetched: 2026-09-22
+  overrides:
+  - field: abilities.barrier_projector.cooldown_s.v5
+    value: 10
+    source: patch_notes_official
+    url: https://overwatch.blizzard.com/en-us/news/patch-notes/
+    date: 2026-09-08
+    why: 「Cooldown reduced from 12 to 10 seconds. (5v5)」；wiki 同为 10，两源一致
+  - field: abilities.barrier_projector.duration_s
+    value: 7
+    source: patch_notes_official
+    url: https://overwatch.blizzard.com/en-us/news/patch-notes/
+    date: 2026-09-08
+    why: 「Duration reduced from 8 to 7 seconds」；wiki 同为 7
+  conflicts:
+  - field: hitpoints
+    values:
+      overfast_api:
+        health: 425
+        armor: 200
+        total: 625
+      wiki_fandom: 信息框首个数字 Health 275（页面同时列多个模式/版本的取值，本次抓取只取到首项）
+    status: REVIEW
+    note: 两源差距过大，不像更新滞后，更像口径不同（5v5 vs 6v6，或含/不含护甲）；本仓库不猜，留空待人工核对后填入并关闭
+  missing:
+  - field: abilities.barrier_projector.cooldown_s.v6
+    note: 补丁只给 5v5 值，6v6 未查到可靠出处
+  - field: weapons.tesla_cannon_alt.damage_min
+    note: 该字段语义是「最低蓄力伤害」而非距离衰减，与 schema 中 damage_min 定义不同——schema 需要 charge_min/charge_max
+      扩展，记入待办
+  fixture:
+    kind: constructed_before_snapshot
+    patch: '2026-09-08'
+    method: baseline with official 'from' values written back on listed paths
+    assumes:
+    - patch entries cover all numeric changes for this hero on that date
+    - no later patch touched these paths before baseline fetch (2026-09-22)
+    restored_paths:
+    - abilities.barrier_projector.cooldown_s.v5
+    - abilities.barrier_projector.duration_s

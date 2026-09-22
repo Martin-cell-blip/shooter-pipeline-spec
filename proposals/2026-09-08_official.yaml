@@ -1,0 +1,25 @@
+# 「金标」提案：把官方 2026-09-08 补丁按提案格式写出来。
+# 用途：①校验器自身的对照样本（官方改动应当能通过 FAIL 级检查）；②第 5 步执行 Agent 产出的提案与此比对（提取与应用是否正确）。
+# 提案格式约定：每条改动声明 expected_direction（buff / nerf / ambiguous）与理由，联动字段给处置记录。
+proposal_id: 2026-09-08_official
+before: fixtures/2026-09-08_before
+after_ref: baseline            # 应用后应与 baseline 一致
+source: patch_notes_official
+intent_ref: config/patches/2026-09-08.yaml
+heroes:
+  kiriko:
+    overall_direction: nerf
+    mixed_rationale: null
+    changes:
+      - {path: weapons.healing_ofuda.projectile_speed, from: 24, to: 18, expected_direction: nerf, why: "降低远距离治疗稳定性（开发者注释）"}
+      - {path: weapons.healing_ofuda.max_range_m, from: 35, to: 30, expected_direction: nerf, why: "同上"}
+      - {path: abilities.protection_suzu.duration_s, from: 0.65, to: 0.5, expected_direction: nerf, why: "缩短无敌窗口；duration 语义在此为己方增益时长，变短=削弱"}
+      - {path: abilities.protection_suzu.radius_m, from: 5, to: 4, expected_direction: nerf, why: "缩小作用范围"}
+    linked_dispositions: {}   # 本次未触及任何联动字段对
+  winston:
+    overall_direction: mixed
+    mixed_rationale: "冷却缩短以减少交战间隙；持续时间缩短用于抵消可用性上升（开发者注释原文）"
+    changes:
+      - {path: abilities.barrier_projector.cooldown_s.v5, from: 12, to: 10, expected_direction: buff, why: "冷却缩短", mode: 5v5}
+      - {path: abilities.barrier_projector.duration_s, from: 8, to: 7, expected_direction: nerf, why: "屏障持续时间缩短；duration 语义在此为己方屏障存在时长，变短=削弱"}
+    linked_dispositions: {}

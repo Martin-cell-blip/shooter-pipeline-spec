@@ -16,6 +16,7 @@ weapons:
     headshot_mult: 2
     rate_of_fire: 20
     pellets_per_shot: 2
+    ammo_consumption: 2    # wiki: Ammo consumption 2（双枪各一发）
     ammo: 40
     reload_s: 1
     spread_deg: 3.5
