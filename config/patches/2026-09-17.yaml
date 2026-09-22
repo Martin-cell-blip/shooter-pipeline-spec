@@ -10,7 +10,7 @@ entries:
     changes:
       - {field: hitpoints_by_mode.v5.armor, from: 325, to: 275, unit: hp, mode: 5v5, text: "Armor reduced from 325 to 275 (5v5)."}
       - {field: hitpoints_by_mode.v6.armor, from: 300, to: 250, unit: hp, mode: 6v6, text: "Armor reduced from 300 to 250 (6v6)."}
-      - {field: null, from: 45, to: 36, unit: hp, text: "Damage per bullet reduced from 45 to 36.", note: 无法映射到快照任何字段，金标答案 = unmapped}
+      - {field: null, from: 45, to: 36, unit: hp, text: "Damage per bullet reduced from 45 to 36.", note: 2026-09-23 官方现场核验归属 Focused Fusion - Major Perk；当前 schema 未建模天赋，因此仍为 unmapped，而非归属未知}
       - {field: abilities.propulsors.cost_pct_s, from: 25, to: 30, unit: pct_per_s, text: "Fuel drain rate increased from 25 to 30."}
       - {field: abilities.fusion_repeater.damage, from: 16, to: 15, unit: hp, text: "Damage reduced from 16 to 15."}
       - {field: abilities.fusion_repeater.cooldown_s, from: 4, to: 5, unit: s, text: "Cooldown increased from 4 to 5 seconds."}

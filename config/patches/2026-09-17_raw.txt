@@ -6,6 +6,7 @@ Overwatch Retail Patch Notes – September 17, 2026
 ## D.Mon
 - Armor reduced from 325 to 275 (5v5).
 - Armor reduced from 300 to 250 (6v6).
+### Focused Fusion - Major Perk
 - Damage per bullet reduced from 45 to 36.
 ### Propulsors
 - Fuel drain rate increased from 25 to 30.

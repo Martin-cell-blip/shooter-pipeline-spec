@@ -12,22 +12,32 @@ import sys
 from .loader import ROOT, load_proposal, load_yaml
 
 KEYS = ["matched", "wrong_value", "missing", "extra", "direction_mismatch",
-        "unmapped_kept", "unmapped_forced", "unmapped_dropped", "agent_extra_unmapped"]
+        "unmapped_kept", "unmapped_forced", "unmapped_dropped", "agent_extra_unmapped",
+        "missing_hero", "extra_hero", "duplicate_path", "invalid_scope"]
 
 
 def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9.]+", " ", str(s).lower()).strip()
 
 
-def compare(agent: dict, golden: dict) -> dict:
+def compare(agent: dict, golden: dict, expected_heroes=None) -> dict:
     out = {"heroes": {}, "totals": {k: 0 for k in KEYS}}
     T = out["totals"]
+    expected = set(golden["heroes"] if expected_heroes is None else expected_heroes)
+    actual = agent.get("heroes") or {}
+    T["invalid_scope"] = int(not expected or bool(expected - set(golden["heroes"])))
+    T["missing_hero"] = len(expected - set(actual))
+    T["extra_hero"] = len(set(actual) - expected)
+    out["expected_heroes"] = sorted(expected)
     for hero, gph in golden["heroes"].items():
+        if hero not in expected:
+            continue
         aph = (agent.get("heroes") or {}).get(hero)
         if aph is None:
             continue
         g = {c["path"]: c for c in gph["changes"]}
         a = {c["path"]: c for c in aph.get("changes") or []}
+        T["duplicate_path"] += len(aph.get("changes") or []) - len(a)
         rows = []
         for path, gc in g.items():
             ac = a.get(path)
@@ -65,13 +75,14 @@ def compare(agent: dict, golden: dict) -> dict:
 
 def acceptance_ok(res: dict) -> bool:
     t = res["totals"]
-    return t["missing"] == 0 and t["wrong_value"] == 0 and t["extra"] == 0 and t["unmapped_forced"] == 0 and t["unmapped_dropped"] == 0 and t["agent_extra_unmapped"] == 0
+    return all(t[k] == 0 for k in ("missing", "wrong_value", "extra", "unmapped_forced", "unmapped_dropped", "agent_extra_unmapped", "missing_hero", "extra_hero", "duplicate_path", "invalid_scope"))
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(); ap.add_argument("agent_proposal"); ap.add_argument("--golden", default="2026-09-08_official")
+    ap.add_argument("--hero", action="append", help="Explicit evaluation scope; repeat for multiple heroes. Default: all golden heroes.")
     a = ap.parse_args(argv)
-    res = compare(load_yaml(ROOT / a.agent_proposal), load_proposal(a.golden))
+    res = compare(load_yaml(ROOT / a.agent_proposal), load_proposal(a.golden), a.hero)
     print(json.dumps(res, ensure_ascii=False, indent=2, default=str))
     return 0 if acceptance_ok(res) else 1
 

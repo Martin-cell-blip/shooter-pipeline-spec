@@ -46,7 +46,7 @@ python -m pipeline.fixture build 2026-09-17 && python -m pipeline.fixture build 
 python -m pipeline.check 2026-09-08_official      # 校验金标提案 → reports/
 python -m pytest -q                                # 24 项测试
 python -m pipeline.agent 2026-09-08 kiriko         # 执行 Agent（需 DEEPSEEK_API_KEY）→ proposals/agent/ + runs/
-python -m pipeline.compare proposals/agent/2026-09-08_kiriko_run1.yaml   # 与官方金标比对提取结果
+python -m pipeline.compare proposals/agent/2026-09-08_kiriko_run1.yaml --hero kiriko   # 与官方金标比对提取结果
 python -m pipeline.check agent/2026-09-08_kiriko_run1                    # 对 Agent 提案跑校验器
 python -m pipeline.reviewer proposals/agent/2026-09-08_kiriko_run1.yaml  # 审核 Agent（只读 diff）
 python -m pipeline.reconcile 2026-09-08 kiriko 1                          # 三方并排 → reviews/*_reconcile.json

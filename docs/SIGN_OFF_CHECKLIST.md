@@ -5,17 +5,18 @@
 对象：提案 `________________`　　补丁日期 `__________`　　英雄 `__________`
 
 ## A. 提取与应用（对照官方原文，不看 Agent 的说明）
-- [ ] `pipeline.compare` 结果：missing = 0、wrong_value = 0、extra = 0、unmapped_forced = 0、unmapped_dropped = 0
+- [ ] `pipeline.compare` 已显式指定本次英雄范围（单英雄用 `--hero`）；missing / wrong_value / extra / unmapped_forced / unmapped_dropped / agent_extra_unmapped / missing_hero / extra_hero / duplicate_path / invalid_scope 均为 0
 - [ ] `unmapped` 里每一行我都看过，确认它确实映射不到任何字段（不是 Agent 偷懒）
 - [ ] 分模式条目（5v5 / 6v6）落在了正确的 `.v5 / .v6` 路径上，没有把一个模式的值写到另一个模式
 
 ## B. REVIEW 处置
 - [ ] `reviews/decisions.yaml` 中本提案的每条 REVIEW 已处置（accepted / false_positive / needs_revision / resolved），各带 reason 与 scope
 - [ ] 无任何「全局豁免」式决定（每条 scope 都限定到 hero + 字段/检查）
+- [ ] needs_revision 均有后继修订、重验和关闭记录；仅填写 needs_revision 不等于问题已解决。助手复核不等于所有者签字
 - [ ] 审核方与执行方方向不一致的每一处，我都读了 reconcile 的 side_by_side，并写明采信哪一方、为什么
 
 ## C. 机器给不了的判断
-- [ ] 对冲型改动（mixed）：净效果是增强还是削弱，我有自己的判断并写在 decisions 的 reason 里（机器只判局部方向）
+- [ ] 对冲型改动（mixed）：区分字段方向组合、官方解释和实战净效果；缺实测证据可明确写净效果未知，不强迫猜测增强或削弱
 - [ ] `duration_s` 这类语义 ambiguous 的字段，每处方向我都按该技能的实际含义确认过（变形时间变短 = 增强；屏障时长变短 = 削弱）
 - [ ] 对高低分段、不同模式的影响是否可接受
 - [ ] 手感、节奏、是否好玩——本仓库不涉及，但合入前必须有人负责
