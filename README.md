@@ -16,7 +16,7 @@
 | 6 | 四个难样本英雄（查莉娅、巴蒂斯特、吴阳、D.Mon）；补丁叠加的夹具链式撤销；run 1 原样记录：金标自身 2 处缺陷被校验器抓出、Agent 偏差 3 处全部指向规范文本 | 已完成 |
 | 7 | 按 run 1 改规范（金标方向、F4 伙伴字段存在性、提案格式三处）并固化 7 项回归测试；run 2 复跑：4/4 提取全对，暴露 1 类新错误（A4）→ 新增 F7 自洽规则 | 已完成 |
 | 8 | 审核 Agent（只读 diff，泄漏自检）+ reconcile 三方并排；7 例：4 例与官方注释一致，2 处上下文差被抓成 REVIEW，1 例无官方注释单独成立 | 已完成 |
-| 9 | REVIEW 决定文件（`reviews/decisions.yaml`）+ 格式校验 `pipeline/decisions.py`（pending 未清零 / 缺理由 / scope 全局或不含英雄 / 漏项 → CI 红）；决定内容由人填 | 校验已接 CI，待人填 |
+| 9 | REVIEW 决定文件（`reviews/decisions.yaml`）+ 格式校验 `pipeline/decisions.py`（pending 未清零 / 缺理由 / scope 全局或不含英雄 / 漏项 → CI 红）；决定内容由人填 | 已填（助手代填，所有者签字待办），校验接 CI |
 | 10 | 人工签字清单（`docs/SIGN_OFF_CHECKLIST.md`）；迭代历史 = `docs/RUN_LOG.md` + git log | 清单已出 |
 
 第 6 步以后的内容取决于实跑结果，不预先编排。

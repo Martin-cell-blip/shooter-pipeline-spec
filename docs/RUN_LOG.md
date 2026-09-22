@@ -72,6 +72,6 @@ A4 的处置：这是提案自洽问题，不需要金标就能判——新增 F
 
 **本步结论**：审核方在 7 例里没有一次凭空编造背景（cannot_determine 每例都列了 2–3 条），4 例与官方注释方向一致；两处不一致（吴阳整体方向、D.Mon 变形时间）都是**上下文差**造成的，而且都被 reconcile 抓成 REVIEW 交给人。这正是"审核方不读执行方说明"的价值：它替人把"没有说明就读不出来的地方"标了出来。
 
-## 第 9 步待办：REVIEW 决定文件
+## 2026-09-23 · 第 9 步 · REVIEW 决定文件
 
-`reviews/decisions.yaml` 已按 7 例的 reconcile 项 + 校验器 REVIEW 项生成模板，每条 `decision: pending`。决定（accepted / false_positive / needs_revision / resolved）、理由与限定范围由人填，禁止全局豁免。
+19 条 REVIEW 项全部处置（accepted 10 / resolved 5 / needs_revision 3 / false_positive 1），每条带理由与限定范围；格式由 `pipeline/decisions.py` 校验并接入 CI。**决定内容由助手按仓库所有者指示代填，所有者签字待办**（文件头 `_filled` 段有注明）。三条 needs_revision：吴阳提案整体方向应为 mixed 并补对冲理由（#4、#11）；D.Mon 生命值继续留空待第三来源（#12）。附带一处数据修正：`config/patches/2026-09-08.yaml` 中吴阳的 direction 由 buff 改为 mixed（#5）。

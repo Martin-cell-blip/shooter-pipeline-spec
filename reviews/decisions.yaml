@@ -7,137 +7,141 @@ items:
   hero: dmon
   date: '2026-09-08'
   item: 'abilities.call_mech.duration_s: executor declared buff, reviewer inferred nerf'
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: 采信执行方。变形时间 1.95→0.95 s 是自身硬直缩短，官方注释明写“缩短变形时间以对齐 D.Va”，属增强；审核方只见 duration 变短、按保守读法判削弱，是上下文缺失导致，不是执行方错
+  scope: dmon abilities.call_mech.duration_s（2026-09-08）
 - source: 2026-09-08_dmon_run2_reconcile.json
   hero: dmon
   date: '2026-09-08'
   item: 'overall: executor mixed vs reviewer nerf'
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: 执行方 mixed 正确：官方注释明说等离子剑削弱用于抵消（offset）变形时间与精度的增强。审核方判净 nerf 是从数值幅度做的推断，机器与审核方都不判净效果，以官方为准
+  scope: dmon 2026-09-08 整体方向
 - source: 2026-09-08_dmon_run2_reconcile.json
   hero: dmon
   date: '2026-09-08'
   item: 'overall: reviewer nerf vs official patch file mixed'
-  decision: pending
-  reason: null
-  scope: null
+  decision: resolved
+  reason: 同上一条，以官方注释 mixed 为准；审核方结论作为“无上下文读法”留档，不采信
+  scope: dmon 2026-09-08 整体方向（审核方 vs 官方）
 - source: 2026-09-08_dmon_run2_reconcile.json
   hero: dmon
   date: '2026-09-08'
   item: 'reviewer flagged suspicious: portable_fusion_repeater 同时收紧散布（buff）与提前衰减起点（nerf），方向相反，可能并非同一意图'
-  decision: pending
-  reason: null
-  scope: null
+  decision: false_positive
+  reason: 散布收紧 + 衰减起点提前是官方明说的有意组合（improve accuracy and reduce effectiveness at longer distances）：近距离更准、远距离更弱。审核方无上下文时报可疑属预期行为，本条不成立
+  scope: dmon weapons.portable_fusion_repeater spread_deg + falloff_start_m（2026-09-08）
 - source: 2026-09-08_wuyang_run2_reconcile.json
   hero: wuyang
   date: '2026-09-08'
   item: 'overall: executor buff vs reviewer mixed'
-  decision: pending
-  reason: null
-  scope: null
+  decision: needs_revision
+  reason: 执行方 run 2 把整体写成 buff，但含一条按语义为 nerf 的改动（视线超时 5→3）。审核方 mixed 正确；执行方提案应改为 mixed 并给对冲理由。提案格式已要求，属执行方遗漏
+  scope: wuyang 2026-09-08 整体方向（执行方提案）
 - source: 2026-09-08_wuyang_run2_reconcile.json
   hero: wuyang
   date: '2026-09-08'
   item: 'overall: reviewer mixed vs official patch file buff'
-  decision: pending
-  reason: null
-  scope: null
+  decision: resolved
+  reason: '补丁文件 direction: buff 写得过粗（只看了开发者注释）。按字段语义该补丁是 mixed，已把 config/patches/2026-09-08.yaml 的 wuyang direction 改为 mixed 并注明'
+  scope: wuyang 2026-09-08 config/patches 的 direction 字段
 - source: 2026-09-17_dmon_run2_reconcile.json
   hero: dmon
   date: '2026-09-17'
   item: no official developer comment for this hero/date — reviewer inference stands alone, human must judge
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: 无官方注释。审核方反推“整体削弱生存与机动/输出”与五条改动的字段语义方向（全部 nerf）一致，作为工作意图接受；标注为非官方口径，不得写成官方意图
+  scope: dmon 2026-09-17 意图（审核方单独成立）
 - source: reports/2026-09-08_kiriko_healing_ofuda_protection_suzu.json
   hero: kiriko
   date: '2026-09-08'
   item: 'P0_provenance_status: open source conflict on weapons.healing_ofuda.projectile_speed: {''patch_notes_official'': 18, ''wiki_fandom'': ''30 (homing) / 24 (non-homing)''} — wiki 在补丁两周后未更新；且 wiki
     区分 homing/non-homing 两个速度而补丁只给一个数——补丁改的是哪一个，需确认后才能关闭'
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: 取官方补丁值 18，接受冲突未关的风险。wiki 未同步且区分 homing/non-homing 两个速度而补丁只给一个数；当前所有依赖该字段的指标本就为 NOT_RUN，不影响其他结论。待 wiki 更新后复核关闭
+  scope: kiriko weapons.healing_ofuda.projectile_speed
 - source: reports/2026-09-08_kiriko_healing_ofuda_protection_suzu.json
   hero: kiriko
   date: '2026-09-08'
   item: 'P0_provenance_status: open source conflict on weapons.healing_ofuda.max_range_m: {''patch_notes_official'': 30, ''wiki_fandom'': 35} — 同上，wiki 未更新'
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: 取官方补丁值 30，同上；wiki 未同步。待 wiki 更新后复核关闭
+  scope: kiriko weapons.healing_ofuda.max_range_m
 - source: reports/2026-09-08_kiriko_healing_ofuda_protection_suzu.json
   hero: kiriko
   date: '2026-09-08'
   item: 'F5_direction_vs_declared: abilities.protection_suzu.duration_s: field semantics ''ambiguous'' — direction cannot be machine-judged; declared=nerf, reason=''Phased out invulnerability duration reduced
     from 0.65 to 0.5 seconds; duration_s 语义为 ambiguous，按上下文（无敌窗口缩短）判定为 nerf。'''
-  decision: pending
-  reason: null
-  scope: null
+  decision: resolved
+  reason: 护身铃 duration_s 是己方无敌窗口时长，变短为削弱；执行方声明 nerf 正确。语义表保留 ambiguous 是对的——同名字段在 call_mech 上语义相反
+  scope: kiriko abilities.protection_suzu.duration_s
 - source: reports/2026-09-08_winston_barrier_projector.json
   hero: winston
   date: '2026-09-08'
   item: 'F5_direction_vs_declared: abilities.barrier_projector.duration_s: field semantics ''ambiguous'' — direction cannot be machine-judged; declared=nerf, reason=''原文 "Duration reduced from 8 to 7 seconds."，持续时间缩短削弱屏障可用时长；duration_s
     语义为 ambiguous，按上下文（缩短可用时间）判为 nerf。'''
-  decision: pending
-  reason: null
-  scope: null
+  decision: resolved
+  reason: 屏障 duration_s 是己方屏障存在时长，变短为削弱；执行方声明 nerf 正确，官方注释亦称用于抵消冷却缩短
+  scope: winston abilities.barrier_projector.duration_s
 - source: reports/2026-09-08_wuyang_restorative_stream.json
   hero: wuyang
   date: '2026-09-08'
   item: 'R8_mixed_direction_rationale: mixed buff+nerf without mixed_rationale'
-  decision: pending
-  reason: null
-  scope: null
+  decision: needs_revision
+  reason: 执行方提案缺 mixed_rationale。官方注释只解释了回复率提高，未解释视线超时缩短的用意——这不是执行方能补的，应写“官方未说明，按语义判为收紧”作为理由；同时把该问题列为向设计方确认的事项
+  scope: wuyang 2026-09-08 R8（执行方提案的 mixed_rationale）
 - source: reports/2026-09-08_dmon.json
   hero: dmon
   date: '2026-09-08'
   item: 'P0_provenance_status: open source conflict on hitpoints.health: {''overfast_api'': 325, ''wiki_fandom'': ''275 (Open queue) / 425 (Role queue) / 175 (Pilot)''} — OverFast 的 325 与 wiki 任一模式都对不上；温斯顿那次的教训是模式标签，这次两边按模式对齐仍不一致，留空'
-  decision: pending
-  reason: null
-  scope: null
+  decision: needs_revision
+  reason: OverFast 325 与 wiki 425（职责队列）按模式对齐后仍不一致，不像温斯顿那次的模式标签问题。保持留空，F3/R10 相关项继续 NOT_RUN；需要第三个来源或官方英雄页核对后才填
+  scope: dmon hitpoints.health
 - source: reports/2026-09-08_dmon.json
   hero: dmon
   date: '2026-09-08'
   item: 'P0_provenance_status: open source conflict on abilities.propulsors.cost_pct_s: {''patch_notes_official'': 30, ''wiki_fandom'': 25} — 补丁原文写 "Fuel drain rate 25 → 30"，无单位；wiki 字段为 "25% per second"。取补丁值，但"drain
     rate"是否就是 wiki 的 energy cost 字段待确认'
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: 补丁原文 fuel drain rate 25→30 无单位；wiki 该技能唯一的资源消耗字段是 energy cost 25% per second，两者数值吻合，映射到 cost_pct_s 可接受。冲突记录保留 REVIEW，待官方英雄页或后续补丁给出单位后关闭
+  scope: dmon abilities.propulsors.cost_pct_s
 - source: reports/2026-09-08_dmon.json
   hero: dmon
   date: '2026-09-08'
   item: 'F5_direction_vs_declared: abilities.call_mech.duration_s: field semantics ''ambiguous'' — direction cannot be machine-judged; declared=buff, reason=''Transformation duration has been reduced from
     1.95 to 0.95 seconds；duration_s 语义为 ambiguous，按上下文（缩短变形时间以匹配 D.Va，属增强）判为 buff。'''
-  decision: pending
-  reason: null
-  scope: null
+  decision: resolved
+  reason: '同 #0：变形时间为自身硬直，变短=增强，执行方声明 buff 正确'
+  scope: dmon abilities.call_mech.duration_s（F5 语义 ambiguous）
 - source: reports/2026-09-08_dmon.json
   hero: dmon
   date: '2026-09-08'
   item: 'R2_ttk_delta_or_reload_breakpoint: plasma_saber vs 250hp body: TTK 1.974s → 2.632s (+33.3%)'
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: 等离子剑 65→60 使打 250 血从 4 刀变 5 刀、TTK 上升，是官方明说的抵消性削弱，方向与幅度均符合注释
+  scope: dmon weapons.plasma_saber（R2，2026-09-08）
 - source: reports/2026-09-08_dmon.json
   hero: dmon
   date: '2026-09-08'
   item: 'R5_falloff_window_delta: portable_fusion_repeater: window 10m → 20m (+100.0%); start 30→20, end 40→40 [endpoints moved]'
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: 衰减窗口 10→20 m 是起点 30→20、终点 40 不变的结果，对应官方“reduce effectiveness at longer distances”；执行方已对 falloff_end_m 给 keep 处置
+  scope: dmon weapons.portable_fusion_repeater falloff（R5，2026-09-08）
 - source: reports/2026-09-08_dmon.json
   hero: dmon
   date: '2026-09-08'
   item: 'R9_shots_to_kill_breakpoint: plasma_saber vs 250hp body: 4 → 5 shot events'
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: '同 #15，射击次数断点 4→5 是该削弱的直接后果'
+  scope: dmon weapons.plasma_saber（R9，2026-09-08）
 - source: reports/2026-09-17_dmon.json
   hero: dmon
   date: '2026-09-17'
   item: 'R6_cooldown_step: fusion_repeater: cooldown 4s → 5s (Δ1.00s, 25.0%)'
-  decision: pending
-  reason: null
-  scope: null
+  decision: accepted
+  reason: 聚变连发冷却 4→5 s（+25%）触发相对阈值。09-17 无官方注释，但该英雄同期五条改动全为削弱，与审核方反推一致；接受为有意削弱
+  scope: dmon abilities.fusion_repeater.cooldown_s（R6，2026-09-17）
+_filled:
+  by: assistant (Claude), at the owner's instruction on 2026-09-23
+  owner_sign_off: pending — see docs/SIGN_OFF_CHECKLIST.md §B
+  note: 决定内容由助手代填，理由逐条可查；这些不是官方平衡口径，也不构成对游戏设计的判断

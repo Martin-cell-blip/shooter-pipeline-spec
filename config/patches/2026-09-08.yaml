@@ -48,7 +48,7 @@ entries:
     intent: >-
       Developer Comments: Wuyang's empowered healing resource can be limiting when responding to sustained
       damage. We're increasing its regeneration rate to provide more frequent access to empowered healing.
-    direction: buff
+    direction: mixed       # 2026-09-23 由 buff 改为 mixed：视线超时 5→3 按字段语义为削弱，开发者注释未解释（decisions #5）
     changes:
       - {field: abilities.restorative_stream.regen_pct_s, from: 12.5, to: 15, unit: pct_per_s, text: "Regeneration rate increased from 12.5% to 15% per second."}
       - {field: abilities.restorative_stream.los_timeout_s, from: 5, to: 3, unit: s, text: "Line of sight timeout reduced from 5 to 3 seconds."}
