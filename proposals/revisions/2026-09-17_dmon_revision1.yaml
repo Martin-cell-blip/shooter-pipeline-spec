@@ -1,0 +1,43 @@
+proposal_id: 2026-09-17_dmon_codex_revision1
+before: fixtures/2026-09-17_before
+heroes:
+  dmon:
+    overall_direction: nerf
+    mixed_rationale: null
+    changes:
+    - path: hitpoints_by_mode.v5.armor
+      from: 325
+      to: 275
+      expected_direction: nerf
+      why: Armor reduced from 325 to 275 (5v5).
+      mode: 5v5
+    - path: hitpoints_by_mode.v6.armor
+      from: 300
+      to: 250
+      expected_direction: nerf
+      why: Armor reduced from 300 to 250 (6v6).
+      mode: 6v6
+    - path: abilities.propulsors.cost_pct_s
+      from: 25
+      to: 30
+      expected_direction: nerf
+      why: 'Propulsors: Fuel drain rate increased from 25 to 30.'
+    - path: abilities.fusion_repeater.damage
+      from: 16
+      to: 15
+      expected_direction: nerf
+      why: 'Fusion Repeater: Damage reduced from 16 to 15.'
+    - path: abilities.fusion_repeater.cooldown_s
+      from: 4
+      to: 5
+      expected_direction: nerf
+      why: 'Fusion Repeater: Cooldown increased from 4 to 5 seconds.'
+    linked_dispositions: {}
+    unmapped:
+    - '- Damage per bullet reduced from 45 to 36.'
+revision:
+  kind: assistant_manual_revision
+  source: proposals/agent/2026-09-17_dmon_run2.yaml
+  date: '2026-09-23'
+  owner_sign_off: pending
+  note: 仅去除两条已经映射的重复 unmapped；不改原始模型输出，不关闭来源缺口

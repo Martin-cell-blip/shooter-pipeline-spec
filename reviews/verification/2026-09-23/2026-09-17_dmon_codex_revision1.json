@@ -1,0 +1,593 @@
+{
+  "summary": {
+    "counts": {
+      "REVIEW": 3,
+      "NOT_RUN": 10,
+      "PASS": 26
+    },
+    "exit_code": 0,
+    "final": "READY_FOR_HUMAN_REVIEW",
+    "exception_not_run": 0
+  },
+  "results": [
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "open source conflict on hitpoints.health: {'overfast_api': 325, 'wiki_fandom': '275 (Open queue) / 425 (Role queue) / 175 (Pilot)'} — OverFast 的 325 与 wiki 任一模式都对不上；温斯顿那次的教训是模式标签，这次两边按模式对齐仍不一致，留空",
+      "records": {
+        "field": "hitpoints.health"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "open source conflict on abilities.propulsors.cost_pct_s: {'patch_notes_official': 30, 'wiki_fandom': 25} — 补丁原文写 \"Fuel drain rate 25 → 30\"，无单位；wiki 字段为 \"25% per second\"。取补丁值，但\"drain rate\"是否就是 wiki 的 energy cost 字段待确认",
+      "records": {
+        "field": "abilities.propulsors.cost_pct_s"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "missing field abilities.power_barrier.cast_time_s: 09-08 官方「Cast time decreased from 0.065s to 0.016s」，wiki 该技能无施法时间字段，无法核对改动后值",
+      "records": {
+        "field": "abilities.power_barrier.cast_time_s"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "missing field 09-17 General「Damage per bullet reduced from 45 to 36」: 无法映射到任何已知武器（Portable Fusion Repeater 为 12、Fusion Repeater 为 16→15）；疑为某 Perk 或未收录字段，留待人工",
+      "records": {
+        "field": "09-17 General「Damage per bullet reduced from 45 to 36」"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "missing field hitpoints.health: 见 conflicts",
+      "records": {
+        "field": "hitpoints.health"
+      }
+    },
+    {
+      "check": "F1_schema_bounds",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "all numeric fields within project bounds",
+      "records": {}
+    },
+    {
+      "check": "F2_falloff_structure",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "falloff structure consistent for all weapons",
+      "records": {}
+    },
+    {
+      "check": "F3_hitpoints_sum",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "hitpoints is null (open conflict or missing) — no numeric judgement",
+      "records": {}
+    },
+    {
+      "check": "F4_linked_disposition",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "every touched linked pair has a disposition record",
+      "records": {}
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "hitpoints_by_mode.v5.armor: 325→275 = nerf, matches declaration",
+      "records": {
+        "path": "hitpoints_by_mode.v5.armor"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "hitpoints_by_mode.v6.armor: 300→250 = nerf, matches declaration",
+      "records": {
+        "path": "hitpoints_by_mode.v6.armor"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "abilities.propulsors.cost_pct_s: 25→30 = nerf, matches declaration",
+      "records": {
+        "path": "abilities.propulsors.cost_pct_s"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "abilities.fusion_repeater.damage: 16→15 = nerf, matches declaration",
+      "records": {
+        "path": "abilities.fusion_repeater.damage"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "abilities.fusion_repeater.cooldown_s: 4→5 = nerf, matches declaration",
+      "records": {
+        "path": "abilities.fusion_repeater.cooldown_s"
+      }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "plasma_saber: ammo or reload_s missing (full-cycle DPS needs both)",
+      "records": {
+        "weapon": "plasma_saber"
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "portable_fusion_repeater: ammo or reload_s missing (full-cycle DPS needs both)",
+      "records": {
+        "weapon": "portable_fusion_repeater"
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "plasma_saber vs 175hp body: TTK 1.316s → 1.316s (+0.0%)",
+      "records": {
+        "weapon": "plasma_saber",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.3157894736842106,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": null,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.3157894736842106,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": null,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "plasma_saber vs 250hp body: TTK 2.632s → 2.632s (+0.0%)",
+      "records": {
+        "weapon": "plasma_saber",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 2.6315789473684212,
+          "shots": 5,
+          "requires_reload": false,
+          "shots_per_magazine": null,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 2.6315789473684212,
+          "shots": 5,
+          "requires_reload": false,
+          "shots_per_magazine": null,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 175hp body: TTK 1.792s → 1.792s (+0.0%)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.7918853193395623,
+          "shots": 15,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.7918853193395623,
+          "shots": 15,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 175hp head: TTK 0.896s → 0.896s (+0.0%)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 175,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 0.8959426596697811,
+          "shots": 8,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.8959426596697811,
+          "shots": 8,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 250hp body: TTK 2.560s → 2.560s (+0.0%)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 2.559836170485089,
+          "shots": 21,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 2.559836170485089,
+          "shots": 21,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 250hp head: TTK 1.280s → 1.280s (+0.0%)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 250,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 1.2799180852425445,
+          "shots": 11,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.2799180852425445,
+          "shots": 11,
+          "requires_reload": false,
+          "shots_per_magazine": 30,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "plasma_saber: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "plasma_saber",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "damage_head": 24,
+          "conditions": "none (plain shot, distance within falloff start)"
+        }
+      }
+    },
+    {
+      "check": "R4_change_count_stats",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "changes: {'buff': 0, 'nerf': 5, 'ambiguous': 0} (display only, no threshold)",
+      "records": {
+        "buff": 0,
+        "nerf": 5,
+        "ambiguous": 0
+      }
+    },
+    {
+      "check": "R5_falloff_window_delta",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater: window 20m → 20m (+0.0%); start 20→20, end 40→40",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "before": {
+          "status": "OK",
+          "value": 20,
+          "has_falloff": true,
+          "start": 20,
+          "end": 40
+        },
+        "after": {
+          "status": "OK",
+          "value": 20,
+          "has_falloff": true,
+          "start": 20,
+          "end": 40
+        },
+        "rel_change": 0.0,
+        "endpoints_moved": false
+      }
+    },
+    {
+      "check": "R6_cooldown_step",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "fusion_repeater: cooldown 4s → 5s (Δ1.00s, 25.0%)",
+      "records": {
+        "ability": "fusion_repeater",
+        "mode": "",
+        "abs": 1,
+        "rel": 0.25,
+        "threshold": {
+          "abs_s": 2,
+          "rel": 0.2
+        }
+      }
+    },
+    {
+      "check": "R8_mixed_direction_rationale",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "single direction {'nerf'}",
+      "records": {
+        "overall": "nerf"
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "plasma_saber vs 175hp body: 3 → 3 shot events",
+      "records": {
+        "weapon": "plasma_saber",
+        "target_hp": 175,
+        "location": "body",
+        "before": 3,
+        "after": 3,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "plasma_saber vs 250hp body: 5 → 5 shot events",
+      "records": {
+        "weapon": "plasma_saber",
+        "target_hp": 250,
+        "location": "body",
+        "before": 5,
+        "after": 5,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 175hp body: 15 → 15 shot events",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 175,
+        "location": "body",
+        "before": 15,
+        "after": 15,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 175hp head: 8 → 8 shot events",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 175,
+        "location": "head",
+        "before": 8,
+        "after": 8,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 250hp body: 21 → 21 shot events",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 250,
+        "location": "body",
+        "before": 21,
+        "after": 21,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "portable_fusion_repeater vs 250hp head: 11 → 11 shot events",
+      "records": {
+        "weapon": "portable_fusion_repeater",
+        "target_hp": 250,
+        "location": "head",
+        "before": 11,
+        "after": 11,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "propulsors: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "propulsors",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "fusion_repeater: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "fusion_repeater",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "limit_break: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "limit_break",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "dmon",
+      "status": "NOT_RUN",
+      "detail": "call_mech: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "call_mech",
+        "mode": ""
+      }
+    }
+  ]
+}
