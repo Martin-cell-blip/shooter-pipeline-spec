@@ -36,6 +36,9 @@ fail_rules:
   - id: F5_direction_vs_declared
     what: 提案逐条声明 expected_direction；字段 semantics 为 buff/nerf 且实际增减与声明相反 → FAIL
     note: semantics=ambiguous 或声明缺失 → REVIEW；开发者注释的自然语言不直接转成方向
+  - id: F7_unmapped_vs_changes
+    what: 提案自洽——同一原文行不得既作为某条改动的依据又列在 unmapped
+    note: 2026-09-22 run 2 D.Mon 09-17 出现；无需金标即可判定
   - id: F6_no_silent_null
     what: 空值不参与任何数值比较；依赖空值的计算报 NOT_RUN
 

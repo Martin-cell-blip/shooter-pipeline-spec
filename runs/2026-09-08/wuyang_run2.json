@@ -1,0 +1,27 @@
+{
+  "date": "2026-09-08",
+  "hero": "wuyang",
+  "run": 2,
+  "model_requested": "deepseek-chat",
+  "prompt_sha256": "8454d6aae6d47cc752d57453d493db8e99388d0d17c5703bb85348bc935047c1",
+  "system": "你是射击游戏数值管线里的配置改动执行者。任务：把官方补丁说明的自然语言条目翻译成对配置表的精确改动提案。你只负责提取与映射，不负责判断改动是否合理；不确定的映射不要猜，放进 unmapped。",
+  "user": "# 补丁原文（2026-09-08）\n## Wuyang\n### Restorative Stream\n- Regeneration rate increased from 12.5% to 15% per second.\n- Line of sight timeout reduced from 5 to 3 seconds.\nDeveloper Comments: Wuyang's empowered healing resource can be limiting when responding to sustained damage. We're increasing its regeneration rate to provide more frequent access to empowered healing.\n\n# 改动前快照（wuyang）\n```yaml\nid: wuyang\nname_en: Wuyang\nname_zh: 吴阳\nrole: support\nsubrole: survivor\nmode_split: false\nhitpoints:\n  health: 225\n  armor: 0\n  shields: 0\n  total: 225\nweapons:\n- id: xuanwu_staff\n  slot: primary\n  hit_type: projectile\n  damage_max: 30\n  headshot_mult: 1\n  rate_of_fire: 3\n  ammo_consumption: 1\n  ammo: 20\n  reload_s: 1.5\n  projectile_speed: 25\nabilities:\n- id: restorative_stream\n  kind: ability\n  healing_per_s: 20\n  bonus_healing_per_s: 55\n  cost_pct_s: 33.3\n  regen_pct_s: 12.5\n  los_timeout_s: 5\n  max_range_m: 20\n- id: rushing_torrent\n  kind: ability\n  cooldown_s: 8\n  duration_s: 3.5\n- id: guardian_wave\n  kind: ability\n  cooldown_s: 14\n  damage: 80\n  healing: 80\n  duration_s: 3\n  max_range_m: 30\n- id: tidal_blast\n  kind: ultimate\n  ult_cost: 2800\n  damage: 100\n  healing: 250\n  radius_m: 7.5\n  max_range_m: 35\n```\n\n# 字段语义\n字段方向语义（higher_is：数值变大对该英雄是 buff 还是 nerf；ambiguous 需按上下文判断）：\n- weapon: damage_max=buff, damage_min=buff, healing_per_shot=buff, rate_of_fire=buff, ammo=buff, reload_s=nerf, spread_deg=nerf, projectile_speed=buff, max_range_m=buff, falloff_start_m=buff, falloff_end_m=buff, headshot_mult=buff, pellets_per_shot=buff\n- ability: cooldown_s=nerf, charges=buff, damage=buff, healing=buff, radius_m=buff, max_range_m=buff, ult_cost=nerf, barrier_health=buff, deployable_health=buff, threshold_pct=buff, regen_pct_s=buff, cost_pct_s=nerf, los_timeout_s=buff, healing_per_s=buff, bonus_healing_per_s=buff, cast_time_s=nerf, duration_s=ambiguous\n- hitpoints: health=buff, armor=buff, shields=buff\n联动字段对（改其一须对另一个给处置记录）：ammo+reload_s; damage_max+damage_min; falloff_start_m+falloff_end_m\n单位：距离 m，时间 s，射速 shots/s，速度 m/s。\n\n# 提案格式\n输出一个 YAML 文档，且只输出 YAML（不要 markdown 围栏、不要解释）。结构：\nproposal_id: <string>\nbefore: fixtures/2026-09-08_before\nheroes:\n  <hero_id>:\n    overall_direction: buff | nerf | mixed\n    mixed_rationale: <string 或 null>        # 既有 buff 又有 nerf 时必须说明对冲理由\n    changes:\n      - path: <weapons.<weapon_id>.<field> | abilities.<ability_id>.<field>[.v5|.v6] | hitpoints.<field> | hitpoints_by_mode.<v5|v6>.<field>>\n        # 路径必须逐级照抄快照的键名和层级：快照是 hitpoints_by_mode: {v6: {armor: ...}} 就写 hitpoints_by_mode.v6.armor，不要自创 hitpoints.armor.v6\n        from: <number>                        # 必须等于改动前快照上的值\n        to: <number>\n        expected_direction: buff | nerf | ambiguous\n        why: <string，引用补丁原文中的依据>\n        mode: 5v5 | 6v6                       # 仅当条目标注了模式\n    linked_dispositions:                      # 若改动了联动对中的一个字段，且另一个字段在快照里存在，就以【另一个字段（伙伴）的路径】为键给处置：keep | changed | \"not_needed: <理由>\"\n      <partner_path>: <disposition>           # 例：改了 weapons.x.falloff_start_m → 键写 weapons.x.falloff_end_m: keep（不要把键写成被改的那个字段）\n    unmapped:                                 # 只收「- 」开头的条目行中无法映射到快照任何字段的那些，原样列出，不要硬凑；开发者注释（Developer Comments）不是条目，不要放进来\n      - <原文行>\n规则：\n- path 必须是改动前快照中真实存在的键；不存在就放进 unmapped。\n- from 取快照上的值；若原文的 from 与快照不一致，仍按快照写 from，并在 why 里说明不一致。\n- expected_direction 按字段方向语义判断；语义为 ambiguous 的字段按原文上下文判断并在 why 说明。\n- 不要修改与原文无关的字段。",
+  "content": "proposal_id: 2026-09-08_wuyang_restorative_stream\nbefore: fixtures/2026-09-08_before\nheroes:\n  wuyang:\n    overall_direction: buff\n    mixed_rationale: null\n    changes:\n      - path: abilities.restorative_stream.regen_pct_s\n        from: 12.5\n        to: 15\n        expected_direction: buff\n        why: \"Regeneration rate increased from 12.5% to 15% per second.\"\n      - path: abilities.restorative_stream.los_timeout_s\n        from: 5\n        to: 3\n        expected_direction: nerf\n        why: \"Line of sight timeout reduced from 5 to 3 seconds.\"\n    linked_dispositions: {}\n    unmapped: []",
+  "model": "deepseek-flash",
+  "usage": {
+    "completion_tokens": 176,
+    "prompt_tokens": 1326,
+    "total_tokens": 1502,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 768
+    },
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 558
+  },
+  "started": "2026-09-22T15:01:59.706825+00:00",
+  "seconds": 1.427419,
+  "fenced_output": false,
+  "parse": "ok"
+}

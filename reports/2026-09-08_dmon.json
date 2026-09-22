@@ -1,22 +1,15 @@
 {
   "summary": {
     "counts": {
-      "PASS": 27,
-      "REVIEW": 3,
-      "NOT_RUN": 10
+      "REVIEW": 6,
+      "NOT_RUN": 10,
+      "PASS": 23
     },
     "exit_code": 0,
     "final": "READY_FOR_HUMAN_REVIEW",
     "exception_not_run": 0
   },
   "results": [
-    {
-      "check": "apply_vs_baseline",
-      "hero": "dmon",
-      "status": "PASS",
-      "detail": "applied snapshot matches baseline on every changed path",
-      "records": {}
-    },
     {
       "check": "P0_provenance_status",
       "hero": "dmon",
@@ -94,16 +87,7 @@
       "check": "F5_direction_vs_declared",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "hitpoints_by_mode.v5.armor: 325→275 = nerf, matches declaration",
-      "records": {
-        "path": "hitpoints_by_mode.v5.armor"
-      }
-    },
-    {
-      "check": "F5_direction_vs_declared",
-      "hero": "dmon",
-      "status": "PASS",
-      "detail": "hitpoints_by_mode.v6.armor: 300→250 = nerf, matches declaration",
+      "detail": "hitpoints_by_mode.v6.armor: 325→300 = nerf, matches declaration",
       "records": {
         "path": "hitpoints_by_mode.v6.armor"
       }
@@ -112,27 +96,36 @@
       "check": "F5_direction_vs_declared",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "abilities.propulsors.cost_pct_s: 25→30 = nerf, matches declaration",
+      "detail": "weapons.plasma_saber.damage_max: 65→60 = nerf, matches declaration",
       "records": {
-        "path": "abilities.propulsors.cost_pct_s"
+        "path": "weapons.plasma_saber.damage_max"
       }
     },
     {
       "check": "F5_direction_vs_declared",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "abilities.fusion_repeater.damage: 16→15 = nerf, matches declaration",
+      "detail": "weapons.portable_fusion_repeater.spread_deg: 2→1.75 = buff, matches declaration",
       "records": {
-        "path": "abilities.fusion_repeater.damage"
+        "path": "weapons.portable_fusion_repeater.spread_deg"
       }
     },
     {
       "check": "F5_direction_vs_declared",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "abilities.fusion_repeater.cooldown_s: 4→5 = nerf, matches declaration",
+      "detail": "weapons.portable_fusion_repeater.falloff_start_m: 30→20 = nerf, matches declaration",
       "records": {
-        "path": "abilities.fusion_repeater.cooldown_s"
+        "path": "weapons.portable_fusion_repeater.falloff_start_m"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "dmon",
+      "status": "REVIEW",
+      "detail": "abilities.call_mech.duration_s: field semantics 'ambiguous' — direction cannot be machine-judged; declared=buff, reason='Transformation duration has been reduced from 1.95 to 0.95 seconds；duration_s 语义为 ambiguous，按上下文（缩短变形时间以匹配 D.Va，属增强）判为 buff。'",
+      "records": {
+        "path": "abilities.call_mech.duration_s"
       }
     },
     {
@@ -200,16 +193,16 @@
     {
       "check": "R2_ttk_delta_or_reload_breakpoint",
       "hero": "dmon",
-      "status": "PASS",
-      "detail": "plasma_saber vs 250hp body: TTK 2.632s → 2.632s (+0.0%)",
+      "status": "REVIEW",
+      "detail": "plasma_saber vs 250hp body: TTK 1.974s → 2.632s (+33.3%)",
       "records": {
         "weapon": "plasma_saber",
         "target_hp": 250,
         "location": "body",
         "before": {
           "status": "OK",
-          "value": 2.6315789473684212,
-          "shots": 5,
+          "value": 1.9736842105263157,
+          "shots": 4,
           "requires_reload": false,
           "shots_per_magazine": null,
           "distance_m": 0,
@@ -230,7 +223,7 @@
           "target_hp": 250,
           "location": "body"
         },
-        "rel_change": 0.0,
+        "rel_change": 0.3333333333333335,
         "reload_flip": false
       }
     },
@@ -415,25 +408,25 @@
       "check": "R4_change_count_stats",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "changes: {'buff': 0, 'nerf': 5, 'ambiguous': 0} (display only, no threshold)",
+      "detail": "changes: {'buff': 2, 'nerf': 3, 'ambiguous': 0} (display only, no threshold)",
       "records": {
-        "buff": 0,
-        "nerf": 5,
+        "buff": 2,
+        "nerf": 3,
         "ambiguous": 0
       }
     },
     {
       "check": "R5_falloff_window_delta",
       "hero": "dmon",
-      "status": "PASS",
-      "detail": "portable_fusion_repeater: window 20m → 20m (+0.0%); start 20→20, end 40→40",
+      "status": "REVIEW",
+      "detail": "portable_fusion_repeater: window 10m → 20m (+100.0%); start 30→20, end 40→40 [endpoints moved]",
       "records": {
         "weapon": "portable_fusion_repeater",
         "before": {
           "status": "OK",
-          "value": 20,
+          "value": 10,
           "has_falloff": true,
-          "start": 20,
+          "start": 30,
           "end": 40
         },
         "after": {
@@ -443,33 +436,24 @@
           "start": 20,
           "end": 40
         },
-        "rel_change": 0.0,
-        "endpoints_moved": false
+        "rel_change": 1.0,
+        "endpoints_moved": true
       }
     },
     {
       "check": "R6_cooldown_step",
       "hero": "dmon",
-      "status": "REVIEW",
-      "detail": "fusion_repeater: cooldown 4s → 5s (Δ1.00s, 25.0%)",
-      "records": {
-        "ability": "fusion_repeater",
-        "mode": "",
-        "abs": 1,
-        "rel": 0.25,
-        "threshold": {
-          "abs_s": 2,
-          "rel": 0.2
-        }
-      }
+      "status": "PASS",
+      "detail": "no cooldown changes",
+      "records": {}
     },
     {
       "check": "R8_mixed_direction_rationale",
       "hero": "dmon",
       "status": "PASS",
-      "detail": "single direction {'nerf'}",
+      "detail": "mixed, rationale given: '生存与机动性削弱（护甲、Plasma Saber 伤害、Call Mech 变形时间）与武器精度增强（Portable Fusion Repeater 散布与衰减起点）并存，方向对冲。' (local directions only; net effect not machine-judged)",
       "records": {
-        "overall": "nerf"
+        "overall": "mixed"
       }
     },
     {
@@ -489,13 +473,13 @@
     {
       "check": "R9_shots_to_kill_breakpoint",
       "hero": "dmon",
-      "status": "PASS",
-      "detail": "plasma_saber vs 250hp body: 5 → 5 shot events",
+      "status": "REVIEW",
+      "detail": "plasma_saber vs 250hp body: 4 → 5 shot events",
       "records": {
         "weapon": "plasma_saber",
         "target_hp": 250,
         "location": "body",
-        "before": 5,
+        "before": 4,
         "after": 5,
         "pellets_per_event": 1
       }

@@ -27,15 +27,16 @@ heroes:
     overall_direction: buff | nerf | mixed
     mixed_rationale: <string 或 null>        # 既有 buff 又有 nerf 时必须说明对冲理由
     changes:
-      - path: <weapons.<weapon_id>.<field> | abilities.<ability_id>.<field>[.v5|.v6] | hitpoints.<field>>
+      - path: <weapons.<weapon_id>.<field> | abilities.<ability_id>.<field>[.v5|.v6] | hitpoints.<field> | hitpoints_by_mode.<v5|v6>.<field>>
+        # 路径必须逐级照抄快照的键名和层级：快照是 hitpoints_by_mode: {v6: {armor: ...}} 就写 hitpoints_by_mode.v6.armor，不要自创 hitpoints.armor.v6
         from: <number>                        # 必须等于改动前快照上的值
         to: <number>
         expected_direction: buff | nerf | ambiguous
         why: <string，引用补丁原文中的依据>
         mode: 5v5 | 6v6                       # 仅当条目标注了模式
-    linked_dispositions:                      # 若改动了 schema.linked 中某对字段之一，对另一个给处置：keep | changed | "not_needed: <理由>"
-      <path>: <disposition>
-    unmapped:                                 # 原文中无法映射到快照任何字段的条目，原样列出，不要硬凑
+    linked_dispositions:                      # 若改动了联动对中的一个字段，且另一个字段在快照里存在，就以【另一个字段（伙伴）的路径】为键给处置：keep | changed | "not_needed: <理由>"
+      <partner_path>: <disposition>           # 例：改了 weapons.x.falloff_start_m → 键写 weapons.x.falloff_end_m: keep（不要把键写成被改的那个字段）
+    unmapped:                                 # 只收「- 」开头的条目行中无法映射到快照任何字段的那些，原样列出，不要硬凑；开发者注释（Developer Comments）不是条目，不要放进来
       - <原文行>
 规则：
 - path 必须是改动前快照中真实存在的键；不存在就放进 unmapped。

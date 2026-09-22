@@ -1,0 +1,397 @@
+{
+  "summary": {
+    "counts": {
+      "NOT_RUN": 6,
+      "PASS": 19
+    },
+    "exit_code": 0,
+    "final": "READY_FOR_HUMAN_REVIEW",
+    "exception_not_run": 0
+  },
+  "results": [
+    {
+      "check": "P0_provenance_status",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "missing field abilities.particle_barrier.cooldown_s.v6: 补丁只给 5v5 值，6v6 未查到可靠出处",
+      "records": {
+        "field": "abilities.particle_barrier.cooldown_s.v6"
+      }
+    },
+    {
+      "check": "P0_provenance_status",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "missing field weapons.particle_cannon.energy_scaling: 能量 0%→100% 的伤害缩放（95→175 /s、55→110）未建模，schema 无能量扩展",
+      "records": {
+        "field": "weapons.particle_cannon.energy_scaling"
+      }
+    },
+    {
+      "check": "F1_schema_bounds",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "all numeric fields within project bounds",
+      "records": {}
+    },
+    {
+      "check": "F2_falloff_structure",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "falloff structure consistent for all weapons",
+      "records": {}
+    },
+    {
+      "check": "F3_hitpoints_sum",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "total 550 = sum of components",
+      "records": {}
+    },
+    {
+      "check": "F4_linked_disposition",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "every touched linked pair has a disposition record",
+      "records": {}
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "abilities.particle_barrier.cooldown_s.v5: 11→12 = nerf, matches declaration",
+      "records": {
+        "path": "abilities.particle_barrier.cooldown_s.v5"
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon: full-cycle body DPS 73.08 → 73.08 (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon",
+        "before": {
+          "status": "OK",
+          "value": 73.07692307692308,
+          "fire_s": 5.0,
+          "reload_s": 1.5
+        },
+        "after": {
+          "status": "OK",
+          "value": 73.07692307692308,
+          "fire_s": 5.0,
+          "reload_s": 1.5
+        },
+        "rel_change": 0.0,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt: full-cycle body DPS 40.00 → 40.00 (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "before": {
+          "status": "OK",
+          "value": 40.0,
+          "shots_per_magazine": 4,
+          "fire_s": 4.0,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 55
+        },
+        "after": {
+          "status": "OK",
+          "value": 40.0,
+          "shots_per_magazine": 4,
+          "fire_s": 4.0,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 55
+        },
+        "rel_change": 0.0,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon vs 175hp body: TTK 1.842s → 1.842s (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.8421052631578947,
+          "requires_reload": false,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.8421052631578947,
+          "requires_reload": false,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon vs 250hp body: TTK 2.632s → 2.632s (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 2.6315789473684212,
+          "requires_reload": false,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 2.6315789473684212,
+          "requires_reload": false,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt vs 175hp body: TTK 3.000s → 3.000s (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 3.0,
+          "shots": 4,
+          "requires_reload": false,
+          "shots_per_magazine": 4,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 3.0,
+          "shots": 4,
+          "requires_reload": false,
+          "shots_per_magazine": 4,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt vs 250hp body: TTK 5.500s → 5.500s (+0.0%)",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 5.5,
+          "shots": 5,
+          "requires_reload": true,
+          "shots_per_magazine": 4,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 5.5,
+          "shots": 5,
+          "requires_reload": true,
+          "shots_per_magazine": 4,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "particle_cannon",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R4_change_count_stats",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "changes: {'buff': 0, 'nerf': 1, 'ambiguous': 0} (display only, no threshold)",
+      "records": {
+        "buff": 0,
+        "nerf": 1,
+        "ambiguous": 0
+      }
+    },
+    {
+      "check": "R5_falloff_window_delta",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "no falloff weapons",
+      "records": {}
+    },
+    {
+      "check": "R6_cooldown_step",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_barrier[v5]: cooldown 11s → 12s (Δ1.00s, 9.1%)",
+      "records": {
+        "ability": "particle_barrier",
+        "mode": "v5",
+        "abs": 1,
+        "rel": 0.09090909090909091,
+        "threshold": {
+          "abs_s": 2,
+          "rel": 0.2
+        }
+      }
+    },
+    {
+      "check": "R8_mixed_direction_rationale",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "single direction {'nerf'}",
+      "records": {
+        "overall": "nerf"
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt vs 175hp body: 4 → 4 shot events",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "target_hp": 175,
+        "location": "body",
+        "before": 4,
+        "after": 4,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "particle_cannon_alt vs 250hp body: 5 → 5 shot events",
+      "records": {
+        "weapon": "particle_cannon_alt",
+        "target_hp": 250,
+        "location": "body",
+        "before": 5,
+        "after": 5,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "particle_barrier[v5]: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "particle_barrier",
+        "mode": "v5"
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "particle_barrier[v6]: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "particle_barrier",
+        "mode": "v6"
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "projected_barrier: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "projected_barrier",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "zarya",
+      "status": "NOT_RUN",
+      "detail": "graviton_surge: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "graviton_surge",
+        "mode": ""
+      }
+    }
+  ]
+}

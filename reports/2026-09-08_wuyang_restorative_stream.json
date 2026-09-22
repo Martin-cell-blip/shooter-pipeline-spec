@@ -1,0 +1,264 @@
+{
+  "summary": {
+    "counts": {
+      "NOT_RUN": 3,
+      "PASS": 15,
+      "REVIEW": 1
+    },
+    "exit_code": 0,
+    "final": "READY_FOR_HUMAN_REVIEW",
+    "exception_not_run": 0
+  },
+  "results": [
+    {
+      "check": "P0_provenance_status",
+      "hero": "wuyang",
+      "status": "NOT_RUN",
+      "detail": "missing field weapons.xuanwu_staff.charged: 蓄力档（直击 40 / 溅射 60、消耗 2 弹）未建模，schema 无蓄力扩展",
+      "records": {
+        "field": "weapons.xuanwu_staff.charged"
+      }
+    },
+    {
+      "check": "F1_schema_bounds",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "all numeric fields within project bounds",
+      "records": {}
+    },
+    {
+      "check": "F2_falloff_structure",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "falloff structure consistent for all weapons",
+      "records": {}
+    },
+    {
+      "check": "F3_hitpoints_sum",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "total 225 = sum of components",
+      "records": {}
+    },
+    {
+      "check": "F4_linked_disposition",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "every touched linked pair has a disposition record",
+      "records": {}
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "abilities.restorative_stream.regen_pct_s: 12.5→15 = buff, matches declaration",
+      "records": {
+        "path": "abilities.restorative_stream.regen_pct_s"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "abilities.restorative_stream.los_timeout_s: 5→3 = nerf, matches declaration",
+      "records": {
+        "path": "abilities.restorative_stream.los_timeout_s"
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff: full-cycle body DPS 73.47 → 73.47 (+0.0%)",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "before": {
+          "status": "OK",
+          "value": 73.46938775510203,
+          "shots_per_magazine": 20,
+          "fire_s": 6.666666666666667,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 90
+        },
+        "after": {
+          "status": "OK",
+          "value": 73.46938775510203,
+          "shots_per_magazine": 20,
+          "fire_s": 6.666666666666667,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 90
+        },
+        "rel_change": 0.0,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff vs 175hp body: TTK 1.667s → 1.667s (+0.0%)",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.6666666666666667,
+          "shots": 6,
+          "requires_reload": false,
+          "shots_per_magazine": 20,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.6666666666666667,
+          "shots": 6,
+          "requires_reload": false,
+          "shots_per_magazine": 20,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff vs 250hp body: TTK 2.667s → 2.667s (+0.0%)",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 2.6666666666666665,
+          "shots": 9,
+          "requires_reload": false,
+          "shots_per_magazine": 20,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 2.6666666666666665,
+          "shots": 9,
+          "requires_reload": false,
+          "shots_per_magazine": 20,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R4_change_count_stats",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "changes: {'buff': 1, 'nerf': 1, 'ambiguous': 0} (display only, no threshold)",
+      "records": {
+        "buff": 1,
+        "nerf": 1,
+        "ambiguous": 0
+      }
+    },
+    {
+      "check": "R5_falloff_window_delta",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "no falloff weapons",
+      "records": {}
+    },
+    {
+      "check": "R6_cooldown_step",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "no cooldown changes",
+      "records": {}
+    },
+    {
+      "check": "R8_mixed_direction_rationale",
+      "hero": "wuyang",
+      "status": "REVIEW",
+      "detail": "mixed buff+nerf without mixed_rationale",
+      "records": {}
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff vs 175hp body: 6 → 6 shot events",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "target_hp": 175,
+        "location": "body",
+        "before": 6,
+        "after": 6,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "xuanwu_staff vs 250hp body: 9 → 9 shot events",
+      "records": {
+        "weapon": "xuanwu_staff",
+        "target_hp": 250,
+        "location": "body",
+        "before": 9,
+        "after": 9,
+        "pellets_per_event": 1
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "wuyang",
+      "status": "NOT_RUN",
+      "detail": "rushing_torrent: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "rushing_torrent",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "wuyang",
+      "status": "NOT_RUN",
+      "detail": "guardian_wave: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "guardian_wave",
+        "mode": ""
+      }
+    }
+  ]
+}

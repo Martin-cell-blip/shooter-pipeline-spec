@@ -28,7 +28,9 @@ def test_golden_proposal_has_no_fail():
     p = load_proposal("2026-09-08_official")
     res = run_proposal(SCHEMA, INV, p, load_hero_dir(p["before"]), load_hero_dir("baseline"))
     assert not [r for r in res if r["status"] == "FAIL"], [r["detail"] for r in res if r["status"] == "FAIL"]
-    assert statuses(res, "F3_hitpoints_sum") == ["PASS", "PASS"]  # 职责队列生命值已现场核验；空值行为由独立测试覆盖
+    f3 = {r["hero"]: r["status"] for r in res if r["check"] == "F3_hitpoints_sum"}
+    assert f3["winston"] == "PASS"     # 职责队列生命值已现场核验（6128ed6）
+    assert f3["dmon"] == "NOT_RUN"     # D.Mon 生命值冲突未关闭 → 留空不判错
 
 
 def test_bounds_fail_is_labelled_as_project_bound():

@@ -1,13 +1,12 @@
 {
   "summary": {
     "counts": {
-      "PASS": 127,
+      "PASS": 135,
       "REVIEW": 10,
-      "NOT_RUN": 30,
-      "FAIL": 2
+      "NOT_RUN": 30
     },
-    "exit_code": 1,
-    "final": "FAIL",
+    "exit_code": 0,
+    "final": "READY_FOR_HUMAN_REVIEW",
     "exception_not_run": 0
   },
   "results": [
@@ -99,6 +98,13 @@
       "records": {
         "path": "abilities.protection_suzu.radius_m"
       }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "kiriko",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
     },
     {
       "check": "R1_full_cycle_dps_delta",
@@ -523,6 +529,13 @@
       }
     },
     {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "winston",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
       "check": "R1_full_cycle_dps_delta",
       "hero": "winston",
       "status": "PASS",
@@ -894,6 +907,13 @@
       "records": {
         "path": "abilities.particle_barrier.cooldown_s.v5"
       }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
     },
     {
       "check": "R1_full_cycle_dps_delta",
@@ -1292,6 +1312,13 @@
       "records": {
         "path": "abilities.immortality_field.deployable_health"
       }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
     },
     {
       "check": "R1_full_cycle_dps_delta",
@@ -1727,13 +1754,18 @@
     {
       "check": "F5_direction_vs_declared",
       "hero": "wuyang",
-      "status": "FAIL",
-      "detail": "abilities.restorative_stream.los_timeout_s: 5→3 is a nerf by field semantics but declared buff",
+      "status": "PASS",
+      "detail": "abilities.restorative_stream.los_timeout_s: 5→3 = nerf, matches declaration",
       "records": {
-        "path": "abilities.restorative_stream.los_timeout_s",
-        "actual": "nerf",
-        "declared": "buff"
+        "path": "abilities.restorative_stream.los_timeout_s"
       }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
     },
     {
       "check": "R1_full_cycle_dps_delta",
@@ -1854,10 +1886,10 @@
       "check": "R4_change_count_stats",
       "hero": "wuyang",
       "status": "PASS",
-      "detail": "changes: {'buff': 2, 'nerf': 0, 'ambiguous': 0} (display only, no threshold)",
+      "detail": "changes: {'buff': 1, 'nerf': 1, 'ambiguous': 0} (display only, no threshold)",
       "records": {
-        "buff": 2,
-        "nerf": 0,
+        "buff": 1,
+        "nerf": 1,
         "ambiguous": 0
       }
     },
@@ -1879,9 +1911,9 @@
       "check": "R8_mixed_direction_rationale",
       "hero": "wuyang",
       "status": "PASS",
-      "detail": "single direction {'buff'}",
+      "detail": "mixed, rationale given: '开发者注释只解释了回复率提高（增强）；视线超时缩短按字段语义是收紧，注释未说明其用意——对冲理由缺失，留给 R8 报 REVIEW' (local directions only; net effect not machine-judged)",
       "records": {
-        "overall": "buff"
+        "overall": "mixed"
       }
     },
     {
@@ -2008,12 +2040,9 @@
     {
       "check": "F4_linked_disposition",
       "hero": "dmon",
-      "status": "FAIL",
-      "detail": "weapons.plasma_saber.damage_max changed but linked field weapons.plasma_saber.damage_min has no disposition (keep / changed / not_needed:<reason>)",
-      "records": {
-        "path": "weapons.plasma_saber.damage_max",
-        "partner": "weapons.plasma_saber.damage_min"
-      }
+      "status": "PASS",
+      "detail": "every touched linked pair has a disposition record",
+      "records": {}
     },
     {
       "check": "F5_direction_vs_declared",
@@ -2059,6 +2088,13 @@
       "records": {
         "path": "weapons.portable_fusion_repeater.falloff_start_m"
       }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "dmon",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
     },
     {
       "check": "R1_full_cycle_dps_delta",

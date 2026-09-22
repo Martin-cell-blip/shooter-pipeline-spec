@@ -112,7 +112,8 @@ def F3_hitpoints_sum(schema: dict, hero_id: str, after: dict) -> list[dict]:
 
 
 @_guard
-def F4_linked_disposition(schema: dict, hero_id: str, proposal_hero: dict) -> list[dict]:
+def F4_linked_disposition(schema: dict, hero_id: str, proposal_hero: dict, before: dict | None = None) -> list[dict]:
+    """伙伴字段在快照里不存在时（如近战武器没有 damage_min）不要求处置——run 1 金标缺陷 G2。"""
     linked = schema.get("weapon", {}).get("linked") or []
     changed = {c["path"] for c in proposal_hero.get("changes") or []}
     disp = proposal_hero.get("linked_dispositions") or {}
@@ -128,6 +129,8 @@ def F4_linked_disposition(schema: dict, hero_id: str, proposal_hero: dict) -> li
                 partner_path = f"{parts[0]}.{parts[1]}.{partner}"
                 if partner_path in changed:
                     continue  # 一起改了，本身就是处置
+                if before is not None and get_path(before, partner_path) is None:
+                    continue  # 快照里没有这个伙伴字段，无处置可言
                 d = disp.get(partner_path)
                 if not d:
                     out.append(_r("F4_linked_disposition", hero_id, FAIL,
@@ -171,6 +174,20 @@ def F5_direction_vs_declared(schema: dict, hero_id: str, proposal_hero: dict, be
         else:
             out.append(_r("F5_direction_vs_declared", hero_id, PASS, f"{path}: {frm}→{to} = {actual}, matches declaration", path=path))
     return out or [_r("F5_direction_vs_declared", hero_id, NOT_RUN, "no changes in proposal")]
+
+
+@_guard
+def F7_unmapped_vs_changes(schema: dict, hero_id: str, proposal_hero: dict) -> list[dict]:
+    """提案自洽：同一原文行不能既映射成改动又列在 unmapped（run 2 D.Mon 09-17 出现过）。不需要金标即可判。"""
+    import re as _re
+    def norm(x): return _re.sub(r"[^a-z0-9.]+", " ", str(x).lower()).strip().lstrip("- ").strip()
+    whys = [norm(c.get("why", "")) for c in proposal_hero.get("changes") or []]
+    out = []
+    for line in proposal_hero.get("unmapped") or []:
+        key = " ".join(norm(line).split()[:5])
+        if key and any(key in w for w in whys):
+            out.append(_r("F7_unmapped_vs_changes", hero_id, FAIL, f"line listed as unmapped but also used as basis of a change: {line!r}", line=line))
+    return out or [_r("F7_unmapped_vs_changes", hero_id, PASS, "no line is both mapped and unmapped")]
 
 
 # ---------------- REVIEW 级（同英雄前后对比） ----------------
@@ -393,8 +410,9 @@ def run_proposal(schema: dict, inv: dict, proposal: dict, before_heroes: dict[st
         results += F1_schema_bounds(schema, hero_id, after)
         results += F2_falloff_structure(schema, hero_id, after)
         results += F3_hitpoints_sum(schema, hero_id, after)
-        results += F4_linked_disposition(schema, hero_id, ph)
+        results += F4_linked_disposition(schema, hero_id, ph, before)
         results += F5_direction_vs_declared(schema, hero_id, ph, before)
+        results += F7_unmapped_vs_changes(schema, hero_id, ph)
         results += R1_full_cycle_dps_delta(inv, hero_id, before, after)
         results += R2_ttk_delta_or_reload_breakpoint(inv, hero_id, before, after)
         results += R3_headshot_oneshot_change(inv, hero_id, before, after)

@@ -1,0 +1,42 @@
+# agent output — deepseek-chat — run 2 — raw record: runs/2026-09-08/dmon_run2.json
+proposal_id: 2026-09-08_dmon
+before: fixtures/2026-09-08_before
+heroes:
+  dmon:
+    overall_direction: mixed
+    mixed_rationale: 生存与机动性削弱（护甲、Plasma Saber 伤害、Call Mech 变形时间）与武器精度增强（Portable Fusion
+      Repeater 散布与衰减起点）并存，方向对冲。
+    changes:
+    - path: hitpoints_by_mode.v6.armor
+      from: 325
+      to: 300
+      expected_direction: nerf
+      why: Armor reduced from 325 to 300. (6v6)
+      mode: 6v6
+    - path: weapons.plasma_saber.damage_max
+      from: 65
+      to: 60
+      expected_direction: nerf
+      why: Plasma Saber Damage reduced from 65 to 60.
+    - path: weapons.portable_fusion_repeater.spread_deg
+      from: 2
+      to: 1.75
+      expected_direction: buff
+      why: Portable Fusion Repeater Spread reduced from 2 to 1.75 degrees.
+    - path: weapons.portable_fusion_repeater.falloff_start_m
+      from: 30
+      to: 20
+      expected_direction: nerf
+      why: Minimum falloff range reduced from 30 to 20 meters.
+    - path: abilities.call_mech.duration_s
+      from: 1.95
+      to: 0.95
+      expected_direction: buff
+      why: Transformation duration has been reduced from 1.95 to 0.95 seconds；duration_s
+        语义为 ambiguous，按上下文（缩短变形时间以匹配 D.Va，属增强）判为 buff。
+    linked_dispositions:
+      weapons.portable_fusion_repeater.falloff_end_m: keep
+    unmapped:
+    - Power Barrier Cast time decreased from 0.065s to 0.016s.
+    - Notches on side of shield reduced in size.
+    - A new first-person bootup animation lasting 1 second has been added.

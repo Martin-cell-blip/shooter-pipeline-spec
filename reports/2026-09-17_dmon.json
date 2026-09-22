@@ -1,22 +1,16 @@
 {
   "summary": {
     "counts": {
-      "PASS": 27,
       "REVIEW": 3,
-      "NOT_RUN": 10
+      "NOT_RUN": 10,
+      "PASS": 25,
+      "FAIL": 2
     },
-    "exit_code": 0,
-    "final": "READY_FOR_HUMAN_REVIEW",
+    "exit_code": 1,
+    "final": "FAIL",
     "exception_not_run": 0
   },
   "results": [
-    {
-      "check": "apply_vs_baseline",
-      "hero": "dmon",
-      "status": "PASS",
-      "detail": "applied snapshot matches baseline on every changed path",
-      "records": {}
-    },
     {
       "check": "P0_provenance_status",
       "hero": "dmon",
@@ -138,9 +132,20 @@
     {
       "check": "F7_unmapped_vs_changes",
       "hero": "dmon",
-      "status": "PASS",
-      "detail": "no line is both mapped and unmapped",
-      "records": {}
+      "status": "FAIL",
+      "detail": "line listed as unmapped but also used as basis of a change: '- Damage reduced from 16 to 15.'",
+      "records": {
+        "line": "- Damage reduced from 16 to 15."
+      }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "dmon",
+      "status": "FAIL",
+      "detail": "line listed as unmapped but also used as basis of a change: '- Cooldown increased from 4 to 5 seconds.'",
+      "records": {
+        "line": "- Cooldown increased from 4 to 5 seconds."
+      }
     },
     {
       "check": "R1_full_cycle_dps_delta",

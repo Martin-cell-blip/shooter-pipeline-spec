@@ -31,3 +31,27 @@ Agent 五次运行（每次约 2 s）：
 | 09-17 D.Mon | 3/5 matched，2 missing，2 extra；"Damage per bullet 45→36" 正确放进 unmapped，没有硬凑 | 两条护甲路径同样的 `hitpoints.armor.v5/.v6` 问题 |
 
 **本轮定性**：5 次运行里 Agent 的数值提取 0 错（from/to 全对），不可映射条目 4/4 处理正确；所有偏差都指向**我写的规范**——金标方向错 1 处、联动规则 1 处过宽、提案格式 3 处没说清（路径语法、处置键、unmapped 范围）。第 7 步先改规范，把这五条固化成回归测试，再跑 run 2。
+
+## 2026-09-22 · 第 7 步规范修改（指回上表）
+
+| 指回 | 改了什么 | 固化为 |
+|---|---|---|
+| G1 | 金标 wuyang `los_timeout_s` 改为 nerf，整体 mixed 并注明对冲理由缺失 | `test_G1_golden_wuyang_direction_is_nerf` |
+| G2 | F4 只对快照中实际存在的伙伴字段要求处置 | `test_G2_linked_disposition_not_required_when_partner_absent` |
+| A1 | 提案格式写明处置键 = 伙伴字段路径，并给例子 | `test_A1_disposition_keyed_on_changed_field_is_not_accepted` |
+| A2 | 提案格式的路径语法加入 `hitpoints_by_mode.<v5|v6>.<field>`，并写明"逐级照抄快照键名" | `test_A2_prompt_grammar_covers_hitpoints_by_mode_and_partner_key`、`test_A2_wrong_hitpoints_path_is_caught_by_apply` |
+| A3 | 提案格式写明 unmapped 只收条目行、不收开发者注释 | 同 A2 语法测试 |
+| — | compare 的 unmapped 三分类（保留 / 硬凑 / 静默丢弃）与空提案必失败 | `test_compare_unmapped_classification`、`test_empty_proposal_fails_acceptance` |
+
+## 2026-09-22 · run 2 · deepseek-chat · 规范修改后重跑 run 1 有偏差的四例
+
+| 运行 | 提取验收 | 校验器 | 与 run 1 相比 |
+|---|---|---|---|
+| 09-08 查莉娅 | 1/1，unmapped 为空 | 0 FAIL | A3 修正生效：开发者注释不再进 unmapped |
+| 09-08 吴阳 | 2/2，`los_timeout_s` 判 nerf 与修正后金标一致 | 0 FAIL · R8 REVIEW（整体标 buff 却含 nerf 且无对冲理由——这是应当被人看的） | 金标改对之后不再有方向不一致 |
+| 09-08 D.Mon | 5/5，3 条 unmapped 全部保留 | 0 FAIL | A1、A2 修正生效：护甲路径 `hitpoints_by_mode.v6.armor`，处置键 `falloff_end_m: keep` |
+| 09-17 D.Mon | 5/5 数值全对，"45→36" 正确保留 unmapped | **F7 FAIL**（新规则） | **新错误 A4**：把已映射的两行（16→15、4→5）又原样抄进了 unmapped，且带着"- "前缀。compare 记 `agent_extra_unmapped` 2 |
+
+A4 的处置：这是提案自洽问题，不需要金标就能判——新增 FAIL 级规则 `F7_unmapped_vs_changes`（同一原文行不得既作改动依据又列在 unmapped），固化为 `test_A4_line_both_mapped_and_unmapped_fails`。提案格式暂不再加措辞，先看 run 3 是否复现。
+
+**两轮合计（9 个英雄、11 次运行）**：数值 from/to 提取 0 错；不可映射条目 8/8 正确保留；Agent 侧真实错误 1 类（A4）；其余偏差 5 处全部是规范文本或金标的错，且都已固化为回归测试。

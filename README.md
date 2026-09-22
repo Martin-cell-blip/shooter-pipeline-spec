@@ -13,7 +13,9 @@
 | 3 | 不变量 v0（6 条 FAIL 级 + 10 条 REVIEW 级，同英雄前后对比为主）；校验器；改动前夹具；官方补丁按提案格式的金标样本 | 已完成 |
 | 4 | 24 项测试（每条规则至少一个触发与一个不触发用例；异常永不变 PASS；金标 0 FAIL）；CI 含夹具幂等性检查 | 已完成 |
 | 5 | 执行 Agent（DeepSeek）：补丁原文 + 改动前快照 + 字段语义 → 提案 YAML；提取验收脚本；首轮实跑 6/6 匹配、0 FAIL（样本偏易，见 `docs/RUN_LOG.md`） | 已完成 |
-| 6 及以后 | 补更难的真实样本并实跑、记录失败、据此修规范并固化为回归测试、审核 Agent、人工签字清单 | 未开始 |
+| 6 | 四个难样本英雄（查莉娅、巴蒂斯特、吴阳、D.Mon）；补丁叠加的夹具链式撤销；run 1 原样记录：金标自身 2 处缺陷被校验器抓出、Agent 偏差 3 处全部指向规范文本 | 已完成 |
+| 7 | 按 run 1 改规范（金标方向、F4 伙伴字段存在性、提案格式三处）并固化 7 项回归测试；run 2 复跑：4/4 提取全对，暴露 1 类新错误（A4）→ 新增 F7 自洽规则 | 已完成 |
+| 8 及以后 | 审核 Agent（零上下文反推意图）、二轮 REVIEW 决定文件、人工签字清单 | 未开始 |
 
 第 6 步以后的内容取决于实跑结果，不预先编排。
 
@@ -35,7 +37,7 @@
 ## 运行
 
 ```bash
-python -m pipeline.fixture build 2026-09-08        # 构造改动前夹具（幂等）
+python -m pipeline.fixture build 2026-09-17 && python -m pipeline.fixture build 2026-09-08   # 构造改动前夹具（幂等；09-08 会先撤销 09-17）
 python -m pipeline.check 2026-09-08_official      # 校验金标提案 → reports/
 python -m pytest -q                                # 24 项测试
 python -m pipeline.agent 2026-09-08 kiriko         # 执行 Agent（需 DEEPSEEK_API_KEY）→ proposals/agent/ + runs/
