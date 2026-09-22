@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-08",
+  "hero": "winston",
+  "run": 1,
+  "items": [],
+  "side_by_side": {
+    "official_intent": "Developer Comments: Winston's Barrier Projector cooldown is being reduced to shorten the downtime between engagements. To offset the increased availability, its duration is also being reduced.",
+    "reviewer_inferred_intent": "缩短屏障冷却，使其能更频繁地重新部署；同时略微削减单次屏障的持续时间。合起来看，意图是把屏障从“单次长驻”调整为“更频繁但更短促”的使用节奏，提高重新施放的灵活性，同时压低单次覆盖的持续收益。",
+    "reviewer_confidence": "medium",
+    "reviewer_cannot_determine": [
+      "冷却缩短与持续时间缩短对冲后的实际覆盖率是否净增或净减",
+      "是否针对特定模式或特定对局节奏",
+      "屏障生命值等其他未出现在 diff 中的属性是否同步调整"
+    ],
+    "executor_mixed_rationale": "冷却时间缩短（12→10s）为增益，屏障持续时间缩短（8→7s）为削弱，两者按原文设计意图相互对冲。"
+  }
+}

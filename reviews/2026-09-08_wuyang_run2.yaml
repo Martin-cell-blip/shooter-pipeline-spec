@@ -1,0 +1,17 @@
+# reviewer output — deepseek-chat — reads diff only — raw record: runs/2026-09-08/wuyang_review_run2.json
+hero: wuyang
+per_change:
+- path: abilities.restorative_stream.regen_pct_s
+  direction: buff
+  basis: regen_pct_s 语义为 higher_is=buff，数值由 12.5 提升至 15，治疗回复速率增强。
+- path: abilities.restorative_stream.los_timeout_s
+  direction: nerf
+  basis: los_timeout_s 语义为 higher_is=buff，数值由 5 降至 3，脱离视线后效果保留时间缩短。
+overall_direction: mixed
+inferred_intent: 该技能被调整为“回复更强但更依赖持续视线”的形态：提高每秒回复比例以增强在视野内的治疗强度，同时缩短视线中断后的宽限时间，使治疗更即时地随视线断开而终止。整体意图可能是把该技能从“断线后仍能持续回血”转向“需要保持视线才能获得更高治疗”的高强度持续引导型技能。
+confidence: medium
+cannot_determine:
+- 两个字段的改动是否在实战中相互抵消
+- 该技能是否针对特定模式或特定阵容
+- 数值改动是否伴随机制或判定逻辑变化
+suspicious: []

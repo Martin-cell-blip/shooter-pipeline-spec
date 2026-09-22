@@ -1,0 +1,26 @@
+# reviewer output — deepseek-chat — reads diff only — raw record: runs/2026-09-17/dmon_review_run2.json
+hero: dmon
+per_change:
+- path: hitpoints_by_mode.v5.armor
+  direction: nerf
+  basis: armor 数值由 325 降至 275，按 hitpoints.armor=buff 语义，降低即削弱。
+- path: hitpoints_by_mode.v6.armor
+  direction: nerf
+  basis: armor 数值由 300 降至 250，同样为护甲削弱。
+- path: abilities.propulsors.cost_pct_s
+  direction: nerf
+  basis: cost_pct_s 语义为 nerf，数值由 25 升至 30，资源消耗增加。
+- path: abilities.fusion_repeater.damage
+  direction: nerf
+  basis: damage 语义为 buff，数值由 16 降至 15，单发伤害降低。
+- path: abilities.fusion_repeater.cooldown_s
+  direction: nerf
+  basis: cooldown_s 语义为 nerf，数值由 4 升至 5，冷却变长。
+overall_direction: nerf
+inferred_intent: 这组改动整体在削弱该英雄：两个模式的护甲同时下调，使其更脆；推进类技能的资源消耗提高，限制机动频率；融合连发武器同时降低单发伤害并延长冷却，压低其持续输出。合起来看，意图是降低该英雄的生存能力与输出/机动效率，而非做补偿性调整。
+confidence: high
+cannot_determine:
+- 两个模式护甲削弱幅度不同（-50 与 -50，但基数不同）是否意在区分模式强度
+- 各改动之间是否存在隐藏的联动补偿
+- 是否针对特定模式或特定对局环境
+suspicious: []

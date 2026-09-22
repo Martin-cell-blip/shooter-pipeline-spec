@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-08",
+  "hero": "wuyang",
+  "executor_run": 2,
+  "model_requested": "deepseek-chat",
+  "reads": "diff only",
+  "prompt_sha256": "2fea8c418c37fc28f69dffa1d556ab1b0e3fd28232767f301387eb45f0efe669",
+  "system": "你是射击游戏数值管线里的独立审核者。你只能看到一组配置数值的改动前后值，看不到任何说明。任务：从数值本身反推这次改动的方向与意图。不要假设你知道这次补丁的背景。",
+  "user": "# 配置 diff（wuyang）\n```yaml\n- path: abilities.restorative_stream.regen_pct_s\n  from: 12.5\n  to: 15\n- path: abilities.restorative_stream.los_timeout_s\n  from: 5\n  to: 3\n```\n\n# 字段语义\n字段方向语义（higher_is：数值变大对该英雄是 buff 还是 nerf；ambiguous 需按上下文判断）：\n- weapon: damage_max=buff, damage_min=buff, healing_per_shot=buff, rate_of_fire=buff, ammo=buff, reload_s=nerf, spread_deg=nerf, projectile_speed=buff, max_range_m=buff, falloff_start_m=buff, falloff_end_m=buff, headshot_mult=buff, pellets_per_shot=buff\n- ability: cooldown_s=nerf, charges=buff, damage=buff, healing=buff, radius_m=buff, max_range_m=buff, ult_cost=nerf, barrier_health=buff, deployable_health=buff, threshold_pct=buff, regen_pct_s=buff, cost_pct_s=nerf, los_timeout_s=buff, healing_per_s=buff, bonus_healing_per_s=buff, cast_time_s=nerf, duration_s=ambiguous\n- hitpoints: health=buff, armor=buff, shields=buff\n联动字段对（改其一须对另一个给处置记录）：ammo+reload_s; damage_max+damage_min; falloff_start_m+falloff_end_m\n单位：距离 m，时间 s，射速 shots/s，速度 m/s。\n\n# 输出格式\n输出一个 YAML 文档，且只输出 YAML（不要 markdown 围栏、不要解释）。结构：\nhero: <hero_id>\nper_change:\n  - path: <与输入相同>\n    direction: buff | nerf | ambiguous      # 只依据字段语义与数值增减；语义 ambiguous 的字段说明你依据什么判断\n    basis: <一句话>\noverall_direction: buff | nerf | mixed\ninferred_intent: <2–4 句：这组改动合起来想解决什么问题；只能从数值本身推，不要编造背景>\nconfidence: high | medium | low\ncannot_determine: [<从 diff 无法判断的事项，例如\"对冲是否抵消\"\"是否针对某模式\">]\nsuspicious: [<看起来自相矛盾或不像出自同一意图的改动，没有就留空列表>]",
+  "n_changes": 2,
+  "leak_check": [],
+  "content": "```yaml\nhero: wuyang\nper_change:\n  - path: abilities.restorative_stream.regen_pct_s\n    direction: buff\n    basis: regen_pct_s 语义为 higher_is=buff，数值由 12.5 提升至 15，治疗回复速率增强。\n  - path: abilities.restorative_stream.los_timeout_s\n    direction: nerf\n    basis: los_timeout_s 语义为 higher_is=buff，数值由 5 降至 3，脱离视线后效果保留时间缩短。\noverall_direction: mixed\ninferred_intent: 该技能被调整为“回复更强但更依赖持续视线”的形态：提高每秒回复比例以增强在视野内的治疗强度，同时缩短视线中断后的宽限时间，使治疗更即时地随视线断开而终止。整体意图可能是把该技能从“断线后仍能持续回血”转向“需要保持视线才能获得更高治疗”的高强度持续引导型技能。\nconfidence: medium\ncannot_determine:\n  - 两个字段的改动是否在实战中相互抵消\n  - 该技能是否针对特定模式或特定阵容\n  - 数值改动是否伴随机制或判定逻辑变化\nsuspicious: []\n```",
+  "model": "deepseek-flash",
+  "usage": {
+    "completion_tokens": 267,
+    "prompt_tokens": 600,
+    "total_tokens": 867,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 600
+  },
+  "started": "2026-09-22T15:08:01.528076+00:00",
+  "seconds": 2.358696,
+  "parse": "ok"
+}

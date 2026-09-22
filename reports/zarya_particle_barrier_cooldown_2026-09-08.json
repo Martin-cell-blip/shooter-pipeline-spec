@@ -2,7 +2,7 @@
   "summary": {
     "counts": {
       "NOT_RUN": 6,
-      "PASS": 19
+      "PASS": 20
     },
     "exit_code": 0,
     "final": "READY_FOR_HUMAN_REVIEW",
@@ -63,6 +63,13 @@
       "records": {
         "path": "abilities.particle_barrier.cooldown_s.v5"
       }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "zarya",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
     },
     {
       "check": "R1_full_cycle_dps_delta",

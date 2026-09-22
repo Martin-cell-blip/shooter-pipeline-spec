@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-08",
+  "hero": "baptiste",
+  "executor_run": 1,
+  "model_requested": "deepseek-chat",
+  "reads": "diff only",
+  "prompt_sha256": "398c7b748be2a2e5d7e86824d2a284b7a3d97c8022c4f3c44e7b5cf22daedb65",
+  "system": "你是射击游戏数值管线里的独立审核者。你只能看到一组配置数值的改动前后值，看不到任何说明。任务：从数值本身反推这次改动的方向与意图。不要假设你知道这次补丁的背景。",
+  "user": "# 配置 diff（baptiste）\n```yaml\n- path: abilities.immortality_field.threshold_pct\n  from: 20\n  to: 25\n- path: abilities.immortality_field.cooldown_s\n  from: 22\n  to: 20\n- path: abilities.immortality_field.deployable_health\n  from: 125\n  to: 150\n```\n\n# 字段语义\n字段方向语义（higher_is：数值变大对该英雄是 buff 还是 nerf；ambiguous 需按上下文判断）：\n- weapon: damage_max=buff, damage_min=buff, healing_per_shot=buff, rate_of_fire=buff, ammo=buff, reload_s=nerf, spread_deg=nerf, projectile_speed=buff, max_range_m=buff, falloff_start_m=buff, falloff_end_m=buff, headshot_mult=buff, pellets_per_shot=buff\n- ability: cooldown_s=nerf, charges=buff, damage=buff, healing=buff, radius_m=buff, max_range_m=buff, ult_cost=nerf, barrier_health=buff, deployable_health=buff, threshold_pct=buff, regen_pct_s=buff, cost_pct_s=nerf, los_timeout_s=buff, healing_per_s=buff, bonus_healing_per_s=buff, cast_time_s=nerf, duration_s=ambiguous\n- hitpoints: health=buff, armor=buff, shields=buff\n联动字段对（改其一须对另一个给处置记录）：ammo+reload_s; damage_max+damage_min; falloff_start_m+falloff_end_m\n单位：距离 m，时间 s，射速 shots/s，速度 m/s。\n\n# 输出格式\n输出一个 YAML 文档，且只输出 YAML（不要 markdown 围栏、不要解释）。结构：\nhero: <hero_id>\nper_change:\n  - path: <与输入相同>\n    direction: buff | nerf | ambiguous      # 只依据字段语义与数值增减；语义 ambiguous 的字段说明你依据什么判断\n    basis: <一句话>\noverall_direction: buff | nerf | mixed\ninferred_intent: <2–4 句：这组改动合起来想解决什么问题；只能从数值本身推，不要编造背景>\nconfidence: high | medium | low\ncannot_determine: [<从 diff 无法判断的事项，例如\"对冲是否抵消\"\"是否针对某模式\">]\nsuspicious: [<看起来自相矛盾或不像出自同一意图的改动，没有就留空列表>]",
+  "n_changes": 3,
+  "leak_check": [],
+  "content": "```yaml\nhero: baptiste\nper_change:\n  - path: abilities.immortality_field.threshold_pct\n    direction: buff\n    basis: 触发阈值百分比从 20 提高到 25，技能更早/更易触发，按语义 threshold_pct 变大是 buff。\n  - path: abilities.immortality_field.cooldown_s\n    direction: buff\n    basis: 冷却时间从 22s 降到 20s，按语义 cooldown_s 变小是 buff。\n  - path: abilities.immortality_field.deployable_health\n    direction: buff\n    basis: 部署物生命值从 125 提高到 150，按语义 deployable_health 变大是 buff。\noverall_direction: buff\ninferred_intent: 这组改动同时放宽了不朽力场的触发条件、缩短了冷却并提高了部署物耐久，整体是在强化该技能的可用性与存活能力。数值方向一致，意图应是让该技能更频繁、更可靠地生效，并更难被提前击破。没有出现任何削弱项，因此不像是在做对冲式平衡。\nconfidence: high\ncannot_determine:\n  - 该技能在实战中的实际强度变化幅度\n  - 是否针对特定模式或特定阵容\n  - 三项改动之间是否存在隐性联动上限\nsuspicious: []\n```",
+  "model": "deepseek-flash",
+  "usage": {
+    "completion_tokens": 289,
+    "prompt_tokens": 624,
+    "total_tokens": 913,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 624
+  },
+  "started": "2026-09-22T15:07:57.993571+00:00",
+  "seconds": 2.361741,
+  "parse": "ok"
+}

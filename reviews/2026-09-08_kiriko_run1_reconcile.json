@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-08",
+  "hero": "kiriko",
+  "run": 1,
+  "items": [],
+  "side_by_side": {
+    "official_intent": "Developer Comments: Kiriko has become highly effective as a healer while retaining the utility and mobility of her kit. We're reducing the speed and range of Healing Ofuda to lower her healing consistency at longer distances. Protection Suzu is also being adjusted to reduce the effectiveness of its invulnerability window.",
+    "reviewer_inferred_intent": "这组改动同时削弱了治疗符的投掷手感与有效射程，以及保护类技能的作用时长和覆盖范围。合起来看，意图是降低该英雄的远程治疗可达性与团队保护能力，使其在远距离支援和瞬时救场上的收益变小，需要更贴近队友、更精准地使用技能。",
+    "reviewer_confidence": "high",
+    "reviewer_cannot_determine": [
+      "无法判断这些削弱是否被其他未展示的数值改动所抵消",
+      "无法判断改动是否针对特定模式或特定段位",
+      "无法判断 duration_s 缩短是否伴随其他机制补偿"
+    ],
+    "executor_mixed_rationale": null
+  }
+}

@@ -1,0 +1,20 @@
+# reviewer output — deepseek-chat — reads diff only — raw record: runs/2026-09-08/baptiste_review_run1.json
+hero: baptiste
+per_change:
+- path: abilities.immortality_field.threshold_pct
+  direction: buff
+  basis: 触发阈值百分比从 20 提高到 25，技能更早/更易触发，按语义 threshold_pct 变大是 buff。
+- path: abilities.immortality_field.cooldown_s
+  direction: buff
+  basis: 冷却时间从 22s 降到 20s，按语义 cooldown_s 变小是 buff。
+- path: abilities.immortality_field.deployable_health
+  direction: buff
+  basis: 部署物生命值从 125 提高到 150，按语义 deployable_health 变大是 buff。
+overall_direction: buff
+inferred_intent: 这组改动同时放宽了不朽力场的触发条件、缩短了冷却并提高了部署物耐久，整体是在强化该技能的可用性与存活能力。数值方向一致，意图应是让该技能更频繁、更可靠地生效，并更难被提前击破。没有出现任何削弱项，因此不像是在做对冲式平衡。
+confidence: high
+cannot_determine:
+- 该技能在实战中的实际强度变化幅度
+- 是否针对特定模式或特定阵容
+- 三项改动之间是否存在隐性联动上限
+suspicious: []

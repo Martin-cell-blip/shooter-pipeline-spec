@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-08",
+  "hero": "baptiste",
+  "run": 1,
+  "items": [],
+  "side_by_side": {
+    "official_intent": "Developer Comments: Immortality Field's long cooldown and vulnerability to being destroyed can limit its effectiveness. We're increasing its health, lowering its cooldown, and raising its minimum health threshold to improve its overall reliability.",
+    "reviewer_inferred_intent": "这组改动同时放宽了不朽力场的触发条件、缩短了冷却并提高了部署物耐久，整体是在强化该技能的可用性与存活能力。数值方向一致，意图应是让该技能更频繁、更可靠地生效，并更难被提前击破。没有出现任何削弱项，因此不像是在做对冲式平衡。",
+    "reviewer_confidence": "high",
+    "reviewer_cannot_determine": [
+      "该技能在实战中的实际强度变化幅度",
+      "是否针对特定模式或特定阵容",
+      "三项改动之间是否存在隐性联动上限"
+    ],
+    "executor_mixed_rationale": null
+  }
+}

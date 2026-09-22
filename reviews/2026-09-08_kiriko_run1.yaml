@@ -1,0 +1,23 @@
+# reviewer output — deepseek-chat — reads diff only — raw record: runs/2026-09-08/kiriko_review_run1.json
+hero: kiriko
+per_change:
+- path: weapons.healing_ofuda.projectile_speed
+  direction: nerf
+  basis: projectile_speed 语义为越高越有利，24→18 降低，治疗符更难命中移动目标。
+- path: weapons.healing_ofuda.max_range_m
+  direction: nerf
+  basis: max_range_m 语义为越高越有利，35→30 降低，治疗符有效射程缩短。
+- path: abilities.protection_suzu.duration_s
+  direction: nerf
+  basis: duration_s 语义为 ambiguous，但该技能为保护/无敌类效果，持续时间 0.65→0.5 缩短，保护窗口变小，判定为 nerf。
+- path: abilities.protection_suzu.radius_m
+  direction: nerf
+  basis: radius_m 语义为越高越有利，5→4 降低，作用范围缩小。
+overall_direction: nerf
+inferred_intent: 这组改动同时削弱了治疗符的投掷手感与有效射程，以及保护类技能的作用时长和覆盖范围。合起来看，意图是降低该英雄的远程治疗可达性与团队保护能力，使其在远距离支援和瞬时救场上的收益变小，需要更贴近队友、更精准地使用技能。
+confidence: high
+cannot_determine:
+- 无法判断这些削弱是否被其他未展示的数值改动所抵消
+- 无法判断改动是否针对特定模式或特定段位
+- 无法判断 duration_s 缩短是否伴随其他机制补偿
+suspicious: []

@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-08",
+  "hero": "zarya",
+  "run": 2,
+  "items": [],
+  "side_by_side": {
+    "official_intent": "Developer Comments: The cooldown of Particle Barrier is being increased to reduce Zarya's personal barrier uptime and energy generation. Projected Barrier remains unchanged, encouraging more proactive use on allies.",
+    "reviewer_inferred_intent": "该改动只提高了粒子屏障的冷却时间，意图是降低该技能的使用频率，从而削弱其覆盖/保护节奏。没有其他数值联动，说明这是一次单点、定向的削弱，而非整体重做。",
+    "reviewer_confidence": "high",
+    "reviewer_cannot_determine": [
+      "该削弱是否被其他未展示的改动对冲",
+      "是否针对特定模式或分段",
+      "冷却从 11 秒到 12 秒对实战强度影响的具体幅度"
+    ],
+    "executor_mixed_rationale": null
+  }
+}

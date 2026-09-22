@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-08",
+  "hero": "kiriko",
+  "executor_run": 1,
+  "model_requested": "deepseek-chat",
+  "reads": "diff only",
+  "prompt_sha256": "1a39e7a268b65e2546c82ae29160225df007a934a4ca91265bc22e81e44df7b8",
+  "system": "你是射击游戏数值管线里的独立审核者。你只能看到一组配置数值的改动前后值，看不到任何说明。任务：从数值本身反推这次改动的方向与意图。不要假设你知道这次补丁的背景。",
+  "user": "# 配置 diff（kiriko）\n```yaml\n- path: weapons.healing_ofuda.projectile_speed\n  from: 24\n  to: 18\n- path: weapons.healing_ofuda.max_range_m\n  from: 35\n  to: 30\n- path: abilities.protection_suzu.duration_s\n  from: 0.65\n  to: 0.5\n- path: abilities.protection_suzu.radius_m\n  from: 5\n  to: 4\n```\n\n# 字段语义\n字段方向语义（higher_is：数值变大对该英雄是 buff 还是 nerf；ambiguous 需按上下文判断）：\n- weapon: damage_max=buff, damage_min=buff, healing_per_shot=buff, rate_of_fire=buff, ammo=buff, reload_s=nerf, spread_deg=nerf, projectile_speed=buff, max_range_m=buff, falloff_start_m=buff, falloff_end_m=buff, headshot_mult=buff, pellets_per_shot=buff\n- ability: cooldown_s=nerf, charges=buff, damage=buff, healing=buff, radius_m=buff, max_range_m=buff, ult_cost=nerf, barrier_health=buff, deployable_health=buff, threshold_pct=buff, regen_pct_s=buff, cost_pct_s=nerf, los_timeout_s=buff, healing_per_s=buff, bonus_healing_per_s=buff, cast_time_s=nerf, duration_s=ambiguous\n- hitpoints: health=buff, armor=buff, shields=buff\n联动字段对（改其一须对另一个给处置记录）：ammo+reload_s; damage_max+damage_min; falloff_start_m+falloff_end_m\n单位：距离 m，时间 s，射速 shots/s，速度 m/s。\n\n# 输出格式\n输出一个 YAML 文档，且只输出 YAML（不要 markdown 围栏、不要解释）。结构：\nhero: <hero_id>\nper_change:\n  - path: <与输入相同>\n    direction: buff | nerf | ambiguous      # 只依据字段语义与数值增减；语义 ambiguous 的字段说明你依据什么判断\n    basis: <一句话>\noverall_direction: buff | nerf | mixed\ninferred_intent: <2–4 句：这组改动合起来想解决什么问题；只能从数值本身推，不要编造背景>\nconfidence: high | medium | low\ncannot_determine: [<从 diff 无法判断的事项，例如\"对冲是否抵消\"\"是否针对某模式\">]\nsuspicious: [<看起来自相矛盾或不像出自同一意图的改动，没有就留空列表>]",
+  "n_changes": 4,
+  "leak_check": [],
+  "content": "```yaml\nhero: kiriko\nper_change:\n  - path: weapons.healing_ofuda.projectile_speed\n    direction: nerf\n    basis: projectile_speed 语义为越高越有利，24→18 降低，治疗符更难命中移动目标。\n  - path: weapons.healing_ofuda.max_range_m\n    direction: nerf\n    basis: max_range_m 语义为越高越有利，35→30 降低，治疗符有效射程缩短。\n  - path: abilities.protection_suzu.duration_s\n    direction: nerf\n    basis: duration_s 语义为 ambiguous，但该技能为保护/无敌类效果，持续时间 0.65→0.5 缩短，保护窗口变小，判定为 nerf。\n  - path: abilities.protection_suzu.radius_m\n    direction: nerf\n    basis: radius_m 语义为越高越有利，5→4 降低，作用范围缩小。\noverall_direction: nerf\ninferred_intent: 这组改动同时削弱了治疗符的投掷手感与有效射程，以及保护类技能的作用时长和覆盖范围。合起来看，意图是降低该英雄的远程治疗可达性与团队保护能力，使其在远距离支援和瞬时救场上的收益变小，需要更贴近队友、更精准地使用技能。\nconfidence: high\ncannot_determine:\n  - 无法判断这些削弱是否被其他未展示的数值改动所抵消\n  - 无法判断改动是否针对特定模式或特定段位\n  - 无法判断 duration_s 缩短是否伴随其他机制补偿\nsuspicious: []\n```",
+  "model": "deepseek-flash",
+  "usage": {
+    "completion_tokens": 352,
+    "prompt_tokens": 650,
+    "total_tokens": 1002,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 650
+  },
+  "started": "2026-09-22T15:07:47.750932+00:00",
+  "seconds": 2.564022,
+  "parse": "ok"
+}

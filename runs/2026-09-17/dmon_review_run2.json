@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-17",
+  "hero": "dmon",
+  "executor_run": 2,
+  "model_requested": "deepseek-chat",
+  "reads": "diff only",
+  "prompt_sha256": "c9474f522f2b3411da7b2439e43ea88cd5671ffa23e198b52004dd6a499b61e8",
+  "system": "你是射击游戏数值管线里的独立审核者。你只能看到一组配置数值的改动前后值，看不到任何说明。任务：从数值本身反推这次改动的方向与意图。不要假设你知道这次补丁的背景。",
+  "user": "# 配置 diff（dmon）\n```yaml\n- path: hitpoints_by_mode.v5.armor\n  from: 325\n  to: 275\n- path: hitpoints_by_mode.v6.armor\n  from: 300\n  to: 250\n- path: abilities.propulsors.cost_pct_s\n  from: 25\n  to: 30\n- path: abilities.fusion_repeater.damage\n  from: 16\n  to: 15\n- path: abilities.fusion_repeater.cooldown_s\n  from: 4\n  to: 5\n```\n\n# 字段语义\n字段方向语义（higher_is：数值变大对该英雄是 buff 还是 nerf；ambiguous 需按上下文判断）：\n- weapon: damage_max=buff, damage_min=buff, healing_per_shot=buff, rate_of_fire=buff, ammo=buff, reload_s=nerf, spread_deg=nerf, projectile_speed=buff, max_range_m=buff, falloff_start_m=buff, falloff_end_m=buff, headshot_mult=buff, pellets_per_shot=buff\n- ability: cooldown_s=nerf, charges=buff, damage=buff, healing=buff, radius_m=buff, max_range_m=buff, ult_cost=nerf, barrier_health=buff, deployable_health=buff, threshold_pct=buff, regen_pct_s=buff, cost_pct_s=nerf, los_timeout_s=buff, healing_per_s=buff, bonus_healing_per_s=buff, cast_time_s=nerf, duration_s=ambiguous\n- hitpoints: health=buff, armor=buff, shields=buff\n联动字段对（改其一须对另一个给处置记录）：ammo+reload_s; damage_max+damage_min; falloff_start_m+falloff_end_m\n单位：距离 m，时间 s，射速 shots/s，速度 m/s。\n\n# 输出格式\n输出一个 YAML 文档，且只输出 YAML（不要 markdown 围栏、不要解释）。结构：\nhero: <hero_id>\nper_change:\n  - path: <与输入相同>\n    direction: buff | nerf | ambiguous      # 只依据字段语义与数值增减；语义 ambiguous 的字段说明你依据什么判断\n    basis: <一句话>\noverall_direction: buff | nerf | mixed\ninferred_intent: <2–4 句：这组改动合起来想解决什么问题；只能从数值本身推，不要编造背景>\nconfidence: high | medium | low\ncannot_determine: [<从 diff 无法判断的事项，例如\"对冲是否抵消\"\"是否针对某模式\">]\nsuspicious: [<看起来自相矛盾或不像出自同一意图的改动，没有就留空列表>]",
+  "n_changes": 5,
+  "leak_check": [],
+  "content": "```yaml\nhero: dmon\nper_change:\n  - path: hitpoints_by_mode.v5.armor\n    direction: nerf\n    basis: armor 数值由 325 降至 275，按 hitpoints.armor=buff 语义，降低即削弱。\n  - path: hitpoints_by_mode.v6.armor\n    direction: nerf\n    basis: armor 数值由 300 降至 250，同样为护甲削弱。\n  - path: abilities.propulsors.cost_pct_s\n    direction: nerf\n    basis: cost_pct_s 语义为 nerf，数值由 25 升至 30，资源消耗增加。\n  - path: abilities.fusion_repeater.damage\n    direction: nerf\n    basis: damage 语义为 buff，数值由 16 降至 15，单发伤害降低。\n  - path: abilities.fusion_repeater.cooldown_s\n    direction: nerf\n    basis: cooldown_s 语义为 nerf，数值由 4 升至 5，冷却变长。\noverall_direction: nerf\ninferred_intent: 这组改动整体在削弱该英雄：两个模式的护甲同时下调，使其更脆；推进类技能的资源消耗提高，限制机动频率；融合连发武器同时降低单发伤害并延长冷却，压低其持续输出。合起来看，意图是降低该英雄的生存能力与输出/机动效率，而非做补偿性调整。\nconfidence: high\ncannot_determine:\n  - 两个模式护甲削弱幅度不同（-50 与 -50，但基数不同）是否意在区分模式强度\n  - 各改动之间是否存在隐藏的联动补偿\n  - 是否针对特定模式或特定对局环境\nsuspicious: []\n```",
+  "model": "deepseek-flash",
+  "usage": {
+    "completion_tokens": 393,
+    "prompt_tokens": 674,
+    "total_tokens": 1067,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 674
+  },
+  "started": "2026-09-22T15:08:09.138634+00:00",
+  "seconds": 2.774544,
+  "parse": "ok"
+}

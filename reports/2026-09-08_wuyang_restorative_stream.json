@@ -2,7 +2,7 @@
   "summary": {
     "counts": {
       "NOT_RUN": 3,
-      "PASS": 15,
+      "PASS": 16,
       "REVIEW": 1
     },
     "exit_code": 0,
@@ -64,6 +64,13 @@
       "records": {
         "path": "abilities.restorative_stream.los_timeout_s"
       }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "wuyang",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
     },
     {
       "check": "R1_full_cycle_dps_delta",

@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-08",
+  "hero": "wuyang",
+  "run": 2,
+  "items": [
+    {
+      "level": "REVIEW",
+      "what": "overall: executor buff vs reviewer mixed"
+    },
+    {
+      "level": "REVIEW",
+      "what": "overall: reviewer mixed vs official patch file buff"
+    }
+  ],
+  "side_by_side": {
+    "official_intent": "Developer Comments: Wuyang's empowered healing resource can be limiting when responding to sustained damage. We're increasing its regeneration rate to provide more frequent access to empowered healing.",
+    "reviewer_inferred_intent": "该技能被调整为“回复更强但更依赖持续视线”的形态：提高每秒回复比例以增强在视野内的治疗强度，同时缩短视线中断后的宽限时间，使治疗更即时地随视线断开而终止。整体意图可能是把该技能从“断线后仍能持续回血”转向“需要保持视线才能获得更高治疗”的高强度持续引导型技能。",
+    "reviewer_confidence": "medium",
+    "reviewer_cannot_determine": [
+      "两个字段的改动是否在实战中相互抵消",
+      "该技能是否针对特定模式或特定阵容",
+      "数值改动是否伴随机制或判定逻辑变化"
+    ],
+    "executor_mixed_rationale": null
+  }
+}

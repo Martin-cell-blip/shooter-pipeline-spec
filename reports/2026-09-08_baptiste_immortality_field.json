@@ -1,0 +1,460 @@
+{
+  "summary": {
+    "counts": {
+      "PASS": 25,
+      "NOT_RUN": 3
+    },
+    "exit_code": 0,
+    "final": "READY_FOR_HUMAN_REVIEW",
+    "exception_not_run": 0
+  },
+  "results": [
+    {
+      "check": "P0_provenance_status",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "no open conflicts, no missing fields",
+      "records": {}
+    },
+    {
+      "check": "F1_schema_bounds",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "all numeric fields within project bounds",
+      "records": {}
+    },
+    {
+      "check": "F2_falloff_structure",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "falloff structure consistent for all weapons",
+      "records": {}
+    },
+    {
+      "check": "F3_hitpoints_sum",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "total 250 = sum of components",
+      "records": {}
+    },
+    {
+      "check": "F4_linked_disposition",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "every touched linked pair has a disposition record",
+      "records": {}
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "abilities.immortality_field.threshold_pct: 20→25 = buff, matches declaration",
+      "records": {
+        "path": "abilities.immortality_field.threshold_pct"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "abilities.immortality_field.cooldown_s: 22→20 = buff, matches declaration",
+      "records": {
+        "path": "abilities.immortality_field.cooldown_s"
+      }
+    },
+    {
+      "check": "F5_direction_vs_declared",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "abilities.immortality_field.deployable_health: 125→150 = buff, matches declaration",
+      "records": {
+        "path": "abilities.immortality_field.deployable_health"
+      }
+    },
+    {
+      "check": "F7_unmapped_vs_changes",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "no line is both mapped and unmapped",
+      "records": {}
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher: full-cycle body DPS 105.15 → 105.15 (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "before": {
+          "status": "OK",
+          "value": 105.15463917525773,
+          "shots_per_magazine": 12,
+          "fire_s": 7.0588235294117645,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 127.5
+        },
+        "after": {
+          "status": "OK",
+          "value": 105.15463917525773,
+          "shots_per_magazine": 12,
+          "fire_s": 7.0588235294117645,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 127.5
+        },
+        "rel_change": 0.0,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R1_full_cycle_dps_delta",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher_alt: full-cycle body DPS 0.00 → 0.00 (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher_alt",
+        "before": {
+          "status": "OK",
+          "value": 0.0,
+          "shots_per_magazine": 10,
+          "fire_s": 9.009009009009008,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 0.0
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.0,
+          "shots_per_magazine": 10,
+          "fire_s": 9.009009009009008,
+          "reload_s": 1.5,
+          "theoretical_dps_no_reload": 0.0
+        },
+        "rel_change": null,
+        "threshold": 0.15
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 175hp body: TTK 1.176s → 1.176s (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 175,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.1764705882352942,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.1764705882352942,
+          "shots": 3,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 175hp head: TTK 0.588s → 0.588s (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 175,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 0.5882352941176471,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.5882352941176471,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 175,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 250hp body: TTK 1.765s → 1.765s (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 250,
+        "location": "body",
+        "before": {
+          "status": "OK",
+          "value": 1.7647058823529411,
+          "shots": 4,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "after": {
+          "status": "OK",
+          "value": 1.7647058823529411,
+          "shots": 4,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "body"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R2_ttk_delta_or_reload_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 250hp head: TTK 0.588s → 0.588s (+0.0%)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 250,
+        "location": "head",
+        "before": {
+          "status": "OK",
+          "value": 0.5882352941176471,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "after": {
+          "status": "OK",
+          "value": 0.5882352941176471,
+          "shots": 2,
+          "requires_reload": false,
+          "shots_per_magazine": 12,
+          "distance_m": 0,
+          "first_shot_at_s": 0,
+          "includes_travel_time": false,
+          "target_hp": 250,
+          "location": "head"
+        },
+        "rel_change": 0.0,
+        "reload_flip": false
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "biotic_launcher",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "damage_head": 150,
+          "conditions": "none (plain shot, distance within falloff start)"
+        }
+      }
+    },
+    {
+      "check": "R3_headshot_oneshot_change",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher_alt: one-shot capability unchanged (False)",
+      "records": {
+        "weapon": "biotic_launcher_alt",
+        "after": {
+          "status": "OK",
+          "value": false,
+          "note": "cannot headshot"
+        }
+      }
+    },
+    {
+      "check": "R4_change_count_stats",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "changes: {'buff': 3, 'nerf': 0, 'ambiguous': 0} (display only, no threshold)",
+      "records": {
+        "buff": 3,
+        "nerf": 0,
+        "ambiguous": 0
+      }
+    },
+    {
+      "check": "R5_falloff_window_delta",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher: window 20m → 20m (+0.0%); start 25→25, end 45→45",
+      "records": {
+        "weapon": "biotic_launcher",
+        "before": {
+          "status": "OK",
+          "value": 20,
+          "has_falloff": true,
+          "start": 25,
+          "end": 45
+        },
+        "after": {
+          "status": "OK",
+          "value": 20,
+          "has_falloff": true,
+          "start": 25,
+          "end": 45
+        },
+        "rel_change": 0.0,
+        "endpoints_moved": false
+      }
+    },
+    {
+      "check": "R6_cooldown_step",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "immortality_field: cooldown 22s → 20s (Δ2.00s, 9.1%)",
+      "records": {
+        "ability": "immortality_field",
+        "mode": "",
+        "abs": 2,
+        "rel": 0.09090909090909091,
+        "threshold": {
+          "abs_s": 2,
+          "rel": 0.2
+        }
+      }
+    },
+    {
+      "check": "R8_mixed_direction_rationale",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "single direction {'buff'}",
+      "records": {
+        "overall": "buff"
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 175hp body: 3 → 3 shot events",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 175,
+        "location": "body",
+        "before": 3,
+        "after": 3,
+        "pellets_per_event": 3
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 175hp head: 2 → 2 shot events",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 175,
+        "location": "head",
+        "before": 2,
+        "after": 2,
+        "pellets_per_event": 3
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 250hp body: 4 → 4 shot events",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 250,
+        "location": "body",
+        "before": 4,
+        "after": 4,
+        "pellets_per_event": 3
+      }
+    },
+    {
+      "check": "R9_shots_to_kill_breakpoint",
+      "hero": "baptiste",
+      "status": "PASS",
+      "detail": "biotic_launcher vs 250hp head: 2 → 2 shot events",
+      "records": {
+        "weapon": "biotic_launcher",
+        "target_hp": 250,
+        "location": "head",
+        "before": 2,
+        "after": 2,
+        "pellets_per_event": 3
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "baptiste",
+      "status": "NOT_RUN",
+      "detail": "regenerative_burst: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "regenerative_burst",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "baptiste",
+      "status": "NOT_RUN",
+      "detail": "immortality_field: cooldown_starts unknown — duration/cooldown must not be presented as coverage",
+      "records": {
+        "ability": "immortality_field",
+        "mode": ""
+      }
+    },
+    {
+      "check": "R10_uptime_ratio",
+      "hero": "baptiste",
+      "status": "NOT_RUN",
+      "detail": "amplification_matrix: duration_s or cooldown_s missing",
+      "records": {
+        "ability": "amplification_matrix",
+        "mode": ""
+      }
+    }
+  ]
+}

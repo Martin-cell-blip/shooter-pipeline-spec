@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-17",
+  "hero": "dmon",
+  "run": 2,
+  "items": [
+    {
+      "level": "REVIEW",
+      "what": "no official developer comment for this hero/date — reviewer inference stands alone, human must judge"
+    }
+  ],
+  "side_by_side": {
+    "official_intent": null,
+    "reviewer_inferred_intent": "这组改动整体在削弱该英雄：两个模式的护甲同时下调，使其更脆；推进类技能的资源消耗提高，限制机动频率；融合连发武器同时降低单发伤害并延长冷却，压低其持续输出。合起来看，意图是降低该英雄的生存能力与输出/机动效率，而非做补偿性调整。",
+    "reviewer_confidence": "high",
+    "reviewer_cannot_determine": [
+      "两个模式护甲削弱幅度不同（-50 与 -50，但基数不同）是否意在区分模式强度",
+      "各改动之间是否存在隐藏的联动补偿",
+      "是否针对特定模式或特定对局环境"
+    ],
+    "executor_mixed_rationale": null
+  }
+}

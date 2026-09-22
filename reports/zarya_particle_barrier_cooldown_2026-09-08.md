@@ -1,6 +1,6 @@
 # zarya_particle_barrier_cooldown_2026-09-08
 
-**结论：READY_FOR_HUMAN_REVIEW**（exit 0）— FAIL 0 / REVIEW 0 / NOT_RUN 6 / PASS 19
+**结论：READY_FOR_HUMAN_REVIEW**（exit 0）— FAIL 0 / REVIEW 0 / NOT_RUN 6 / PASS 20
 
 终态不设自动批准；READY_FOR_HUMAN_REVIEW 表示机器已无 FAIL，剩余 REVIEW / NOT_RUN 须人工逐条处置并写入决定文件。
 
@@ -15,7 +15,7 @@
 | R10_uptime_ratio | zarya | projected_barrier: cooldown_starts unknown — duration/cooldown must not be presented as coverage |
 | R10_uptime_ratio | zarya | graviton_surge: duration_s or cooldown_s missing |
 
-## PASS (19)
+## PASS (20)
 
 | check | hero | detail |
 |---|---|---|
@@ -24,6 +24,7 @@
 | F3_hitpoints_sum | zarya | total 550 = sum of components |
 | F4_linked_disposition | zarya | every touched linked pair has a disposition record |
 | F5_direction_vs_declared | zarya | abilities.particle_barrier.cooldown_s.v5: 11→12 = nerf, matches declaration |
+| F7_unmapped_vs_changes | zarya | no line is both mapped and unmapped |
 | R1_full_cycle_dps_delta | zarya | particle_cannon: full-cycle body DPS 73.08 → 73.08 (+0.0%) |
 | R1_full_cycle_dps_delta | zarya | particle_cannon_alt: full-cycle body DPS 40.00 → 40.00 (+0.0%) |
 | R2_ttk_delta_or_reload_breakpoint | zarya | particle_cannon vs 175hp body: TTK 1.842s → 1.842s (+0.0%) |

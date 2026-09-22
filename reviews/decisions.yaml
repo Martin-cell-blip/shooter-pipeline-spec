@@ -1,0 +1,143 @@
+_rules:
+- 每条决定必须带 reason 与 scope（限定到 hero + 字段/检查），不得写全局豁免
+- decision ∈ accepted / false_positive / needs_revision / resolved；pending 表示尚未处置
+- 本文件由人填写；机器只生成模板与校验格式
+items:
+- source: 2026-09-08_dmon_run2_reconcile.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'abilities.call_mech.duration_s: executor declared buff, reviewer inferred nerf'
+  decision: pending
+  reason: null
+  scope: null
+- source: 2026-09-08_dmon_run2_reconcile.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'overall: executor mixed vs reviewer nerf'
+  decision: pending
+  reason: null
+  scope: null
+- source: 2026-09-08_dmon_run2_reconcile.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'overall: reviewer nerf vs official patch file mixed'
+  decision: pending
+  reason: null
+  scope: null
+- source: 2026-09-08_dmon_run2_reconcile.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'reviewer flagged suspicious: portable_fusion_repeater 同时收紧散布（buff）与提前衰减起点（nerf），方向相反，可能并非同一意图'
+  decision: pending
+  reason: null
+  scope: null
+- source: 2026-09-08_wuyang_run2_reconcile.json
+  hero: wuyang
+  date: '2026-09-08'
+  item: 'overall: executor buff vs reviewer mixed'
+  decision: pending
+  reason: null
+  scope: null
+- source: 2026-09-08_wuyang_run2_reconcile.json
+  hero: wuyang
+  date: '2026-09-08'
+  item: 'overall: reviewer mixed vs official patch file buff'
+  decision: pending
+  reason: null
+  scope: null
+- source: 2026-09-17_dmon_run2_reconcile.json
+  hero: dmon
+  date: '2026-09-17'
+  item: no official developer comment for this hero/date — reviewer inference stands alone, human must judge
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_kiriko_healing_ofuda_protection_suzu.json
+  hero: kiriko
+  date: '2026-09-08'
+  item: 'P0_provenance_status: open source conflict on weapons.healing_ofuda.projectile_speed: {''patch_notes_official'': 18, ''wiki_fandom'': ''30 (homing) / 24 (non-homing)''} — wiki 在补丁两周后未更新；且 wiki
+    区分 homing/non-homing 两个速度而补丁只给一个数——补丁改的是哪一个，需确认后才能关闭'
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_kiriko_healing_ofuda_protection_suzu.json
+  hero: kiriko
+  date: '2026-09-08'
+  item: 'P0_provenance_status: open source conflict on weapons.healing_ofuda.max_range_m: {''patch_notes_official'': 30, ''wiki_fandom'': 35} — 同上，wiki 未更新'
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_kiriko_healing_ofuda_protection_suzu.json
+  hero: kiriko
+  date: '2026-09-08'
+  item: 'F5_direction_vs_declared: abilities.protection_suzu.duration_s: field semantics ''ambiguous'' — direction cannot be machine-judged; declared=nerf, reason=''Phased out invulnerability duration reduced
+    from 0.65 to 0.5 seconds; duration_s 语义为 ambiguous，按上下文（无敌窗口缩短）判定为 nerf。'''
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_winston_barrier_projector.json
+  hero: winston
+  date: '2026-09-08'
+  item: 'F5_direction_vs_declared: abilities.barrier_projector.duration_s: field semantics ''ambiguous'' — direction cannot be machine-judged; declared=nerf, reason=''原文 "Duration reduced from 8 to 7 seconds."，持续时间缩短削弱屏障可用时长；duration_s
+    语义为 ambiguous，按上下文（缩短可用时间）判为 nerf。'''
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_wuyang_restorative_stream.json
+  hero: wuyang
+  date: '2026-09-08'
+  item: 'R8_mixed_direction_rationale: mixed buff+nerf without mixed_rationale'
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_dmon.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'P0_provenance_status: open source conflict on hitpoints.health: {''overfast_api'': 325, ''wiki_fandom'': ''275 (Open queue) / 425 (Role queue) / 175 (Pilot)''} — OverFast 的 325 与 wiki 任一模式都对不上；温斯顿那次的教训是模式标签，这次两边按模式对齐仍不一致，留空'
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_dmon.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'P0_provenance_status: open source conflict on abilities.propulsors.cost_pct_s: {''patch_notes_official'': 30, ''wiki_fandom'': 25} — 补丁原文写 "Fuel drain rate 25 → 30"，无单位；wiki 字段为 "25% per second"。取补丁值，但"drain
+    rate"是否就是 wiki 的 energy cost 字段待确认'
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_dmon.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'F5_direction_vs_declared: abilities.call_mech.duration_s: field semantics ''ambiguous'' — direction cannot be machine-judged; declared=buff, reason=''Transformation duration has been reduced from
+    1.95 to 0.95 seconds；duration_s 语义为 ambiguous，按上下文（缩短变形时间以匹配 D.Va，属增强）判为 buff。'''
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_dmon.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'R2_ttk_delta_or_reload_breakpoint: plasma_saber vs 250hp body: TTK 1.974s → 2.632s (+33.3%)'
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_dmon.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'R5_falloff_window_delta: portable_fusion_repeater: window 10m → 20m (+100.0%); start 30→20, end 40→40 [endpoints moved]'
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-08_dmon.json
+  hero: dmon
+  date: '2026-09-08'
+  item: 'R9_shots_to_kill_breakpoint: plasma_saber vs 250hp body: 4 → 5 shot events'
+  decision: pending
+  reason: null
+  scope: null
+- source: reports/2026-09-17_dmon.json
+  hero: dmon
+  date: '2026-09-17'
+  item: 'R6_cooldown_step: fusion_repeater: cooldown 4s → 5s (Δ1.00s, 25.0%)'
+  decision: pending
+  reason: null
+  scope: null

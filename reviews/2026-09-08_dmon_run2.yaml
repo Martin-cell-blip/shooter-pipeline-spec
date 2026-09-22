@@ -1,0 +1,27 @@
+# reviewer output — deepseek-chat — reads diff only — raw record: runs/2026-09-08/dmon_review_run2.json
+hero: v6
+per_change:
+- path: hitpoints_by_mode.v6.armor
+  direction: nerf
+  basis: armor 从 325 降到 300，有效生命下降。
+- path: weapons.plasma_saber.damage_max
+  direction: nerf
+  basis: damage_max 从 65 降到 60，单发上限伤害下降。
+- path: weapons.portable_fusion_repeater.spread_deg
+  direction: buff
+  basis: spread_deg 从 2 降到 1.75，散布更小、命中更集中。
+- path: weapons.portable_fusion_repeater.falloff_start_m
+  direction: nerf
+  basis: falloff_start_m 从 30 降到 20，伤害衰减起点提前，有效射程缩短。
+- path: abilities.call_mech.duration_s
+  direction: nerf
+  basis: duration_s 从 1.95 降到 0.95，持续时间减半；duration_s 语义为 ambiguous，此处按“持续时间缩短”判定为削弱。
+overall_direction: nerf
+inferred_intent: 这组改动整体在压低该英雄的生存与输出上限：护甲下调、等离子剑最大伤害下调、聚变连发器衰减起点提前，同时召唤机甲持续时间大幅缩短。唯一反向的是连发器散布收紧，属于小幅精度补偿，但不足以抵消其余削弱。合起来看，意图是削弱该英雄的正面强度与持续作战能力。
+confidence: medium
+cannot_determine:
+- 无法判断护甲削弱与武器/技能削弱是否在总强度上互相抵消
+- 无法判断这些改动是否针对特定模式或特定对局环境
+- 无法判断 duration_s 缩短是否同时伴随其他未列出的效果变化
+suspicious:
+- portable_fusion_repeater 同时收紧散布（buff）与提前衰减起点（nerf），方向相反，可能并非同一意图

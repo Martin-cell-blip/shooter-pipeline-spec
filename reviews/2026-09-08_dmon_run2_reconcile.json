@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-08",
+  "hero": "dmon",
+  "run": 2,
+  "items": [
+    {
+      "level": "REVIEW",
+      "what": "abilities.call_mech.duration_s: executor declared buff, reviewer inferred nerf",
+      "executor_why": "Transformation duration has been reduced from 1.95 to 0.95 seconds；duration_s 语义为 ambiguous，按上下文（缩短变形时间以匹配 D.Va，属增强）判为 buff。",
+      "reviewer_basis": "duration_s 从 1.95 降到 0.95，持续时间减半；duration_s 语义为 ambiguous，此处按“持续时间缩短”判定为削弱。"
+    },
+    {
+      "level": "REVIEW",
+      "what": "overall: executor mixed vs reviewer nerf"
+    },
+    {
+      "level": "REVIEW",
+      "what": "overall: reviewer nerf vs official patch file mixed"
+    },
+    {
+      "level": "REVIEW",
+      "what": "reviewer flagged suspicious: portable_fusion_repeater 同时收紧散布（buff）与提前衰减起点（nerf），方向相反，可能并非同一意图"
+    }
+  ],
+  "side_by_side": {
+    "official_intent": "Developer Comments: D.Mon has settled into a strong position since launch. We're reducing Call Mech's transformation time to match D.Va's while adjusting Portable Fusion Repeater to improve accuracy and reduce effectiveness at longer distances. We're also reducing Plasma Saber's damage to help offset these improvements.",
+    "reviewer_inferred_intent": "这组改动整体在压低该英雄的生存与输出上限：护甲下调、等离子剑最大伤害下调、聚变连发器衰减起点提前，同时召唤机甲持续时间大幅缩短。唯一反向的是连发器散布收紧，属于小幅精度补偿，但不足以抵消其余削弱。合起来看，意图是削弱该英雄的正面强度与持续作战能力。",
+    "reviewer_confidence": "medium",
+    "reviewer_cannot_determine": [
+      "无法判断护甲削弱与武器/技能削弱是否在总强度上互相抵消",
+      "无法判断这些改动是否针对特定模式或特定对局环境",
+      "无法判断 duration_s 缩短是否同时伴随其他未列出的效果变化"
+    ],
+    "executor_mixed_rationale": "生存与机动性削弱（护甲、Plasma Saber 伤害、Call Mech 变形时间）与武器精度增强（Portable Fusion Repeater 散布与衰减起点）并存，方向对冲。"
+  }
+}

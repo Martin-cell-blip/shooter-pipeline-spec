@@ -55,3 +55,23 @@ Agent 五次运行（每次约 2 s）：
 A4 的处置：这是提案自洽问题，不需要金标就能判——新增 FAIL 级规则 `F7_unmapped_vs_changes`（同一原文行不得既作改动依据又列在 unmapped），固化为 `test_A4_line_both_mapped_and_unmapped_fails`。提案格式暂不再加措辞，先看 run 3 是否复现。
 
 **两轮合计（9 个英雄、11 次运行）**：数值 from/to 提取 0 错；不可映射条目 8/8 正确保留；Agent 侧真实错误 1 类（A4）；其余偏差 5 处全部是规范文本或金标的错，且都已固化为回归测试。
+
+## 2026-09-22 · 第 8 步 · 审核 Agent（零上下文，只读 diff）· 7 例
+
+审核方输入 = {path, from, to} 列表 + 字段语义 + 单位表。不给执行方的 why / 方向声明 / 对冲理由，不给开发者注释，不给补丁原文，不给校验报告（`pipeline/reviewer.py` 有泄漏自检，`tests/test_reviewer.py` 锁住）。事后由 `pipeline/reconcile.py` 把三方并排：执行方声明、审核方反推、官方注释。
+
+| 案例 | 比对项 | 审核方反推的意图 vs 官方注释 |
+|---|---|---|
+| 雾子 09-08 | 0 | 反推"降低远程治疗可达性与团队保护"，与官方"lower healing consistency at longer distances / reduce invulnerability window"一致 |
+| 温斯顿 09-08 | 0 | 反推"从单次长驻改为更频繁但更短促"，与官方对冲说法一致；审核方自报"对冲后净覆盖率无法判断"——这正是 R10 该算的事 |
+| 查莉娅 09-08 | 0 | 反推"单点定向削弱"；官方注释还提到能量生成与投射屏障不变，diff 里看不到，审核方没有编 |
+| 巴蒂斯特 09-08 | 0 | 反推"三项同向增强可用性与存活"，与官方一致 |
+| 吴阳 09-08 | 2 | **审核方判整体 mixed，执行方 run 2 写的是 buff**（含一条 nerf 却无对冲理由）；官方注释只解释了增强的那条。审核方把视线超时缩短读成"更依赖保持视线的高强度引导"——这是从 diff 能得到的最合理解读，官方没说 |
+| D.Mon 09-08 | 4 | ①`call_mech.duration_s` 1.95→0.95：**审核方判 nerf，执行方判 buff**。执行方对——它读过原文"缩短变形时间以对齐 D.Va"；审核方只见 duration 变短，按保守读法判削弱。`duration_s` 语义 ambiguous 在这里第一次真正咬人 ②整体：审核方 nerf，执行方与官方 mixed ③审核方标记可疑："散布收紧（buff）与衰减起点提前（nerf）方向相反，可能并非同一意图"——官方注释恰好解释了这一对（improve accuracy and reduce effectiveness at longer distances）。审核方没有上下文时把"设计上的有意组合"报成可疑，是预期行为，不是误报 |
+| D.Mon 09-17 | 1 | 无官方注释 → 审核方反推"整体削弱生存与机动/输出"单独成立，人须自己判 |
+
+**本步结论**：审核方在 7 例里没有一次凭空编造背景（cannot_determine 每例都列了 2–3 条），4 例与官方注释方向一致；两处不一致（吴阳整体方向、D.Mon 变形时间）都是**上下文差**造成的，而且都被 reconcile 抓成 REVIEW 交给人。这正是"审核方不读执行方说明"的价值：它替人把"没有说明就读不出来的地方"标了出来。
+
+## 第 9 步待办：REVIEW 决定文件
+
+`reviews/decisions.yaml` 已按 7 例的 reconcile 项 + 校验器 REVIEW 项生成模板，每条 `decision: pending`。决定（accepted / false_positive / needs_revision / resolved）、理由与限定范围由人填，禁止全局豁免。
